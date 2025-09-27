@@ -1233,7 +1233,8 @@ code .</code></pre>
       <li>プログラムは <code>src/prac00.ts</code> を参考に作成してください。</li>
       <li><code>greetAndCalculate</code> のような関数を定義する必要はありません。適当な変数に
       <code>Bob</code> を代入して <code>console.log()</code> で文字列結合して出力すればOKです。</li>
-      <li>解答例は<a href="">こちら</a>。</li>
+      <li>解答例は<a
+      href="https://github.com/TakeshiWada1980/Programming3-2025/blob/main/docs/codes/01/prac00a.ts">こちら</a>。</li>
       </ul>
       <h1 data-number="7" id="gitgithub管理"><span class="header-section-number">7</span>
       Git/GitHub管理</h1>
@@ -1304,51 +1305,58 @@ code .</code></pre>
       <h2 data-number="8.1" id="コンソールメソッド"><span class="header-section-number">8.1</span>
       コンソールメソッド</h2>
       <p>コンソールメソッドは <code>console.log("Hello, World!")</code> のように使用するもので
-      <strong>主にデバッグや開発時の情報出力</strong>に利用します。<span class="masked">Pythonの
+      <strong>主にデバッグや開発時の情報出力</strong> に利用します。<span class="masked">Python の
       <code>print</code> 関数、C言語の <code>printf</code> 関数</span>
       に相当するものと考えてください。</p>
       <p>コンソールメソッドには
       <code>console.log()</code>、<code>console.error()</code>、<code>console.warn()</code>、<code>console.info()</code>、<code>console.debug()</code>
-      などの種類が存在します。これらは、C言語の <span
-      class="masked"><code>fprintf(stdout, ...)</code> や <code>fprintf(stderr, ...)</code></span>
-      のように使い分けます。</p>
+      などが存在します。これらは、C言語の <span class="masked"><code>fprintf(stdout, ...)</code> や
+      <code>fprintf(stderr, ...)</code></span> のように使い分けます。</p>
       <p>実行環境によっては、ログレベル (log, error, warn…)
-      に応じて、色分けや装飾付きで出力されたり、フィルタリングする機能 (=<span
-      class="masked">特定のレベル以上のメッセージのみを表示</span>)
-      が提供されます。しかし、最初のうちは使い分けは考えずに <code>console.log()</code> だけの使用
-      (もしくは <code>console.error()</code> との2つの使い分け) で十分です。</p>
+      に応じて「色分け」や「装飾付き」で出力されたり、フィルタリング機能 (=<span
+      class="masked">特定のレベル以上のメッセージのみを表示する機能</span>)
+      が提供されます。しかし、最初のうちは細かな使い分けは考えずに <code>console.log()</code>
+      だけの使用 (もしくは <code>console.error()</code> との2つの使い分け) で十分です。</p>
       <p>例えば、<code>name</code> と <code>priority</code>
-      という2つの変数を出力したいときは、以下のように <span class="masked">カンマ区切り</span>
-      で記述します。実際に<code>prac01.ts</code> に記述して実行確認してください。ターミナルから
-      <code>npx tsx src/prac01.ts</code>、もしくは <code>[Ctrl]+[Shift]+[B]</code> で実行できます
-      (基本操作として覚えておいてください)。</p>
+      という2つの変数の値を出力したいときは、以下のように <span class="masked">カンマ区切り</span>
+      で記述します (可変長引数としてコンソールメソッドに与えます)。<code>src/prac01.ts</code>
+      というファイルを新規作成して、コードを記述し、実際に実行して結果を確認してください。</p>
+      <ul>
+      <li>プログラムの実行は、ターミナルから <code>npx tsx src/prac01.ts</code>、もしくは
+      <code>[Ctrl]+[Shift]+[B]</code> のショートカットから行なうことができます
+      (基本操作として覚えておいてください)。</li>
+      </ul>
       <div class="sourceCode" id="cb33" data-caption="prac01.ts (コンソールメソッドの基本)"><pre
       class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb33-1"><a href="#cb33-1"></a><span class="co">// 文字列型 (string type) の変数 name の宣言と初期化</span></span>
 <span id="cb33-2"><a href="#cb33-2"></a><span class="kw">let</span> name<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">;</span></span>
 <span id="cb33-3"><a href="#cb33-3"></a><span class="co">// 数値型 (number type) の変数 priority の宣言と初期化</span></span>
 <span id="cb33-4"><a href="#cb33-4"></a><span class="kw">let</span> priority<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
-<span id="cb33-5"><a href="#cb33-5"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(name<span class="op">,</span> priority)<span class="op">;</span></span></code></pre></div>
-      <p>(すこし分かりづらいですが) 以下のようにスペースで区切られて name と priority
-      が出力されます。</p>
-      <pre><code>■ prac01.ts の実行
-TypeScriptの勉強 3</code></pre>
-      <h3 data-number="8.1.1" id="演習-10分"><span class="header-section-number">8.1.1</span> 演習
-      (<i class="fa-solid fa-stopwatch"></i>10分)</h3>
-      <p>次のような Date型 (日付・日時型) の変数 <code>deadline</code>
-      を追加して、コンソールメソッドで出力してください。</p>
+<span id="cb33-5"><a href="#cb33-5"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(name<span class="op">,</span> priority)<span class="op">;</span> <span class="co">// console.log は可変長引数を受け取り可能</span></span></code></pre></div>
+      <p>(すこし分かりづらいですが) 以下のようにスペースで区切られて <code>name</code> と
+      <code>priority</code> の値が出力されます。</p>
+      <pre><code>TypeScriptの勉強 3</code></pre>
+      <h3 data-number="8.1.1" id="演習1-5分"><span class="header-section-number">8.1.1</span> 演習1
+      (<i class="fa-solid fa-stopwatch"></i>5分)</h3>
+      <p><code>src/prac01.ts</code> に、次のような Date型 (日付・日時型) の変数
+      <code>deadline</code> を追加して、コンソールメソッドで出力してください。</p>
       <div class="sourceCode" id="cb35" data-caption="Date型の変数"><pre
       class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb35-1"><a href="#cb35-1"></a><span class="co">// Date型の変数 deadline の宣言と初期化</span></span>
-<span id="cb35-2"><a href="#cb35-2"></a><span class="kw">let</span> deadline<span class="op">:</span> <span class="bu">Date</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2025</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">11</span><span class="op">,</span> <span class="dv">45</span>)<span class="op">;</span></span></code></pre></div>
-      <p>Month (月)
-      の扱いに注意が必要なことに気づいたでしょうか？また、コンソールメソッドで出力される時刻フォーマットが
-      <span class="masked">ISO 8601形式</span> であることに注意してください。</p>
+<span id="cb35-2"><a href="#cb35-2"></a><span class="co">// 2025年10月2日 14:15 で初期化したつもり</span></span>
+<span id="cb35-3"><a href="#cb35-3"></a><span class="kw">let</span> deadline<span class="op">:</span> <span class="bu">Date</span> <span class="op">=</span> <span class="kw">new</span> <span class="bu">Date</span>(<span class="dv">2025</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">14</span><span class="op">,</span> <span class="dv">15</span>)<span class="op">;</span></span></code></pre></div>
+      <ul>
+      <li><code>new Date(...)</code> による初期化において、<span class="masked">Month (月)
+      の扱いに注意が必要なこと</span> に気づけたでしょうか？
+      <ul>
+      <li><span class="masked">ゼロオリジンなので <code>10</code>
+      を与えると「11月」と解釈されます</span></li>
+      </ul></li>
+      <li>コンソールメソッドに Dateオブジェクトを直接渡したとき、出力される時刻フォーマットが <span
+      class="masked">ISO 8601形式</span> となることが確認できたでしょうか。
       <ul>
       <li>生成AIあるいはウェブ検索を利用して <a
       href="https://www.google.com/search?q=ISO8601形式">ISO8601形式</a>
       について概要を把握してください。</li>
-      <li>生成AIあるいはウェブ検索を利用して、<code>dayjs</code> や <code>moment</code>
-      などのライブラリを使わずに「2025/10/02 11:45」や「2025年10月02日 11時45分」のような形式 (書式)
-      で出力する方法について調べてください。また、実行してください。</li>
+      </ul></li>
       </ul>
       <div class="note type-tips">
       <p>上記の <code>prac01.ts</code> は、次のようなC言語プログラムに相当します。C言語では
@@ -1399,11 +1407,19 @@ TypeScriptの勉強 3</code></pre>
       <div class="sourceCode" id="cb38" data-caption="prac01.ts (テンプレート文字列の利用)"><pre
       class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb38-1"><a href="#cb38-1"></a><span class="kw">const</span> name<span class="op">:</span> <span class="dt">string</span> <span class="op">=</span> <span class="st">&quot;TypeScriptの勉強&quot;</span><span class="op">;</span></span>
 <span id="cb38-2"><a href="#cb38-2"></a><span class="kw">const</span> priority<span class="op">:</span> <span class="dt">number</span> <span class="op">=</span> <span class="dv">3</span><span class="op">;</span></span>
-<span id="cb38-3"><a href="#cb38-3"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`Todo 1 =&gt; </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs">（優先度:</span><span class="sc">${</span>priority<span class="sc">}</span><span class="vs">)`</span>)<span class="op">;</span> <span class="co">// テンプレート文字列</span></span></code></pre></div>
+<span id="cb38-3"><a href="#cb38-3"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`Todo 1 =&gt; </span><span class="sc">${</span>name<span class="sc">}</span><span class="vs">（優先度:</span><span class="sc">${</span>priority<span class="sc">}</span><span class="vs">）`</span>)<span class="op">;</span> <span class="co">// テンプレート文字列</span></span></code></pre></div>
       <p>以下のような出力が得られます。</p>
-      <pre><code>■ prac01.ts の実行
-Todo 1 =&gt; TypeScriptの勉強（優先度:3)</code></pre>
+      <pre><code>Todo 1 =&gt; TypeScriptの勉強（優先度:3）</code></pre>
       <p>Pythonとは異なり、<code>$</code>マークをつけなければいけない点に、十分に注意してください。</p>
+      <h3 data-number="8.3.1" id="演習2-10分"><span class="header-section-number">8.3.1</span> 演習2
+      (<i class="fa-solid fa-stopwatch"></i>10分)</h3>
+      <ul>
+      <li><p>生成AIあるいはウェブ検索を利用して、<code>dayjs</code> や <code>moment</code>
+      などのライブラリを使わずに、Date型オブジェクトを「2025/10/02 14:15」や「2025年10月02日
+      14時15分」のような書式で出力する方法について<strong>調べて実装</strong>してください。また、実行して、結果を確認してください。</p></li>
+      <li><p>実装例は<a
+      href="https://github.com/TakeshiWada1980/Programming3-2025/blob/main/docs/codes/01/prac01a.ts">こちら</a>。</p></li>
+      </ul>
       <h2 data-number="8.4" id="オブジェクトのコンソール出力-1"><span
       class="header-section-number">8.4</span> オブジェクトのコンソール出力 (1)</h2>
       <p>ウェブアプリ開発では <strong>複数の変数をオブジェクトにまとめて扱うこと</strong>
