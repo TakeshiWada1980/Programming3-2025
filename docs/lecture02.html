@@ -1392,14 +1392,15 @@ learn-ts-basics@1.0.0 C:\Users\xxxx\Documents\learn-ts-basics
       <h1 data-number="7" id="reactにおける状態-オブジェクト-の変更の検知-概要"><span
       class="header-section-number">7</span> Reactにおける状態 (オブジェクト) の変更の検知
       ～概要～</h1>
-      <p>Reactでは「<strong>極めて大雑排に言えば、「オブジェクト」の状態が変更されたことを検知してライブラリ
-      (React) が自動で画面を書き換える</strong>」ということが行われます (画面=<a
+      <p>Reactでは「<strong>極めて大雑排に言えば、＜オブジェクト＞の状態が変更されたことを検知してライブラリ
+      (React) が自動でウェブ画面を書き換える</strong>」ということが行われます (画面=<a
       href="https://www.google.com/search?q=Domとは">DOM (Document Object Model)</a>。</p>
-      <p>ここでのオブジェクトとは、例えば、ここまで何度も登場している <code>todo</code>
-      です。そのオブジェクトの「状態が変更された」とは、例えば <code>name</code> や
-      <code>isDone</code> などの <strong>プロパティ (属性) の変更</strong> を意味します。</p>
-      <p>オブジェクトのプロパティの変更は、以下
-      (<strong>第14行目</strong>・<strong>第15行目</strong>) のように行なうことができます。</p>
+      <p>ここでの <strong>＜オブジェクト＞</strong> とは、例えば、ここまで何度も登場している
+      <code>todo</code> です。そのオブジェクトの「状態が変更された」とは、例えば <code>name</code>
+      や <code>isDone</code> などの <strong>プロパティ (属性) に変更が生じた</strong>
+      ということを意味します。</p>
+      <p>オブジェクトのプロパティの変更は、以下の <strong>第14行目</strong> や
+      <strong>第15行目</strong> のように行なうことができます。</p>
       <div class="sourceCode" id="cb58" data-caption="src/prac09.ts"><pre
       class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb58-1"><a href="#cb58-1"></a><span class="im">import</span> <span class="im">type</span> { Todo } <span class="im">from</span> <span class="st">&quot;./types.js&quot;</span><span class="op">;</span></span>
 <span id="cb58-2"><a href="#cb58-2"></a><span class="im">import</span> { printTodo } <span class="im">from</span> <span class="st">&quot;./utils/printTodo.js&quot;</span><span class="op">;</span></span>
@@ -1420,30 +1421,35 @@ learn-ts-basics@1.0.0 C:\Users\xxxx\Documents\learn-ts-basics
 <span id="cb58-17"><a href="#cb58-17"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="vs">`■ 状態変更後`</span>)<span class="op">;</span></span>
 <span id="cb58-18"><a href="#cb58-18"></a><span class="fu">printTodo</span>(todo1)<span class="op">;</span></span></code></pre></div>
       <p>実行結果は以下のようになります。確かに <strong>第14行目</strong> と
-      <strong>第15行目</strong> の操作でプロパティが変更されていることが分かると思います。</p>
+      <strong>第15行目</strong> の操作によって「プロパティが変更されていること」が確認できます。</p>
       <pre><code>■ 状態変更前
 (優先度: 3) TypeScriptの勉強 期日: 2024/10/11 09:45
 ■ 状態変更後
 (優先度: 1) COBOLの勉強をする 期日: 2024/10/11 09:45</code></pre>
       <p>しかし、<strong>極めて重要なポイントとして</strong>、<strong>上記のような操作でオブジェクトのプロパティを変更しても</strong>、Reactは
       <span
-      class="masked">オブジェクトの状態に変更があったことを検知してくれません</span>。つまり、オブジェクトを変更しても、それを反映するように画面の更新
+      class="masked">オブジェクトの状態に変更があったことを検知してくれません</span>。つまり、オブジェクトを変更しても、それを反映するようにウェブ画面の更新
       (=再レンダリング) をしてくれません😭。</p>
       <p>Reactがオブジェクトの状態変更を検知しない理由は…</p>
       <blockquote>
-      <p>Reactはオブジェクトの「参照」が変更されたときに、「オブジェクトが変更された」と検知・判断して画面の再レンダリングするという仕組みになっている
+      <p>Reactはオブジェクトの「<strong>参照</strong>」が変更されたときに、「オブジェクトが変更された」と検知・判断して画面の再レンダリングするという仕組みになっている
       (重要)</p>
       </blockquote>
       <p>…ためです。さきほどの<a href="lecture02.html#オブジェクトの比較-重要">6.2
       オブジェクトの比較</a> の <code>comp2.ts</code> で示したように、<code>=</code>
       でコピーをしても「参照」は変化しません。また、プロパティを変更しても「参照」は変化しません。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>TypeScript (JavaScript)
+      において、オブジェクトの「参照」とはなんですか。いまいちイメージがつかめません。</p>
+      </blockquote>
       <h2 data-number="7.1" id="reactが変更を検知可能なオブジェクトの生成"><span
       class="header-section-number">7.1</span> Reactが変更を検知可能なオブジェクトの生成</h2>
       <p>Reactが変更を検知できるようにオブジェクトを生成する方法を解説します。これは、React開発において
       <strong>特に重要な操作</strong> となってくるので、しっかりと覚えておいてください。</p>
       <p>まずは、次のように新たにオブジェクトを生成することで、オリジナル (<code>todo</code>) とは
       <span class="masked">参照が異なるオブジェクト (<code>updatedTodo</code>)</span>
-      を生成できます。</p>
+      を生成することができます。</p>
       <div class="sourceCode" id="cb60" data-caption="src/prac10.ts"><pre
       class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript"><span id="cb60-1"><a href="#cb60-1"></a><span class="im">import</span> <span class="im">type</span> { Todo } <span class="im">from</span> <span class="st">&quot;./types.js&quot;</span><span class="op">;</span></span>
 <span id="cb60-2"><a href="#cb60-2"></a></span>
@@ -1466,7 +1472,7 @@ learn-ts-basics@1.0.0 C:\Users\xxxx\Documents\learn-ts-basics
 <span id="cb60-19"><a href="#cb60-19"></a><span class="co">// todo と updatedTodo の todo の参照が「異なること」を確認</span></span>
 <span id="cb60-20"><a href="#cb60-20"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(todo <span class="op">!==</span> updatedTodo)<span class="op">;</span> <span class="co">// true であれば OK</span></span></code></pre></div>
       <p>ただし、多数のプロパティを持ったオブジェクトについて上記の方法は非常に冗長になります。例えば20個のプロパティを持ったオブジェクトについて、1個のプロパティだけを変更する場合でも、20個のプロパティを列挙する必要があります
-      (コードの可読性が低下します)。</p>
+      (コードの可読性が著しく低下します)。</p>
       <p>そのようなときに、次のような <strong>スプレッド構文</strong> が利用されます。</p>
       <div class="sourceCode" id="cb61" data-caption="src/prac10.ts (部分抜粋)"
       data-startFrom="10"><pre class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 9;"><span id="cb61-10"><a href="#cb61-10"></a><span class="kw">const</span> updatedTodo<span class="op">:</span> Todo <span class="op">=</span> {</span>
@@ -1474,8 +1480,10 @@ learn-ts-basics@1.0.0 C:\Users\xxxx\Documents\learn-ts-basics
 <span id="cb61-12"><a href="#cb61-12"></a>  name<span class="op">:</span> <span class="st">&quot;COBOLの勉強をする&quot;</span><span class="op">,</span> <span class="co">// 変更</span></span>
 <span id="cb61-13"><a href="#cb61-13"></a>  priority<span class="op">:</span> <span class="dv">3</span><span class="op">,</span> <span class="co">// 変更</span></span>
 <span id="cb61-14"><a href="#cb61-14"></a>}<span class="op">;</span></span></code></pre></div>
-      <p>スプレッド構文は、オブジェクトのプロパティを展開して新しいオブジェクトに組み込む強力な機能です。これにより、元のオブジェクトのプロパティをコピーしつつ、特定のプロパティだけを変更するコードを短く書くことができます。</p>
-      <p>なお、スプレッド構文を使用する際、プロパティを記述する順序に注意してください。あとに記述するプロパティは、前のプロパティを上書きします。</p>
+      <p>スプレッド構文は、<strong>オブジェクトのプロパティを展開して新しいオブジェクトに組み込む機能</strong>
+      を持っています。これにより、元のオブジェクトのプロパティをコピーしつつ、特定のプロパティだけを変更するコードをシンプルに書くことができます。</p>
+      <p>なお、スプレッド構文を使用する際は、<span class="masked">プロパティを記述する順序</span>
+      に注意してください。あとに記述するプロパティは、前のプロパティを上書きします。</p>
       <div class="sourceCode" id="cb62" data-caption="不適切な記述" data-startFrom="10"><pre
       class="sourceCode numberSource typescript numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 9;"><span id="cb62-10"><a href="#cb62-10"></a><span class="kw">const</span> updatedTodo<span class="op">:</span> Todo <span class="op">=</span> {</span>
 <span id="cb62-11"><a href="#cb62-11"></a>  name<span class="op">:</span> <span class="st">&quot;COBOLの勉強をする&quot;</span><span class="op">,</span></span>
@@ -1484,6 +1492,10 @@ learn-ts-basics@1.0.0 C:\Users\xxxx\Documents\learn-ts-basics
 <span id="cb62-14"><a href="#cb62-14"></a>}<span class="op">;</span></span></code></pre></div>
       <p>上記の場合、priority は <code>3</code> に更新されますが、<code>name</code> は
       <code>todo</code> の値 (<code>TypeScriptの勉強"</code>) で上書きされてしまいます。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>Reactでオブジェクトの変更を検知するために「スプレッド構文」を使う必要があるのですが、「スプレッド構文」の文法や意味が分かりません。</p>
+      </blockquote>
       <h3 data-number="7.1.1" id="定着確認-6"><span class="header-section-number">7.1.1</span>
       定着確認</h3>
       <p>次のプログラムにつづけて、<code>isDone</code> が <code>true</code>
