@@ -790,10 +790,14 @@ id="toc-メソッドチェーン-mapfiltersortの組み合わせ"><span class="t
 <span id="cb23-3"><a href="#cb23-3"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(grades)<span class="op">;</span></span>
 <span id="cb23-4"><a href="#cb23-4"></a><span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(gradeListItems)<span class="op">;</span></span></code></pre></div>
       <p>実行結果は、次のようになります。</p>
-      <pre><code>const grades: number[] = [1, 2, 3, 4, 5];
-const gradeListItems = grades.map((grade) =&gt; `&lt;li&gt;${grade}年&lt;/li&gt;`);
-console.log(grades);
-console.log(gradeListItems);</code></pre>
+      <pre><code>[ 1, 2, 3, 4, 5 ]
+[
+  &#39;&lt;li&gt;1年&lt;/li&gt;&#39;,
+  &#39;&lt;li&gt;2年&lt;/li&gt;&#39;,
+  &#39;&lt;li&gt;3年&lt;/li&gt;&#39;,
+  &#39;&lt;li&gt;4年&lt;/li&gt;&#39;,
+  &#39;&lt;li&gt;5年&lt;/li&gt;&#39;
+]</code></pre>
       <h3 data-number="4.5.9" id="演習②"><span class="header-section-number">4.5.9</span> 演習②</h3>
       <p><strong>期待する結果</strong>が得られるように、次のプログラムを完成させてください。ここでは優先度
       (優先順位)「1」が「★★★」で、優先度 (優先順位)「3」が「★」になる点に注意してください。</p>
