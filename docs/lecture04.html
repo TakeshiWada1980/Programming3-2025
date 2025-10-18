@@ -1376,7 +1376,7 @@ Found 1 error.</code></pre>
       </figure>
       <ul>
       <li>実装例は<a
-      href="https://github.com/TakeshiWada1980/Programming3-2024/blob/main/docs/codes/04/code04.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a></li>
+      href="https://github.com/TakeshiWada1980/Programming3-2025/blob/main/docs/codes/04/code04.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a></li>
       </ul>
       <h1 data-number="8" id="todoアプリの実装"><span class="header-section-number">8</span>
       Todoアプリの実装</h1>
@@ -1690,9 +1690,8 @@ npm i -D @types/react-fontawesome</code></pre>
       </blockquote>
       <h3 data-number="8.5.1" id="演習-3"><span class="header-section-number">8.5.1</span> 演習</h3>
       <p>前回講義で学んだように、Todoの並び替えは「配列のsortメソッド」を利用して行なうことができます。例えば、優先度を昇順
-      (1 <span class="math inline">\(\to\)</span> 2 <span class="math inline">\(\to\)</span> 3の順)
-      にしたいときは、<strong>第09行目</strong>の <code>const todos = props.todos;</code>
-      を以下のように書き換えます。</p>
+      (1👉2👉3の順) にしたいときは、<strong>第09行目</strong>の
+      <code>const todos = props.todos;</code> を以下のように書き換えます。</p>
       <div class="sourceCode" id="cb47"><pre class="sourceCode ts"><code class="sourceCode typescript"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="kw">const</span> todos <span class="op">=</span> [<span class="op">...</span>props<span class="op">.</span><span class="at">todos</span>]<span class="op">.</span><span class="fu">sort</span>((a<span class="op">,</span> b) <span class="kw">=&gt;</span> a<span class="op">.</span><span class="at">priority</span> <span class="op">-</span> b<span class="op">.</span><span class="at">priority</span>)<span class="op">;</span></span></code></pre></div>
       <p>前回講義の<a
       href="lecture03.html#複数のソートキーを使ったオブジェクト配列の並び替え">複数のソートキーを使ったオブジェクト配列の並び替え</a>を参考にして、<strong>第1ソートキー</strong>を
@@ -1704,7 +1703,7 @@ npm i -D @types/react-fontawesome</code></pre>
       CSS</strong> に編集を加えてTodoリストコンポーネントの表示を
       <strong>自分流にカスタイマイズ</strong>
       してみてください。これは、UI/UXの設計練習も兼ねています。また、後期前半の大課題に関連する内容にもなってきます。</p>
-      <p>なお、現時点では「チェックボックス」や「ボタン」などの要素追加やスタイリングは不要です
+      <p>なお、現時点では「チェックボックス」や「ボタン」などの要素追加や、それに対するスタイリングは不要です
       (これらの内容は次回講義で扱います)。</p>
       <p><strong>(Todoリストのカスタマイズの例)</strong></p>
       <figure>
