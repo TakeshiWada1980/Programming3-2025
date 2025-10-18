@@ -366,7 +366,7 @@ div.note > pre {
 .markdown-body span.masked.open {
   color: var(--main-theme-color);
   background-color: transparent;
-  border: solid 2px var(--main-masked-background);
+  border: solid 2px transparent;
 }
 
 .markdown-body span.masked.open::before {
@@ -381,6 +381,7 @@ div.note > pre {
 }
 
 .markdown-body .masked.open code {
+  background-color: var(--code-pg-background);
   color: var(--code-pg-foreground);
 }
 
