@@ -217,7 +217,7 @@ Ok to proceed? (y)</code></pre>
       <strong><em>No</em></strong> を、<code>Install with npm and start now?</code> については
       <strong><em>Yes</em></strong> を選択してください。</p>
       <pre><code>&gt; npx
-&gt; create-vite react-todo-app --template react-ts
+&gt; create-vite react-todo-app --template react-swc-ts
 
 │
 ◆  Use rolldown-vite (Experimental)?:
@@ -614,7 +614,7 @@ npm i -D prettier prettier-plugin-tailwindcss </code></pre>
       でプラグインとして設定しています。</p>
       <div class="sourceCode" id="cb15" data-caption="vite.config.ts"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb15-1"><a href="#cb15-1"></a><span class="im">import</span> { defineConfig } <span class="im">from</span> <span class="st">&quot;vite&quot;</span><span class="op">;</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a><span class="im">import</span> react <span class="im">from</span> <span class="st">&quot;@vitejs/plugin-react&quot;</span><span class="op">;</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="im">import</span> react <span class="im">from</span> <span class="st">&quot;@vitejs/plugin-react-swc&quot;</span><span class="op">;</span></span>
 <span id="cb15-3"><a href="#cb15-3"></a><span class="im">import</span> tailwindcss <span class="im">from</span> <span class="st">&quot;@tailwindcss/vite&quot;</span><span class="op">;</span></span>
 <span id="cb15-4"><a href="#cb15-4"></a></span>
 <span id="cb15-5"><a href="#cb15-5"></a><span class="co">// https://vite.dev/config/</span></span>
