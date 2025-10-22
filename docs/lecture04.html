@@ -186,7 +186,7 @@ TodoListコンポーネントのブラッシュアップ</a></li>
       <p><strong>注意</strong></p>
       <p>ドキュメントフォルダを <strong>OneDrive 同期</strong>している学生は、その影響のないフォルダ
       (<code>c:\work</code> など) で作業することを強く推奨します。OneDrive
-      同期フォルダで作業すると予期せぬトラブルの発生や、OneDrive要領を圧迫することがあります。</p>
+      同期フォルダで作業すると予期せぬトラブルの発生や、OneDrive容量を圧迫することがあります。</p>
       </div>
       <h2 data-number="3.2" id="viteによるプロジェクトフォルダの作成"><span
       class="header-section-number">3.2</span> Viteによるプロジェクトフォルダの作成</h2>
@@ -195,7 +195,7 @@ TodoListコンポーネントのブラッシュアップ</a></li>
       は「ビート」「ヴィート」のように読みます
       (稀に「バイト」や「ビーテ」のように読む人もいます)。</p>
       <p>ターミナルから以下のコマンドを実行してください。</p>
-      <pre><code>npm create vite@latest react-todo-app -- --template react-ts</code></pre>
+      <pre><code>npm create vite@latest react-todo-app -- --template react-swc-ts</code></pre>
       <p>コマンドオプションの <code>react-todo-app</code> は <strong>プロジェクトの名称</strong>
       (=プロジェクトフォルダの名称) を指示しています。また <code>--</code> は後続オプションを (npm
       ではなく) Vite に渡すことを意味し、<code>--template react-ts</code> では <span
@@ -231,11 +231,11 @@ Ok to proceed? (y)</code></pre>
 │
 ◇  Installing dependencies with npm...
 
-added 237 packages, and audited 238 packages in 43s
+added 206 packages, and audited 207 packages in 25s
 
-47 packages are looking for funding
+44 packages are looking for funding
   run `npm fund` for details
-
+  
 found 0 vulnerabilities
 │
 ◇  Starting dev server...
