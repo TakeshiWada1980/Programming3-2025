@@ -761,10 +761,10 @@ npm i -D prettier prettier-plugin-tailwindcss </code></pre>
       <strong>3000番ポート</strong> で起動するので、それにあわせて、ここでも
       <strong>3000番ポート</strong> で開発サーバが起動するように設定を変更してみます。</p>
       <p>プロジェクトフォルダの直下にある <code>vite.config.ts</code>
-      を、次のように変更してください。</p>
+      を、次のように変更してください。。</p>
       <div class="sourceCode" id="cb20" data-caption="vite.config.ts (ポート番号の変更)"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb20-1"><a href="#cb20-1"></a><span class="im">import</span> { defineConfig } <span class="im">from</span> <span class="st">&quot;vite&quot;</span><span class="op">;</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a><span class="im">import</span> react <span class="im">from</span> <span class="st">&quot;@vitejs/plugin-react&quot;</span><span class="op">;</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="im">import</span> react <span class="im">from</span> <span class="st">&quot;@vitejs/plugin-react-swc&quot;</span></span>
 <span id="cb20-3"><a href="#cb20-3"></a><span class="im">import</span> tailwindcss <span class="im">from</span> <span class="st">&quot;@tailwindcss/vite&quot;</span><span class="op">;</span></span>
 <span id="cb20-4"><a href="#cb20-4"></a></span>
 <span id="cb20-5"><a href="#cb20-5"></a><span class="co">// https://vite.dev/config/</span></span>
