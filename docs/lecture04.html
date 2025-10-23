@@ -199,11 +199,10 @@ TodoListコンポーネントのブラッシュアップ</a></li>
       は「ビート」「ヴィート」のように読みます
       (稀に「バイト」や「ビーテ」のように読む人もいます)。</p>
       <p>ターミナルから以下のコマンドを実行してください。</p>
-      <pre><code>npm create vite@latest react-todo-app -- --template react-swc-ts</code></pre>
+      <pre><code>npx create-vite@latest react-todo2-app --template react-swc-ts</code></pre>
       <p>コマンドオプションの <code>react-todo-app</code> は <strong>プロジェクトの名称</strong>
-      (=プロジェクトフォルダの名称) を指示しています。また <code>--</code> は後続オプションを (npm
-      ではなく) Vite に渡すことを意味し、<code>--template react-ts</code> では <span
-      class="masked">React と TypeScript を統合した開発環境テンプレート</span>
+      (=プロジェクトフォルダの名称) を指示しています。<code>--template react-swc-ts</code> では
+      <span class="masked">React と TypeScript と SWC を統合した開発環境テンプレート</span>
       を使って環境構築することを指示しています。</p>
       <div class="note type-tips">
       <p><strong>create-react-app</strong></p>
@@ -211,7 +210,7 @@ TodoListコンポーネントのブラッシュアップ</a></li>
       というコマンドでも同様に環境構築が可能でしたが、現在はアップデートされていないので、Vite
       を使うようにしてください。</p>
       </div>
-      <p>なお、<code>npm create vite@latest</code>
+      <p>なお、<code>npx create-vite</code>
       を初めて実行するときや、前回実行から時間が経っているときは、以下のように尋ねられるので、続行するために
       <code>y</code> を入力してください。</p>
       <pre><code>Need to install the following packages:
@@ -220,13 +219,6 @@ Ok to proceed? (y)</code></pre>
       <p>次のように <code>Use rolldown-vite (Experimental)?</code> については
       <strong><em>No</em></strong> を、<code>Install with npm and start now?</code> については
       <strong><em>Yes</em></strong> を選択してください。</p>
-      <div class="note type-tips">
-      <p><strong>補足</strong></p>
-      <p>Node のバージョンによっては <code>--template</code>
-      というオプション指定が無効で「<strong>Select a
-      framework:</strong>」のように尋ねられることがあります。その場合は「<strong>React</strong>」を選択してください。また「<strong>Select
-      a variant:</strong>」は「<strong>TypeScript + SWC</strong>」を選択してください。</p>
-      </div>
       <pre><code>&gt; npx
 &gt; create-vite react-todo-app --template react-swc-ts
 
