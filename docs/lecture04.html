@@ -141,7 +141,11 @@ TodoListコンポーネントのブラッシュアップ</a></li>
       <li>Reactを使ったTodoアプリのための環境構築 <strong>← 今回 (前半)</strong></li>
       <li>Todoアプリ開発（Reactフロントエンド開発）のチュートリアル <strong>←
       今回と次回</strong></li>
-      <li>Todoアプリのカスタマイズや作り込み → <strong><em>課題1</em></strong></li>
+      <li>Todoアプリのカスタマイズや作り込み → <strong><em>課題1</em></strong>
+      <ul>
+      <li>参考: <a
+      href="https://omunet-my.sharepoint.com/:t:/g/personal/z21707r_omu_ac_jp/ET7-SWbLKVlBvtsv3v5guw0BvXiUlGzUqjCKk6ES6X88-w">2024年度の学生作品</a>(学内のみ)</li>
+      </ul></li>
       </ol>
       <p>まずは、次のような📝<strong>Todoアプリの開発</strong> (Reactを採用したフロントエンド開発)
       を目標とします。</p>
@@ -1476,7 +1480,7 @@ npm i -D @types/react-fontawesome</code></pre>
 <span id="cb42-26"><a href="#cb42-26"></a>]<span class="op">;</span></span></code></pre></div>
       <ul>
       <li>現在の開発環境では <code>import type { Todo } from "./types.js";</code>
-      のようにインポートファイルに<strong>拡張子をつける必要はありません</strong>。</li>
+      のようにインポートファイルに <span class="masked">拡張子をつける必要はありません</span>。</li>
       </ul>
       <h2 data-number="8.3" id="todolistコンポーネントの作成"><span
       class="header-section-number">8.3</span> TodoListコンポーネントの作成</h2>
@@ -1492,7 +1496,8 @@ npm i -D @types/react-fontawesome</code></pre>
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
       <p>ここで定義する <code>TodoList</code> は、Reactの関数コンポーネントなので必ず<a
-      href="https://www.google.com/search?q=パスカルケースとは">パスカルケース</a>としてください。また、同様に、ファイルの名前もパスカルケースとしてください。</p>
+      href="https://www.google.com/search?q=パスカルケースとは">パスカルケース</a>としてください。また、同様に、<span
+      class="masked">ファイルの名前もパスカルケース</span>としてください。</p>
       <div class="sourceCode" id="cb43" data-caption="src/TodoList.tsx"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb43-1"><a href="#cb43-1"></a><span class="im">import</span> React <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
 <span id="cb43-2"><a href="#cb43-2"></a><span class="im">import</span> <span class="im">type</span> { Todo } <span class="im">from</span> <span class="st">&quot;./types&quot;</span><span class="op">;</span></span>
@@ -1545,7 +1550,7 @@ npm i -D @types/react-fontawesome</code></pre>
       </blockquote>
       <div class="sourceCode" id="cb44" data-caption="src/App.tsx"><pre
       class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb44-1"><a href="#cb44-1"></a><span class="im">import</span> { useState } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
-<span id="cb44-2"><a href="#cb44-2"></a><span class="im">import</span> { Todo } <span class="im">from</span> <span class="st">&quot;./types&quot;</span><span class="op">;</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a><span class="im">import</span> <span class="im">type</span> { Todo } <span class="im">from</span> <span class="st">&quot;./types&quot;</span><span class="op">;</span></span>
 <span id="cb44-3"><a href="#cb44-3"></a><span class="im">import</span> { initTodos } <span class="im">from</span> <span class="st">&quot;./initTodos&quot;</span><span class="op">;</span></span>
 <span id="cb44-4"><a href="#cb44-4"></a><span class="im">import</span> WelcomeMessage <span class="im">from</span> <span class="st">&quot;./WelcomeMessage&quot;</span><span class="op">;</span></span>
 <span id="cb44-5"><a href="#cb44-5"></a><span class="im">import</span> TodoList <span class="im">from</span> <span class="st">&quot;./TodoList&quot;</span><span class="op">;</span></span>
