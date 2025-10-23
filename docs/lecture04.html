@@ -220,6 +220,13 @@ Ok to proceed? (y)</code></pre>
       <p>次のように <code>Use rolldown-vite (Experimental)?</code> については
       <strong><em>No</em></strong> を、<code>Install with npm and start now?</code> については
       <strong><em>Yes</em></strong> を選択してください。</p>
+      <div class="note type-tips">
+      <p><strong>補足</strong></p>
+      <p>Node のバージョンによっては <code>--template</code>
+      というオプション指定が無効で「<strong>Select a
+      framework:</strong>」のように尋ねられることがあります。その場合は「<strong>React</strong>」を選択してください。また「<strong>Select
+      a variant:</strong>」は「<strong>TypeScript + SWC</strong>」を選択してください。</p>
+      </div>
       <pre><code>&gt; npx
 &gt; create-vite react-todo-app --template react-swc-ts
 
@@ -271,13 +278,6 @@ found 0 vulnerabilities
       という主要な機能を利用して行なわれています。数値のカウントアップは <span
       class="masked">「Hello World」や「(組込み開発の)Lチカ」のような位置づけ</span>
       になります。</p>
-      <div class="note type-tips">
-      <p><strong>補足</strong></p>
-      <p>コマンドオプションに <code>--template react-ts</code>
-      を付けているので表示されないと思いますが、もし「Select a
-      framework」と聞かれたら「React」、「Select a
-      variant」と聞かれたら「TypeScript」を選択してください。</p>
-      </div>
       <p>動作が確認できたら、ターミナルから <code>[Ctrl]+[C]</code>
       を入力して、開発サーバを停止してください。</p>
       <h2 data-number="3.3" id="プロジェクトフォルダの構成確認"><span
