@@ -1431,9 +1431,11 @@ Publish</a></li>
       <p>LocalStorageは、JavaScriptの <strong>Window.localStorage API</strong>
       を通じて利用可能で、保存可能なデータは <span class="masked">文字列 (string型) のみ</span>
       ですが、<strong>約5MB</strong> までのデータが保存可能となっています。</p>
-      <p>LocalStorageは <strong>ブラウザごとに独立した保存領域</strong>
-      を持ちます。例えば、https://hoge777.github.io/react-todo-app/ にホストされた TodoApp
-      に2人のユーザ「寝屋川タヌキ」と「萱島ウサギ」がアクセスした場合、各データは、各ユーザーが使用するデバイスのブラウザに独立して保存されます。そのため、例えば寝屋川タヌキが「高専に侵入」というTodoを追加しても、萱島ウサギは影響を受けません。</p>
+      <p>LocalStorageは <strong>ブラウザごとに独立した保存領域</strong> を持ちます。例えば
+      <code>https://hoge777.github.io/react-todo-app/</code> にホストされた TodoApp
+      に2人のユーザ「寝屋川タヌキ」と「萱島ウサギ」がアクセスした場合、各データは <span
+      class="masked">各ユーザーが使用するデバイスのブラウザに独立して保存</span> されます。</p>
+      <p>そのため、例えば寝屋川タヌキが「高専に侵入」というTodoを追加しても、萱島ウサギは影響を受けません。</p>
       <div class="note type-tips">
       <p><strong>LocalStorage の容量制限</strong></p>
       <p>LocalStorage は、<strong>1オリジンあたり約5MB</strong>
