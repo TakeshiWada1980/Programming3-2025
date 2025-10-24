@@ -120,6 +120,8 @@ class="toc-section-number">10.1</span> LocalStorage とは</a></li>
 <li><a href="#localstorage-を利用した保存機能の実装"
 id="toc-localstorage-を利用した保存機能の実装"><span class="toc-section-number">10.2</span>
 LocalStorage を利用した保存機能の実装</a></li>
+<li><a href="#ローカルストレージの管理" id="toc-ローカルストレージの管理"><span
+class="toc-section-number">10.3</span> ローカルストレージの管理</a></li>
 </ul></li>
 <li><a href="#reactアプリを-github-pages-にデプロイする手順"
 id="toc-reactアプリを-github-pages-にデプロイする手順"><span class="toc-section-number">11</span>
@@ -1551,6 +1553,16 @@ Publish</a></li>
       にはDate型の値に復元されない点に注意してください (文字列型として復元されます)。そのため
       <strong>第21行目</strong> のような工夫がされています。</p>
       <p>以上のように、この永続化の処理は様々な工夫が詰められているので、色々と実験したり読み解いたりして理解を深めてください。</p>
+      <h2 data-number="10.3" id="ローカルストレージの管理"><span
+      class="header-section-number">10.3</span> ローカルストレージの管理</h2>
+      <p>ローカルストレージの管理 (確認・編集・削除)
+      は、以下のようにウェブブラウザの<strong>デベロッパーツール</strong> (<code>F12</code> で起動)
+      から行なうことができます。</p>
+      <figure>
+      <img src="figs/05/chrome-01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>上記の❸で、右クリックして「<strong>削除</strong>」を選択すれば手動で当該のローカルストレージを削除することができます。</p>
       <h1 data-number="11" id="reactアプリを-github-pages-にデプロイする手順"><span
       class="header-section-number">11</span> Reactアプリを GitHub Pages にデプロイする手順</h1>
       <p>Todoアプリを GitHub Pages にデプロイ するための手順について解説します。</p>
@@ -1737,16 +1749,16 @@ dist/assets/main-DWqE2Lov.js   232.21 kB │ gzip: 76.33 kB
 &gt; gh-pages -d dist
 
 Published</code></pre>
-      <p>ウェブブラウザから <strong>https://xxxx.github.io/react-todo-app/</strong>
-      にアクセスしてTodoアプリが利用できることを確認してください。</p>
+      <p>ウェブブラウザから <code>https://xxxx.github.io/react-todo-app/</code>
+      にアクセスしてTodoアプリが実際に利用できることを確認してください。</p>
       <figure>
       <img src="figs/05/deploy_06.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
       <p>なお、<a
-      href="https://www.google.com/search?q=react-router-domとは">react-router-dom</a>を使った
-      <strong>ルーティング</strong> を導入したReactアプリを GitHub Pages
-      でホストする場合は、さらにひと工夫が求められます。これについては個別に訊いてくれれば個別にレクチャします
+      href="https://www.google.com/search?q=react-router-domとは">react-router-dom</a>による
+      <strong>ルーティング</strong> を使ったReactアプリを GitHub Pages
+      でホストする場合は、さらにひと工夫が求められます。これについては個別に質問してくれれば個別にレクチャします
       (<a
       href="https://github.com/TakeshiWada1980/Programming3-2025/blob/main/docs/codes/05/main.tsx">main.tsx</a>,<a
       href="https://github.com/TakeshiWada1980/Programming3-2025/blob/main/docs/codes/05/Router.tsx">Router.tsx</a>)。</p>
@@ -1770,26 +1782,29 @@ Published</code></pre>
       <li><strong><em>提出先</em></strong> :
       Teamsの「<strong>PG3-課題1</strong>」にリポジトリのURLを提出
       <ul>
-      <li>🚨提出するURLは「<strong>Todoアプリをホストしている GitHub Pages
-      のURL</strong>」ではなく、「<strong>GitHubリポジトリのURL</strong>」としてください。</li>
-      <li><code>README.md</code> の先頭付近に、Todoアプリをホストしている GitHub Pages
-      のURLを記載してください。</li>
+      <li>🚨提出するURLは「<strong>Todo アプリをホストしている GitHub Pages の
+      URL</strong>」ではなく、「<strong>GitHub リポジトリの URL</strong>」としてください。</li>
+      <li><code>README.md</code> の先頭付近に、Todoアプリをホストしている GitHub Pages の URL
+      を記載してください。</li>
       <li><code>README.md</code> の末尾付近に「<strong>開発期間: 2025.10.xx ~ 2025.11.xx
       (約XXX時間)</strong>」のような内容を必ず記載してください。</li>
       </ul></li>
       <li><strong><em>取り組み時間の目安</em></strong> : <strong>16時間以上</strong> (
-      <code>useEffect</code>
-      の理解などの基礎学習の時間を含む)。本科目は「学修単位科目」かつ「筆記試験がない科目」です。課題には十分な時間をかけて取り組んでください。</li>
+      前回講義と今回講義の取り組みを含む)。本科目は「学修単位科目」かつ「筆記試験がない科目」です。課題
+      (全3回) には十分な時間をかけて取り組んでください。</li>
       <li><strong><em>アドバイス</em></strong> : Todoアプリとしての「<strong>機能
       (独自性)</strong>」や「<strong>UI/UX</strong>」を中心とした完成度の他、リポジトリの
       <code>README.md</code> の内容を評価します
       (最低、3枚以上のスクリーンショットを添えてください)。<code>README.md</code>
-      に、以下の内容を含めると高評価です。
+      には、次の内容を含めるようにしてください。
       <ul>
-      <li>アプリの機能やコンセプト。これを書いておかないと<strong>頑張って実装した機能に気付いてもらえないこと</strong>があります。スクリーンショットがあると分かりやすいです。</li>
-      <li><strong>特に工夫や注力 (チャレンジ)
-      したところ、オリジナリティを持たせているところ</strong>。それらの「着想」や「経緯」についても書かれていると
+      <li>アプリの機能やコンセプト。これを記載しておかないと「<strong>頑張って実装した機能に気付いてもらえないこと</strong>」があります。スクリーンショットなどがあると分かりやすいです。
+      <ul>
+      <li><strong>特に挑戦・工夫したところ、オリジナリティを持たせているところ</strong>。それらの「着想」や「経緯」についても書かれていると
       (就活のポートフォリオとして) 高評価・好印象です👍</li>
+      <li>「授業の課題だから仕方な作成した感」が透けて見えると低評価・悪印象です。README
+      に「課題1」のような文言は記載しないことをお勧めします。</li>
+      </ul></li>
       <li>使用技術 (技術スタック、主要ライブラリ)、開発に要した時間や期間など。</li>
       </ul></li>
       </ul>
