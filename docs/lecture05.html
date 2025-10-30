@@ -726,7 +726,7 @@ Publish</a></li>
 <span id="cb9-8"><a href="#cb9-8"></a><span class="op">/&gt;</span></span></code></pre></div>
       <p>上記のようなテクニックは、Reactでは頻繁に使われるので覚えておいてください。特に処理が短い場合は、こちらの記法が推奨されます。また、ここでは<strong>型推論が有効になるので</strong>、以下のように長々と「型」を記述しなくても良いことも嬉しいです。</p>
       <div class="sourceCode" id="cb10" data-caption="型を明示する例" data-startFrom="7"><pre
-      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 6;"><span id="cb10-7"><a href="#cb10-7"></a>onChange<span class="op">=</span>{(e<span class="op">:</span>React<span class="op">.</span><span class="at">ChangeEvent</span><span class="op">&lt;</span><span class="bu">HTMLInputElement</span><span class="op">&gt;</span>) <span class="kw">=&gt;</span> <span class="fu">updateNewTodoPriority</span>(e)}</span></code></pre></div>
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 6;"><span id="cb10-7"><a href="#cb10-7"></a>onChange<span class="op">=</span>{(e<span class="op">:</span>React<span class="op">.</span><span class="at">ChangeEvent</span><span class="op">&lt;</span><span class="bu">HTMLInputElement</span><span class="op">&gt;</span>) <span class="kw">=&gt;</span> <span class="fu">setNewTodoPriority</span>(<span class="bu">Number</span>(e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">value</span>))}</span></code></pre></div>
       <h2 data-number="4.2" id="補足-mapを使用せずにラジオボタンを構成する例"><span
       class="header-section-number">4.2</span> 補足: mapを使用せずにラジオボタンを構成する例</h2>
       <p><code>map</code> を使用せずに <strong>第67行目</strong> ～ <strong>第82行目</strong>
