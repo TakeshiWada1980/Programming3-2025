@@ -722,7 +722,7 @@ Publish</a></li>
 <span id="cb9-4"><a href="#cb9-4"></a>  <span class="kw">type</span><span class="op">=</span><span class="st">&quot;radio&quot;</span></span>
 <span id="cb9-5"><a href="#cb9-5"></a>  value<span class="op">=</span>{value}</span>
 <span id="cb9-6"><a href="#cb9-6"></a>  checked<span class="op">=</span>{newTodoPriority <span class="op">===</span> value}</span>
-<span id="cb9-7"><a href="#cb9-7"></a>  onChange<span class="op">=</span>{(e) <span class="kw">=&gt;</span> <span class="fu">updateNewTodoPriority</span>(e)} <span class="co">// ◀◀ 注目</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>  onChange<span class="op">=</span>{(e) <span class="kw">=&gt;</span> <span class="fu">setNewTodoPriority</span>(<span class="bu">Number</span>(e<span class="op">.</span><span class="at">target</span><span class="op">.</span><span class="at">value</span>))} <span class="co">// ◀◀ 注目</span></span>
 <span id="cb9-8"><a href="#cb9-8"></a><span class="op">/&gt;</span></span></code></pre></div>
       <p>上記のようなテクニックは、Reactでは頻繁に使われるので覚えておいてください。特に処理が短い場合は、こちらの記法が推奨されます。また、ここでは<strong>型推論が有効になるので</strong>、以下のように長々と「型」を記述しなくても良いことも嬉しいです。</p>
       <div class="sourceCode" id="cb10" data-caption="型を明示する例" data-startFrom="7"><pre
