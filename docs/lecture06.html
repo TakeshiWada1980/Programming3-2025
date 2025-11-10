@@ -1630,6 +1630,10 @@ npm i @fortawesome/free-solid-svg-icons</code></pre>
       <code>dompurify</code> (Next.jsでバックエンドでも使用する可能性があるのであれば
       <code>isomorphic-dompurify</code>)
       などの<strong>ライブラリを使用</strong>します。詳しい使い方は生成AIなどで調べてください。</p>
+      <ul>
+      <li>XSS脆弱性については、来年前期の「知能情報実験実習2」の<a
+      href="https://takeshiwada1980.github.io/Eii2-2025/">前期テーマ</a>で扱います。</li>
+      </ul>
       <p><strong>(プロンプト例)</strong></p>
       <blockquote>
       <p>TypeScript を採用した Next.js 環境において、<code>isomorphic-dompurify</code>
@@ -1656,28 +1660,26 @@ npm i @fortawesome/free-solid-svg-icons</code></pre>
       をアップデートしてください。<strong>「レイアウト」や「デザイン
       (装飾)」は各自で自由に設計してください</strong>。必要に応じて <code>dummyPosts.ts</code>
       にデータを追加してください。</p>
-      <ul>
-      <li>必要なライブラリ (<code>dayjs</code> や <code>isomorphic-dompurify</code> など)
-      があれば適宜追加してください。</li>
-      <li>本文は <strong>最大で「3行」まで表示</strong> されるようにしてください
-      (4行以上になる場合は <code>...</code> で省略する)。
-      <ul>
-      <li>ヒント: <span class="masked">Tailwind CSS の <code>line-clamp-3</code>
-      を利用すると便利です</span></li>
-      </ul></li>
-      <li><strong>EX (任意)</strong>: <code>src/app/page.tsx</code>
-      にボタンなどのUIを追加し、「日付の新しい順」「日付の古い順」に記事概要を並び替える処理を実装してください。</li>
-      <li><strong>EX (任意)</strong>: 同様に、カテゴリによるフィルタ機能 (絞り込み機能)
-      を実装してください。例えば <code>TypeScript</code>
-      のカテゴリタグがついている記事だけを一覧で表示するなど。</li>
-      </ul>
       <figure>
       <img src="figs/06/app_09.png" alt="img" />
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
       <ul>
-      <li>実装例は<a
-      href="https://github.com/TakeshiWada1980/Programming3-2025/blob/main/docs/codes/06/code03.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>を参照してください。</li>
+      <li><p>必要なライブラリ (<code>dayjs</code> や <code>isomorphic-dompurify</code> など)
+      があれば適宜追加してください。</p></li>
+      <li><p>本文は <strong>最大で「3行」まで表示</strong> されるようにしてください
+      (4行以上になる場合は <code>...</code> で省略する)。</p>
+      <ul>
+      <li>ヒント: <span class="masked">Tailwind CSS の <code>line-clamp-3</code>
+      を利用すると便利です</span></li>
+      </ul></li>
+      <li><p><strong>EX (任意)</strong>: <code>src/app/page.tsx</code>
+      にボタンなどのUIを追加し、「日付の新しい順」「日付の古い順」に記事概要を並び替える処理を実装してください。</p></li>
+      <li><p><strong>EX (任意)</strong>: 同様に、カテゴリによるフィルタ機能 (絞り込み機能)
+      を実装してください。例えば <code>TypeScript</code>
+      のカテゴリタグがついている記事だけを一覧で表示するなど。</p></li>
+      <li><p>実装例は<a
+      href="https://github.com/TakeshiWada1980/Programming3-2025/blob/main/docs/codes/06/code03.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>を参照してください。</p></li>
       </ul>
       <!-- ---------------------------------------- -->
     </main>
