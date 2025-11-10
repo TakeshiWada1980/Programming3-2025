@@ -50,25 +50,23 @@ id="toc-バックエンド処理を含めたブログアプリの開発"><span c
 <li><a href="#next.js-の-開発環境構築" id="toc-next.js-の-開発環境構築"><span
 class="toc-section-number">3</span> Next.js の 開発環境構築</a>
 <ul>
-<li><a href="#vscodeの起動" id="toc-vscodeの起動"><span class="toc-section-number">3.1</span>
-VSCodeの起動</a></li>
-<li><a href="#gitignore" id="toc-gitignore"><span class="toc-section-number">3.2</span>
+<li><a href="#gitignore" id="toc-gitignore"><span class="toc-section-number">3.1</span>
 .gitignore</a></li>
 <li><a href="#eslint.config.mjs" id="toc-eslint.config.mjs"><span
-class="toc-section-number">3.3</span> eslint.config.mjs</a></li>
-<li><a href="#next-env.d.ts" id="toc-next-env.d.ts"><span class="toc-section-number">3.4</span>
+class="toc-section-number">3.2</span> eslint.config.mjs</a></li>
+<li><a href="#next-env.d.ts" id="toc-next-env.d.ts"><span class="toc-section-number">3.3</span>
 next-env.d.ts</a></li>
-<li><a href="#next.config.ts" id="toc-next.config.ts"><span class="toc-section-number">3.5</span>
+<li><a href="#next.config.ts" id="toc-next.config.ts"><span class="toc-section-number">3.4</span>
 next.config.ts</a></li>
 <li><a href="#package-lock.json-と-package.json" id="toc-package-lock.json-と-package.json"><span
-class="toc-section-number">3.6</span> package-lock.json と package.json</a></li>
+class="toc-section-number">3.5</span> package-lock.json と package.json</a></li>
 <li><a href="#postcss.config.mjs" id="toc-postcss.config.mjs"><span
-class="toc-section-number">3.7</span> postcss.config.mjs</a></li>
-<li><a href="#readme.md" id="toc-readme.md"><span class="toc-section-number">3.8</span>
+class="toc-section-number">3.6</span> postcss.config.mjs</a></li>
+<li><a href="#readme.md" id="toc-readme.md"><span class="toc-section-number">3.7</span>
 README.md</a></li>
-<li><a href="#tsconfig.json" id="toc-tsconfig.json"><span class="toc-section-number">3.9</span>
+<li><a href="#tsconfig.json" id="toc-tsconfig.json"><span class="toc-section-number">3.8</span>
 tsconfig.json</a></li>
-<li><a href="#srcapp-フォルダ" id="toc-srcapp-フォルダ"><span class="toc-section-number">3.10</span>
+<li><a href="#srcapp-フォルダ" id="toc-srcapp-フォルダ"><span class="toc-section-number">3.9</span>
 src/app フォルダ</a></li>
 </ul></li>
 <li><a href="#最小構成の-next.js-アプリ" id="toc-最小構成の-next.js-アプリ"><span
@@ -149,6 +147,8 @@ class="toc-section-number">7.2</span> 投稿記事のモックを生成</a></li>
       class="masked">チームプロジェクトでの開発の経験があること</span>
       のアピールができるので必ず記載してください。</li>
       </ul></li>
+      <li>次回の講義で <strong><em>小テスト❸</em></strong>
+      を実施します。主に、今回の講義内容からの出題となります。</li>
       </ul>
       <h1 data-number="2" id="バックエンド処理を含めたブログアプリの開発"><span
       class="header-section-number">2</span> バックエンド処理を含めたブログアプリの開発</h1>
@@ -302,9 +302,11 @@ You can update by running: npm i -g create-next-app</code></pre>
       <ul>
       <li>答え: <span class="masked">npx create-next-app@latest</span></li>
       </ul></li>
+      <li>2025年11月10日現在の Next.js の最新バージョン (メジャーバージョン) を答えよ。
+      <ul>
+      <li>答え: <span class="masked">16</span> ### VSCodeの起動</li>
+      </ul></li>
       </ul>
-      <h2 data-number="3.1" id="vscodeの起動"><span class="header-section-number">3.1</span>
-      VSCodeの起動</h2>
       <p>作成されたプロジェクトフォルダ (next-blog-app) に移動して VSCode を起動してください。</p>
       <pre><code>cd next-blog-app
 code .</code></pre>
@@ -314,7 +316,7 @@ code .</code></pre>
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
       <p>プロジェクトフォルダを構成しているファイルについて簡単に確認していきます。</p>
-      <h2 data-number="3.2" id="gitignore"><span class="header-section-number">3.2</span>
+      <h2 data-number="3.1" id="gitignore"><span class="header-section-number">3.1</span>
       .gitignore</h2>
       <p><strong>Gitによるバージョン管理をしないファイルやフォルダ</strong>
       (＝GitHubにプッシュしないファイルやフォルダ)
@@ -331,7 +333,7 @@ code .</code></pre>
       <li><code>.env*</code> により <strong>.env</strong> や <strong>.env.local</strong>
       などのファイルがGit管理から除外されます。</li>
       </ul>
-      <h2 data-number="3.3" id="eslint.config.mjs"><span class="header-section-number">3.3</span>
+      <h2 data-number="3.2" id="eslint.config.mjs"><span class="header-section-number">3.2</span>
       eslint.config.mjs</h2>
       <p><code>eslint.config.mjs</code> は、<strong>ESLint</strong> (<a
       href="lecture04.html#eslintのカスタマイズ">前回講義で解説済み</a>)
@@ -352,22 +354,24 @@ code .</code></pre>
       (FlatCompat)」の違いについて説明してください。</p>
       </blockquote>
       </div>
-      <h2 data-number="3.4" id="next-env.d.ts"><span class="header-section-number">3.4</span>
+      <h2 data-number="3.3" id="next-env.d.ts"><span class="header-section-number">3.3</span>
       next-env.d.ts</h2>
       <p>TypeScriptが <strong>Next.js</strong>
       の「組み込み機能」や「型」を認識するためのグローバル型宣言ファイルです。ファイルに書かれているように
       <span class="masked">This file should not be edited
       (＝このファイルは編集してはいけません)</span>。</p>
-      <h2 data-number="3.5" id="next.config.ts"><span class="header-section-number">3.5</span>
+      <h2 data-number="3.4" id="next.config.ts"><span class="header-section-number">3.4</span>
       next.config.ts</h2>
       <p><code>next.config.ts</code> では <span
       class="masked">外部ドメインからの画像読み込みの制御</span>
       に関する設定などを記述します。必要に応じて設定を追加したり、書き換えたりする必要があります。</p>
-      <h2 data-number="3.6" id="package-lock.json-と-package.json"><span
-      class="header-section-number">3.6</span> package-lock.json と package.json</h2>
+      <h2 data-number="3.5" id="package-lock.json-と-package.json"><span
+      class="header-section-number">3.5</span> package-lock.json と package.json</h2>
       <p>これらのファイルについては、既に<a
-      href="lecture01.html#開発を効率的に行なうためのパッケージの追加">解説済み</a>です。<code>package.json</code>
-      の <code>"scripts"</code> に記載の各コマンド
+      href="lecture01.html#開発を効率的に行なうためのパッケージの追加">解説済み</a>です。<code>"dependencies"</code>
+      を確認すると、内部で <span class="masked">React 19</span>
+      を使用していることが確認できます。</p>
+      <p><code>package.json</code> の <code>"scripts"</code> に記載の各コマンド
       (<code>dev</code>、<code>build</code>、<code>start</code>、<code>lint</code>)
       は次のように動作します。</p>
       <div class="sourceCode" id="cb6" data-caption="package.json (抜粋)" data-startFrom="5"><pre
@@ -377,7 +381,7 @@ code .</code></pre>
 <span id="cb6-8"><a href="#cb6-8"></a>  <span class="dt">&quot;start&quot;</span><span class="fu">:</span> <span class="st">&quot;next start&quot;</span><span class="fu">,</span></span>
 <span id="cb6-9"><a href="#cb6-9"></a>  <span class="dt">&quot;lint&quot;</span><span class="fu">:</span> <span class="st">&quot;eslint&quot;</span></span>
 <span id="cb6-10"><a href="#cb6-10"></a><span class="fu">}</span><span class="er">,</span></span></code></pre></div>
-      <h3 data-number="3.6.1" id="npm-run-dev"><span class="header-section-number">3.6.1</span> npm
+      <h3 data-number="3.5.1" id="npm-run-dev"><span class="header-section-number">3.5.1</span> npm
       run dev</h3>
       <p>「<strong>ホットリロード</strong>」や「<strong>エラー表示</strong>」の機能を提供する
       <strong>開発サーバ</strong>
@@ -411,7 +415,7 @@ code .</code></pre>
       <strong>.next</strong>
       フォルダを一旦削除することで解決することがあります。今後の開発で行き詰まったときには試してみてください。</p>
       </div>
-      <h3 data-number="3.6.2" id="npm-run-build"><span class="header-section-number">3.6.2</span>
+      <h3 data-number="3.5.2" id="npm-run-build"><span class="header-section-number">3.5.2</span>
       npm run build</h3>
       <p><strong>本番用 (プロダクション環境用)</strong>
       にアプリをビルドします。コードの「最適化」「バンドル」「ミニファイ化」などが行われたファイルが
@@ -425,7 +429,7 @@ code .</code></pre>
       <p>Node.js +
       TypeScript環境のウェブアプリ開発において、ビルドプロセスで実行される「最適化」「バンドル」「ミニファイ化」とは、どのような処理ですか。</p>
       </blockquote>
-      <h3 data-number="3.6.3" id="npm-run-start"><span class="header-section-number">3.6.3</span>
+      <h3 data-number="3.5.3" id="npm-run-start"><span class="header-section-number">3.5.3</span>
       npm run start</h3>
       <p>ビルドされた本番用のアプリを起動します。開発サーバと同様にデフォルトでは3000番ポートで起動します。<code>npm start</code>
       でも実行可能です。</p>
@@ -433,7 +437,7 @@ code .</code></pre>
       <pre><code>npm run start</code></pre>
       <p>動作が確認できたら、ターミナルから <code>Ctrl+C</code>
       を入力してサーバを停止しておいてください。</p>
-      <h3 data-number="3.6.4" id="npm-run-lint"><span class="header-section-number">3.6.4</span> npm
+      <h3 data-number="3.5.4" id="npm-run-lint"><span class="header-section-number">3.5.4</span> npm
       run lint</h3>
       <p>ESLint による静的コード解析 (コード品質チェック) を実行します。このコマンドの実行結果が
       <code>✔ No ESLint warnings or errors</code>
@@ -449,11 +453,20 @@ code .</code></pre>
       <figcaption aria-hidden="true">img</figcaption>
       </figure>
       <p>以下、ESLint の拡張機能がインストールされ、有効化されている前提の解説になります。</p>
-      <h2 data-number="3.7" id="postcss.config.mjs"><span class="header-section-number">3.7</span>
+      <h3 data-number="3.5.5" id="定着確認-2"><span class="header-section-number">3.5.5</span>
+      定着確認</h3>
+      <ul>
+      <li>標準設定で Next.js 15 をセットアップした場合、内部的に利用される React
+      のメジャーバージョンを答えよ。
+      <ul>
+      <li><strong>答え</strong> : <span class="masked">19</span></li>
+      </ul></li>
+      </ul>
+      <h2 data-number="3.6" id="postcss.config.mjs"><span class="header-section-number">3.6</span>
       postcss.config.mjs</h2>
       <p><strong>Tailwind CSS に関する設定ファイル</strong>です。<span class="masked">Tailwind CSS
       に関連するライブラリ</span> を追加したときは、設定の追記が必要となることがあります。</p>
-      <h2 data-number="3.8" id="readme.md"><span class="header-section-number">3.8</span>
+      <h2 data-number="3.7" id="readme.md"><span class="header-section-number">3.7</span>
       README.md</h2>
       <p>就職・インターンシップ向けのポートフォリオ用として開発・公開するときは、README.md
       の内容を適切に記述してください。</p>
@@ -466,11 +479,11 @@ code .</code></pre>
       <p>逆にマイナスの評価や印象となるような README.md
       とは、どのようなものでしょうか。具体例を示しながら解説してください。</p>
       </blockquote>
-      <h2 data-number="3.9" id="tsconfig.json"><span class="header-section-number">3.9</span>
+      <h2 data-number="3.8" id="tsconfig.json"><span class="header-section-number">3.8</span>
       tsconfig.json</h2>
       <p><strong>TypeScript
       に関する設定ファイル</strong>です。必要に応じて編集することがあります。</p>
-      <h2 data-number="3.10" id="srcapp-フォルダ"><span class="header-section-number">3.10</span>
+      <h2 data-number="3.9" id="srcapp-フォルダ"><span class="header-section-number">3.9</span>
       src/app フォルダ</h2>
       <p>Next.js では、基本的に <code>src/app</code>
       のなかにファイルやフォルダを配置することでコンテンツを構成していきます。この際、<span
@@ -483,8 +496,8 @@ code .</code></pre>
       <p>ウェブアプリにおけるルーティングとは、<strong>URLを構成するパス</strong> (例えば
       <code>/posts/1</code> や <code>/about</code>) に応じて <span
       class="masked">「どのコンテンツを表示するか」を決める仕組み</span> を指します。</p>
-      <h3 data-number="3.10.1" id="next.js-のルーティング"><span
-      class="header-section-number">3.10.1</span> Next.js のルーティング</h3>
+      <h3 data-number="3.9.1" id="next.js-のルーティング"><span
+      class="header-section-number">3.9.1</span> Next.js のルーティング</h3>
       <p>Next.js ( バージョン13から導入された AppRouter ) では、<code>src/app</code>
       のなかに<strong>規約に従った名前でファイルを配置</strong> (基本的には <code>layout.tsx</code>
       もしくは <code>page.tsx</code>)、<strong>フォルダ階層を構成</strong>することで (自動的に)
@@ -546,7 +559,7 @@ code .</code></pre>
       <span class="masked">「Next.js (v14 + TypeScript + App Router) に関する質問です。」</span>
       のような文をプロンプトに含めるようにしてください。</p>
       </div>
-      <h3 data-number="3.10.2" id="定着確認-2"><span class="header-section-number">3.10.2</span>
+      <h3 data-number="3.9.2" id="定着確認-3"><span class="header-section-number">3.9.2</span>
       定着確認</h3>
       <ul>
       <li>アプリケーションの振る舞いを細かく設定ファイルで指定するのではなく、フレームワークが想定する命名規則や配置ルールに従うことで、設定コードを書く手間を省くプログラミングパラダイムのことを何というか。「XXX
@@ -633,7 +646,7 @@ code .</code></pre>
       <p>次項で説明しますが、同じ階層 (フォルダ内) に <code>layout.tsx</code> と
       <code>page.tsx</code> が存在するときは、<code>layout.tsx</code> のなかの
       <code>{children}</code> に <code>page.tsx</code> が埋め込まれてレンダリングされます。</p>
-      <h3 data-number="4.2.1" id="定着確認-3"><span class="header-section-number">4.2.1</span>
+      <h3 data-number="4.2.1" id="定着確認-4"><span class="header-section-number">4.2.1</span>
       定着確認</h3>
       <p>「リスト1」は、Next.js のプロジェクトに配置したファイルである。以下の問いに答えよ。</p>
       <ul>
@@ -1149,7 +1162,7 @@ npm i @fortawesome/free-solid-svg-icons</code></pre>
       【雰囲気】<br />
       ・（キーワードを列挙）</p>
       </blockquote>
-      <h3 data-number="6.1.1" id="定着確認-4"><span class="header-section-number">6.1.1</span>
+      <h3 data-number="6.1.1" id="定着確認-5"><span class="header-section-number">6.1.1</span>
       定着確認</h3>
       <ul>
       <li>Next.js
@@ -1220,7 +1233,19 @@ npm i @fortawesome/free-solid-svg-icons</code></pre>
       <p>なお、このファイルでは <strong>第05行目</strong> のように <code>Page</code>
       という名前で関数コンポーネントを作成していますが、<code>AboutPage</code> や <code>About</code>
       のような任意の名前にすることもできます。ただし、パスカルケースとするように注意してください。</p>
-      <h3 data-number="6.2.1" id="演習-10分-1"><span class="header-section-number">6.2.1</span> 演習
+      <h3 data-number="6.2.1" id="定着確認-6"><span class="header-section-number">6.2.1</span>
+      定着確認</h3>
+      <ul>
+      <li>Next.js で画像を表示するための標準コンポーネント名を答えよ。
+      <ul>
+      <li><strong>答え</strong> : <span class="masked">Image</span></li>
+      </ul></li>
+      <li>Next.js でリンクを作成するための標準コンポーネント名を答えよ。
+      <ul>
+      <li><strong>答え</strong> : <span class="masked">Link</span></li>
+      </ul></li>
+      </ul>
+      <h3 data-number="6.2.2" id="演習-10分-1"><span class="header-section-number">6.2.2</span> 演習
       (<i class="fa-solid fa-stopwatch"></i>10分)</h3>
       <p>Image コンポーネントの <code>width</code> と <code>height</code>
       を属性を次のように変更した場合、レスポンシブ対応を含めてレンダリング出力がどのように変化するか確認してください。確認の際には、デベロッパーツールのコンソールも同時に確認してください
@@ -1348,7 +1373,7 @@ npm i @fortawesome/free-solid-svg-icons</code></pre>
       <p><a
       href="https://github.com/TakeshiWada1980/Programming3-2025/blob/main/docs/codes/06/code02.tsx"><i class="fa-solid fa-person-chalkboard"></i>
       実装例</a>(レスポンシブデザイン対応)</p>
-      <h3 data-number="6.4.2" id="定着確認-5"><span class="header-section-number">6.4.2</span>
+      <h3 data-number="6.4.2" id="定着確認-7"><span class="header-section-number">6.4.2</span>
       定着確認</h3>
       <ul>
       <li>Next.js において <code>&lt;a&gt;</code>
@@ -1428,14 +1453,24 @@ npm i @fortawesome/free-solid-svg-icons</code></pre>
       は記事が作成され日時を「<strong>ISO8601形式</strong>」で表したものですが、末尾に
       <code>Z</code> が付いている点です。この末尾の Z は、その日時が <span
       class="masked">UTC（協定世界時）であること</span> を示しています。そのため、「投稿1」の
-      <code>"2024-10-22T11:22:34.684Z"</code> は、日本時間 (JST) でいえば<span
-      class="masked">2024-10-25 07:37:17.367</span> を意味します。</p></li>
+      <code>"2024-10-22T11:22:34.684Z"</code> は、日本時間 (JST、UTC+9) でいえば<span
+      class="masked">2024年10月22日 20時22分34.684秒</span> を意味します。</p></li>
       <li><p><code>"content":</code> には <strong>HTMLタグを含んだ文字列</strong>
       が格納されていま1す。ブログ記事中の「改行」を画面に反映させるためには
       <strong>HTMLタグを有効化する必要</strong>がありますが、許可するタグを制限し適切なサニタイズ処理を実装しないと
       <span class="masked">XSS（クロスサイトスクリプティング）攻撃のリスク</span>
       が生じます。</p></li>
       </ol>
+      <h3 data-number="7.1.1" id="定着確認-8"><span class="header-section-number">7.1.1</span>
+      定着確認</h3>
+      <ul>
+      <li>ISO8601 形式の <code>"2025-11-10T18:45:15.000Z"</code>
+      というデータがある。これは、日本時間 (JST)
+      でいえば、何月何日、何時何分何秒を意味するか答えよ。
+      <ul>
+      <li><strong>答え</strong> : <span class="masked">2025年11月11日 03時45分15秒</span></li>
+      </ul></li>
+      </ul>
       <h2 data-number="7.2" id="投稿記事のモックを生成"><span
       class="header-section-number">7.2</span> 投稿記事のモックを生成</h2>
       <p>ソフトウェア開発において、<strong>実際のデータやシステムの振る舞いを模倣した仮のオブジェクトやデータ</strong>
@@ -1589,10 +1624,10 @@ npm i @fortawesome/free-solid-svg-icons</code></pre>
       <ol type="1">
       <li>ウェブAPIをコールしてデータを取得</li>
       <li>取得したデータを <code>setPosts</code> に与えて状態を更新 (state更新)</li>
-      <li>状態が更新されたので再レンダリング (=<strong>Page関数が再実行❗</strong>)</li>
+      <li>状態が更新されたので再レンダリング (=<strong>Page関数が再実行される❗</strong>)</li>
       <li>ウェブAPIをコールしてデータを取得</li>
       <li>取得したデータを <code>setPosts</code> に与えて状態を更新 (state更新)</li>
-      <li>状態が更新されたので再レンダリング (=<strong>Page関数が再実行❗</strong>)</li>
+      <li>状態が更新されたので再レンダリング (=<strong>Page関数が再実行される❗</strong>)</li>
       <li><strong>😱😱無限ループ😱😱</strong></li>
       </ol>
       <p>このような無限ループは、<strong>API使用制限（Rate Limit）への抵触</strong>、<span
@@ -1639,7 +1674,7 @@ npm i @fortawesome/free-solid-svg-icons</code></pre>
       <p>TypeScript を採用した Next.js 環境において、<code>isomorphic-dompurify</code>
       を利用し、HTMLコンテンツから「改行」と「太字・斜線・下線」以外のタグを削除したいです。どのようにすればよいですか。</p>
       </blockquote>
-      <h3 data-number="7.4.1" id="定着確認-6"><span class="header-section-number">7.4.1</span>
+      <h3 data-number="7.4.1" id="定着確認-9"><span class="header-section-number">7.4.1</span>
       定着確認</h3>
       <ul>
       <li>ウェブアプリにおいて、HTMLコンテンツに含まれる可能性のある「悪意のあるスクリプト」や「HTMLタグ」を無害化し、XSS攻撃を防ぐための処理のことを何というか答えよ。英語またはカタカナで答えること。
