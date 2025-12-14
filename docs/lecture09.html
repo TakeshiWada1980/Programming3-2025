@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="referrer" content="no-referrer" />
+
+    <script>
+      MathJax = {
+        chtml: {
+          displayAlign: "left",
+          displayIndent: "1em",
+        },
+      };
+    </script>
+
+    
+
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>第09回 3I-プログラミング3</title>
+  </head>
+
+  <body>
+    <div class="openbtn"><span></span><span></span><span></span></div>
+    <nav id="g-nav">
+      <div id="g-nav-list">
+        <!-- ---------------------------------------- -->
+         <ul>
+<li><a href="#連絡概要" id="toc-連絡概要"><span class="toc-section-number">1</span> 連絡・概要</a>
+<ul>
+<li><a href="#連絡" id="toc-連絡"><span class="toc-section-number">1.1</span> 連絡</a></li>
+<li><a href="#ここまでの授業の流れ" id="toc-ここまでの授業の流れ"><span
+class="toc-section-number">1.2</span> ここまでの授業の流れ</a></li>
+</ul></li>
+<li><a href="#投稿記事に関連するウェブapiの実装" id="toc-投稿記事に関連するウェブapiの実装"><span
+class="toc-section-number">2</span> 投稿記事に関連するウェブAPIの実装</a>
+<ul>
+<li><a href="#準備" id="toc-準備"><span class="toc-section-number">2.1</span> 準備</a></li>
+<li><a href="#投稿記事の一覧を取得するウェブapiの実装"
+id="toc-投稿記事の一覧を取得するウェブapiの実装"><span class="toc-section-number">2.2</span>
+投稿記事の一覧を取得するウェブAPIの実装</a></li>
+<li><a href="#投稿記事を新規作成するウェブapiの実装"
+id="toc-投稿記事を新規作成するウェブapiの実装"><span class="toc-section-number">2.3</span>
+投稿記事を新規作成するウェブAPIの実装</a></li>
+<li><a href="#宿題-投稿記事-単体-を取得するウェブapiの実装"
+id="toc-宿題-投稿記事-単体-を取得するウェブapiの実装"><span class="toc-section-number">2.4</span>
+宿題⛄: 投稿記事 (単体) を取得するウェブAPIの実装</a></li>
+<li><a href="#宿題-投稿記事を削除するウェブapiの実装"
+id="toc-宿題-投稿記事を削除するウェブapiの実装"><span class="toc-section-number">2.5</span> 宿題⛄:
+投稿記事を削除するウェブAPIの実装</a></li>
+<li><a href="#宿題-投稿記事の内容を変更-更新-するウェブapiの実装"
+id="toc-宿題-投稿記事の内容を変更-更新-するウェブapiの実装"><span
+class="toc-section-number">2.6</span> 宿題⛄: 投稿記事の内容を変更 (更新)
+するウェブAPIの実装</a></li>
+<li><a href="#情報の整理-apiリストとサイトマップ" id="toc-情報の整理-apiリストとサイトマップ"><span
+class="toc-section-number">2.7</span> 情報の整理: APIリストとサイトマップ</a></li>
+<li><a href="#ふたたびフロンドエンド開発に" id="toc-ふたたびフロンドエンド開発に"><span
+class="toc-section-number">2.8</span> ふたたびフロンドエンド開発に…</a></li>
+</ul></li>
+<li><a href="#カテゴリの新規作成フォームの実装" id="toc-カテゴリの新規作成フォームの実装"><span
+class="toc-section-number">3</span> カテゴリの新規作成フォームの実装</a>
+<ul>
+<li><a href="#準備-1" id="toc-準備-1"><span class="toc-section-number">3.1</span> 準備</a></li>
+<li><a href="#カテゴリの追加フォームの実装-第1段階"
+id="toc-カテゴリの追加フォームの実装-第1段階"><span class="toc-section-number">3.2</span>
+カテゴリの追加フォームの実装 (第1段階)</a></li>
+<li><a href="#カテゴリの追加フォームの実装-第2段階"
+id="toc-カテゴリの追加フォームの実装-第2段階"><span class="toc-section-number">3.3</span>
+カテゴリの追加フォームの実装 (第2段階)</a></li>
+<li><a href="#カテゴリの追加フォームの実装-第3段階"
+id="toc-カテゴリの追加フォームの実装-第3段階"><span class="toc-section-number">3.4</span>
+カテゴリの追加フォームの実装 (第3段階)</a></li>
+</ul></li>
+<li><a href="#カテゴリの変更削除フォームの実装" id="toc-カテゴリの変更削除フォームの実装"><span
+class="toc-section-number">4</span> カテゴリの変更・削除フォームの実装</a></li>
+<li><a href="#投稿記事の新規作成フォームの実装" id="toc-投稿記事の新規作成フォームの実装"><span
+class="toc-section-number">5</span> 投稿記事の新規作成フォームの実装</a></li>
+<li><a href="#冬休みの宿題" id="toc-冬休みの宿題"><span class="toc-section-number">6</span>
+冬休みの宿題</a></li>
+</ul> 
+        <!-- ---------------------------------------- -->
+      </div>
+    </nav>
+
+    <header class="markdown-body">
+      <p>2025-3I プログラミング3 第09回 講義資料</p>
+      <p>2025年12月18日（木）1・2時限</p>
+    </header>
+
+    <main class="markdown-body">
+      <!-- ---------------------------------------- -->
+      <h1 data-number="1" id="連絡概要"><span class="header-section-number">1</span> 連絡・概要</h1>
+      <h2 data-number="1.1" id="連絡"><span class="header-section-number">1.1</span> 連絡</h2>
+      <ul>
+      <li>年内最後の講義になります。次回は、1月8日 (木) となります。
+      <ul>
+      <li>スペシャルコンテンツとして OB講演 (＝<span
+      class="masked">現役のフリーランスエンジニアとして活躍している本校OB</span>) があります。</li>
+      </ul></li>
+      <li><a href="https://unityroom.com/unity1weeks">Unity 1-Week GAME JAM</a> (再掲)
+      <ul>
+      <li>次回の開催 12月23日(月) 0時 〜 12月29日(日) 20時 … お題「？？？？」</li>
+      </ul></li>
+      </ul>
+      <h2 data-number="1.2" id="ここまでの授業の流れ"><span class="header-section-number">1.2</span>
+      ここまでの授業の流れ</h2>
+      <div class="note type-senior">
+      <p>以下の内容は、学修単位科目の「<strong>授業時間外学習</strong>」として取組みをしておいてください。最後に<a
+      href="lecture09.html#冬休みの宿題">冬休みの宿題</a>🥶 (＝<strong><em>課題2</em></strong>
+      の準備に相当) があります。</p>
+      </div>
+      <p>前回講義では「ブログアプリ」のバックエンド開発として、「<strong>カテゴリ</strong>」のCRUDに関連するウェブAPIの設計と実装を行ないました。</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>エンドポイント</th>
+      <th>HTTP<br>Method</th>
+      <th>処理</th>
+      <th>管理者<br>権限</th>
+      <th>リクエスト<br>ボディ</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td>/api/categories</td>
+      <td>GET</td>
+      <td>カテゴリの一覧を取得する</td>
+      <td></td>
+      <td></td>
+      </tr>
+      <tr class="even">
+      <td>/api/admin/categories</td>
+      <td>POST</td>
+      <td>カテゴリを追加する</td>
+      <td>必要</td>
+      <td>必要</td>
+      </tr>
+      <tr class="odd">
+      <td>/api/admin/categories/[id]</td>
+      <td>PUT</td>
+      <td>カテゴリの名前を変更する</td>
+      <td>必要</td>
+      <td>必要</td>
+      </tr>
+      <tr class="even">
+      <td>/api/admin/categories/[id]</td>
+      <td>DELETE</td>
+      <td>カテゴリを削除する</td>
+      <td>必要</td>
+      <td></td>
+      </tr>
+      </tbody>
+      </table>
+      <p>各APIの実装では、O/R Mapper である <strong>PrismaClient</strong> を通して <span
+      class="masked">リレーショナルデータベース (RDB) に対するCRUD操作</span>
+      について学びました。なお、現在は RDB として <u>SQLite</u> を使用していますが、次々回以降に <a
+      href="https://www.google.com/search?q=Supabaseとは">Supabase</a> の <u>PostgreSQL</u>
+      に切り替える予定です。</p>
+      <p>今回講義 (＋冬休みの宿題を含む)
+      では「<strong>投稿記事</strong>」に関連するウェブAPIの実装と、各APIと連携するフロントエンド開発
+      (＝<span class="masked">編集用のフォームを含む画面の実装</span>)
+      について解説していきます。</p>
+      <h1 data-number="2" id="投稿記事に関連するウェブapiの実装"><span
+      class="header-section-number">2</span> 投稿記事に関連するウェブAPIの実装</h1>
+      <p>「<strong>投稿記事</strong>」に関連するCRUD操作のインターフェイスとして、次のようなウェブAPIを実装していきます。</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>エンドポイント</th>
+      <th>HTTP<br>Method</th>
+      <th>処理</th>
+      <th>管理者<br>権限</th>
+      <th>リクエスト<br>ボディ</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td>/api/posts</td>
+      <td>GET</td>
+      <td>投稿記事の一覧を取得する</td>
+      <td></td>
+      <td></td>
+      </tr>
+      <tr class="even">
+      <td>/api/posts/[id]</td>
+      <td>GET</td>
+      <td>投稿記事 (単体) を取得する</td>
+      <td></td>
+      <td></td>
+      </tr>
+      <tr class="odd">
+      <td>/api/admin/posts</td>
+      <td>POST</td>
+      <td>投稿記事を追加する</td>
+      <td>必要</td>
+      <td>必要</td>
+      </tr>
+      <tr class="even">
+      <td>/api/admin/posts/[id]</td>
+      <td>PUT</td>
+      <td>投稿記事の内容を変更 (編集) する</td>
+      <td>必要</td>
+      <td>必要</td>
+      </tr>
+      <tr class="odd">
+      <td>/api/admin/posts/[id]</td>
+      <td>DELETE</td>
+      <td>投稿記事を削除する</td>
+      <td>必要</td>
+      <td></td>
+      </tr>
+      </tbody>
+      </table>
+      <p>投稿記事については、<code>id</code> を指定して <span class="masked">投稿記事 (単体)
+      を取得</span> するAPI (GET Method 対応) も実装していきます。</p>
+      <h2 data-number="2.1" id="準備"><span class="header-section-number">2.1</span> 準備</h2>
+      <p>解説に示す実行結果と、皆さんの手元での実行結果を一致させるために、以下のコマンドを実行して
+      <strong>DBのレコードの初期化</strong>
+      を実行しておいてください。なお、適切に実行結果の読み替えができる場合は初期化の必要はありません。</p>
+      <pre><code>npx prisma db seed</code></pre>
+      <p><strong>注意</strong>: <code>prisma/seed.ts</code> の内容が<a
+      href="https://github.com/TakeshiWada1980/Programming3-2025/blob/main/docs/codes/08/code01.ts">こちら<i class="fa-solid fa-person-chalkboard"></i></a>のようになっている前提です。</p>
+      <h2 data-number="2.2" id="投稿記事の一覧を取得するウェブapiの実装"><span
+      class="header-section-number">2.2</span> 投稿記事の一覧を取得するウェブAPIの実装</h2>
+      <p>はじめに、<strong>GET Method</strong> に対応した
+      <strong>投稿記事の「一覧」を取得するためのエンドポイント</strong> (<code>/api/posts</code>)
+      を実装していきます。基本的には前回講義で実装した<a
+      href="lecture08.html#カテゴリの一覧を取得するウェブapiの実装">カテゴリの一覧の取得</a>と同じ構造となります。</p>
+      <p><code>src/app/api/posts/route.ts</code>
+      を作成して、次のプログラムを貼付けてください。また、プログラムを読み解いてください。</p>
+      <div class="sourceCode" id="cb2"
+      data-caption="api/posts/route.ts (投稿記事の「一覧」の取得)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb2-1"><a href="#cb2-1"></a><span class="im">import</span> { prisma } <span class="im">from</span> <span class="st">&quot;@/lib/prisma&quot;</span><span class="op">;</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="im">import</span> { NextResponse<span class="op">,</span> NextRequest } <span class="im">from</span> <span class="st">&quot;next/server&quot;</span><span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="im">import</span> { Post } <span class="im">from</span> <span class="st">&quot;@/generated/prisma/client&quot;</span><span class="op">;</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="im">export</span> <span class="kw">const</span> GET <span class="op">=</span> <span class="kw">async</span> (req<span class="op">:</span> NextRequest) <span class="kw">=&gt;</span> {</span>
+<span id="cb2-6"><a href="#cb2-6"></a>  <span class="cf">try</span> {</span>
+<span id="cb2-7"><a href="#cb2-7"></a>    <span class="kw">const</span> posts<span class="op">:</span> Post[] <span class="op">=</span> <span class="cf">await</span> prisma<span class="op">.</span><span class="at">post</span><span class="op">.</span><span class="fu">findMany</span>({</span>
+<span id="cb2-8"><a href="#cb2-8"></a>      orderBy<span class="op">:</span> {</span>
+<span id="cb2-9"><a href="#cb2-9"></a>        createdAt<span class="op">:</span> <span class="st">&quot;desc&quot;</span><span class="op">,</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a>      }<span class="op">,</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>    })<span class="op">;</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(posts)<span class="op">;</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>  } <span class="cf">catch</span> (error) {</span>
+<span id="cb2-14"><a href="#cb2-14"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(error)<span class="op">;</span></span>
+<span id="cb2-15"><a href="#cb2-15"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(</span>
+<span id="cb2-16"><a href="#cb2-16"></a>      { error<span class="op">:</span> <span class="st">&quot;投稿記事の一覧の取得に失敗しました&quot;</span> }<span class="op">,</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a>      { status<span class="op">:</span> <span class="dv">500</span> }<span class="op">,</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a>    )<span class="op">;</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a>  }</span>
+<span id="cb2-20"><a href="#cb2-20"></a>}<span class="op">;</span></span></code></pre></div>
+      <p><strong>httpYac</strong> を使って <code>/api/posts</code>
+      にGETリクエストを送って、次のような
+      <u>「id」「title」「content」「coverImageURL」「createdAt」「updatedAt」を属性に持ったオブジェクトの配列
+      (JSON形式)</u> がレスポンスとして得られることを確認してください。</p>
+      <div class="sourceCode" id="cb3" data-caption="devtools/httpyac/LocalApi.http (抜粋)"><pre
+      class="sourceCode numberSource text numberLines"><code class="sourceCode"><span id="cb3-1"><a href="#cb3-1"></a>### 投稿記事一覧の取得</span>
+<span id="cb3-2"><a href="#cb3-2"></a>GET http://localhost:3000/api/posts</span></code></pre></div>
+      <div class="sourceCode" id="cb4" data-caption="GET /api/posts のレスポンス(例)"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1"></a><span class="ot">[</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>  <span class="fu">{</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>    <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;d6993236-ac1c-40cf-a4af-7ff405b7e96f&quot;</span><span class="fu">,</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>    <span class="dt">&quot;title&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿4&quot;</span><span class="fu">,</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>    <span class="dt">&quot;content&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿4の本文。&lt;br/&gt;投稿4の本文。投稿4の本文。&quot;</span><span class="fu">,</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a>    <span class="dt">&quot;coverImageURL&quot;</span><span class="fu">:</span> <span class="st">&quot;https://...&quot;</span><span class="fu">,</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a>    <span class="dt">&quot;createdAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-12-05T05:58:44.095Z&quot;</span><span class="fu">,</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>    <span class="dt">&quot;updatedAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-12-05T05:58:44.095Z&quot;</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>  <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>  <span class="er">//</span> <span class="er">～</span> <span class="er">省略</span> <span class="er">～</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a>  <span class="fu">{</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>    <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;18cd63c0-d364-4c29-9e92-fa68b8d65cfc&quot;</span><span class="fu">,</span></span>
+<span id="cb4-13"><a href="#cb4-13"></a>    <span class="dt">&quot;title&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿1&quot;</span><span class="fu">,</span></span>
+<span id="cb4-14"><a href="#cb4-14"></a>    <span class="dt">&quot;content&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿1の本文。&lt;br/&gt;投稿1の本文。投稿1の本文。&quot;</span><span class="fu">,</span></span>
+<span id="cb4-15"><a href="#cb4-15"></a>    <span class="dt">&quot;coverImageURL&quot;</span><span class="fu">:</span> <span class="st">&quot;https://...&quot;</span><span class="fu">,</span></span>
+<span id="cb4-16"><a href="#cb4-16"></a>    <span class="dt">&quot;createdAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-12-05T05:58:44.073Z&quot;</span><span class="fu">,</span></span>
+<span id="cb4-17"><a href="#cb4-17"></a>    <span class="dt">&quot;updatedAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-12-05T05:58:44.073Z&quot;</span></span>
+<span id="cb4-18"><a href="#cb4-18"></a>  <span class="fu">}</span></span>
+<span id="cb4-19"><a href="#cb4-19"></a><span class="ot">]</span></span></code></pre></div>
+      <div class="note type-caution">
+      <p><strong>注意</strong></p>
+      <p>microCMS の <code>/api/posts</code> のレスポンスは、次のような構造の JSON
+      でした。一方で、今回の講義で自作したAPI <code>/api/posts</code>
+      のレスポンスの構造は上記に示す通りです。</p>
+      <div class="sourceCode" id="cb5" data-caption="microCMS の /api/posts のレスポンス例"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">{</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="dt">&quot;contents&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>    <span class="fu">{</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>      <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;3x24sup0aq26&quot;</span><span class="fu">,</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>      <span class="dt">&quot;createdAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-11-14T09:34:17.968Z&quot;</span><span class="fu">,</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>      <span class="dt">&quot;updatedAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-11-14T09:43:00.987Z&quot;</span><span class="fu">,</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>      <span class="dt">&quot;publishedAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-11-14T09:34:17.968Z&quot;</span><span class="fu">,</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>      <span class="dt">&quot;revisedAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-11-14T09:43:00.987Z&quot;</span><span class="fu">,</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>      <span class="dt">&quot;title&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿1&quot;</span><span class="fu">,</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>      <span class="dt">&quot;content&quot;</span><span class="fu">:</span> <span class="st">&quot;&lt;p&gt;春はあけぼの...&quot;</span><span class="fu">,</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a>      <span class="dt">&quot;coverImage&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb5-12"><a href="#cb5-12"></a>        <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://images.microcms-assets.io/...&quot;</span><span class="fu">,</span></span>
+<span id="cb5-13"><a href="#cb5-13"></a>        <span class="dt">&quot;height&quot;</span><span class="fu">:</span> <span class="dv">768</span><span class="fu">,</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a>        <span class="dt">&quot;width&quot;</span><span class="fu">:</span> <span class="dv">1365</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>      <span class="fu">}</span></span>
+<span id="cb5-16"><a href="#cb5-16"></a>    <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a>    <span class="fu">{</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a>      <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;...&quot;</span><span class="fu">,</span></span>
+<span id="cb5-19"><a href="#cb5-19"></a>      <span class="dt">&quot;createdAt&quot;</span><span class="fu">:</span> <span class="st">&quot;...&quot;</span><span class="fu">,</span></span>
+<span id="cb5-20"><a href="#cb5-20"></a>      <span class="dt">&quot;updatedAt&quot;</span><span class="fu">:</span> <span class="st">&quot;...&quot;</span><span class="fu">,</span></span>
+<span id="cb5-21"><a href="#cb5-21"></a>      <span class="er">//</span> <span class="er">省略</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a>    <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a>        <span class="fu">{</span></span>
+<span id="cb5-24"><a href="#cb5-24"></a>      <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;...&quot;</span><span class="fu">,</span></span>
+<span id="cb5-25"><a href="#cb5-25"></a>      <span class="dt">&quot;createdAt&quot;</span><span class="fu">:</span> <span class="st">&quot;...&quot;</span><span class="fu">,</span></span>
+<span id="cb5-26"><a href="#cb5-26"></a>      <span class="dt">&quot;updatedAt&quot;</span><span class="fu">:</span> <span class="st">&quot;...&quot;</span><span class="fu">,</span></span>
+<span id="cb5-27"><a href="#cb5-27"></a>      <span class="er">//</span> <span class="er">省略</span></span>
+<span id="cb5-28"><a href="#cb5-28"></a>    <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb5-29"><a href="#cb5-29"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb5-30"><a href="#cb5-30"></a>  <span class="dt">&quot;totalCount&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
+<span id="cb5-31"><a href="#cb5-31"></a>  <span class="dt">&quot;offset&quot;</span><span class="fu">:</span> <span class="dv">0</span><span class="fu">,</span></span>
+<span id="cb5-32"><a href="#cb5-32"></a>  <span class="dt">&quot;limit&quot;</span><span class="fu">:</span> <span class="dv">10</span></span>
+<span id="cb5-33"><a href="#cb5-33"></a><span class="fu">}</span></span></code></pre></div>
+      <p>ここで、注意して欲しいことは「<strong>投稿記事の配列</strong>」が、microCMS のときは
+      <code>contents</code>
+      というプロパティで与えられていたのに対して、ここで実装したAPIでは直接的に与えられる形式に変更していることです。そのため、記事一覧や個別記事表示を処理するフロントエンド側でも、この変更にあわせてコードの変更が必要になります。</p>
+      <div class="sourceCode" id="cb6" data-caption="src/app/page.tsx (microCMS仕様)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">const</span> data <span class="op">=</span> <span class="cf">await</span> response<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="fu">setPosts</span>(data<span class="op">.</span><span class="at">contents</span> <span class="im">as</span> Post[])<span class="op">;</span> </span></code></pre></div>
+      <div class="sourceCode" id="cb7" data-caption="src/app/page.tsx (自作バックエンド仕様)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">const</span> data <span class="op">=</span> <span class="cf">await</span> response<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="fu">setPosts</span>(data <span class="im">as</span> Post[])<span class="op">;</span></span></code></pre></div>
+      <p>これ以外にも、自作バックエンドにあわせて各種変更が必要になります (例えば、fetch の引数に
+      <code>"X-MICROCMS-API-KEY": apiKey</code>
+      が<strong>不要</strong>になるなど)。それらは、適宜、変更修正してください。</p>
+      </div>
+      <p>ところで、このレスポンスを利用して以下のような画面 (＝投稿記事の一覧表示の画面 /
+      トップページ) を構成しようとすると <span
+      class="masked">「カテゴリ」に関する情報が不足していること</span> に気づくでしょうか。また
+      <code>coverImageURL</code> と <code>updatedAt</code>
+      は冗長な情報になることに気づくでしょうか。</p>
+      <figure>
+      <img src="figs/06/app_09.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>RDB には情報が「<strong>正規化</strong>」されて格納されているため、投稿記事テーブル
+      (<code>Post</code>) <strong>だけ</strong>を参照しても <span
+      class="masked">記事に紐づく「カテゴリ」の情報</span> を得ることは
+      <u><strong>で・き・ま・せ・ん</strong></u>。</p>
+      <p>このようなとき、RDB では (中間テーブルを介した使った) <strong>テーブルの結合操作</strong>
+      というものが必要となってきます。SQL文では <code>JOIN</code>
+      というキーワードでテーブルの結合処理をします。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>リレーショナルデータベースにおいてテーブルの結合 (JOIN)
+      は、どのようなときに必要となりますか。投稿記事とカテゴリが「多対多」の関係になっているブログデータを扱う場合を例に考えてみてください。</p>
+      </blockquote>
+      <p>しかし、このブログアプリ開発では、ORM である Prisma を利用しているため、(<code>JOIN</code>
+      を使った SQL文 を記述することなく) 比較的簡単に
+      <strong>投稿記事に紐づくカテゴリ情報の取得が可能</strong> となります🙌。具体的には
+      <code>route.ts</code> の <strong>第07行目</strong> <code>findMany</code>
+      メソッドの第1引数に「<strong>selectオプション</strong>」を追加することによって可能になります。</p>
+      <p>実際に、次のように <code>findMany</code>
+      の第1引数を変更してみてください。そして、投稿記事の情報 (<code>coverImageURL</code> と
+      <code>updatedAt</code> を除いたもの) に加えて、<span
+      class="masked">それに紐づけられたカテゴリの「id」と「name」</span>
+      がレスポンスとして返ってくることを確認してください。</p>
+      <div class="sourceCode" id="cb8" data-startFrom="7"
+      data-caption="api/posts/route.ts (findManyの引数を変更) 抜粋"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 6;"><span id="cb8-7"><a href="#cb8-7"></a><span class="kw">const</span> posts <span class="op">=</span> <span class="cf">await</span> prisma<span class="op">.</span><span class="at">post</span><span class="op">.</span><span class="fu">findMany</span>({ <span class="co">// ◀ 推論を利用して posts の型を決定</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>  select<span class="op">:</span> {</span>
+<span id="cb8-9"><a href="#cb8-9"></a>    id<span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>    title<span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a>    content<span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb8-12"><a href="#cb8-12"></a>    createdAt<span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb8-13"><a href="#cb8-13"></a>    categories<span class="op">:</span> {</span>
+<span id="cb8-14"><a href="#cb8-14"></a>      select<span class="op">:</span> {</span>
+<span id="cb8-15"><a href="#cb8-15"></a>        category<span class="op">:</span> {</span>
+<span id="cb8-16"><a href="#cb8-16"></a>          select<span class="op">:</span> {</span>
+<span id="cb8-17"><a href="#cb8-17"></a>            id<span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb8-18"><a href="#cb8-18"></a>            name<span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb8-19"><a href="#cb8-19"></a>          }<span class="op">,</span></span>
+<span id="cb8-20"><a href="#cb8-20"></a>        }<span class="op">,</span></span>
+<span id="cb8-21"><a href="#cb8-21"></a>      }<span class="op">,</span></span>
+<span id="cb8-22"><a href="#cb8-22"></a>    }<span class="op">,</span></span>
+<span id="cb8-23"><a href="#cb8-23"></a>  }<span class="op">,</span></span>
+<span id="cb8-24"><a href="#cb8-24"></a>  orderBy<span class="op">:</span> {</span>
+<span id="cb8-25"><a href="#cb8-25"></a>    createdAt<span class="op">:</span> <span class="st">&quot;desc&quot;</span><span class="op">,</span></span>
+<span id="cb8-26"><a href="#cb8-26"></a>  }<span class="op">,</span></span>
+<span id="cb8-27"><a href="#cb8-27"></a>})<span class="op">;</span></span></code></pre></div>
+      <p>なお、上記のように第1引数を変更したときは、<code>findMany</code>メソッドの「戻り値」に
+      <span class="masked">カテゴリの情報が含まれるようになる</span> ため、<strong>第07行目</strong>
+      の <code>const posts: Post[] = ...</code> を <code>const posts = ...</code>
+      のように変更してください。つまり <span class="masked">型推論を利用して posts
+      の型を決定する</span> ようにしてください。<code>posts: Post[]</code>
+      のままでは「型」の不一致によるエラーが発生するので注意してください。</p>
+      <div class="note type-senior">
+      <p><strong>応用: selectを指定したときの「型」を明示するためには…</strong></p>
+      <p><code>findMany</code> の引数に <code>select</code>
+      を含むオブジェクトを指定するとき、型推論を使わずに <code>posts</code>
+      に対して明示的に型を指定したいときは<a
+      href="https://github.com/TakeshiWada1980/Programming3-2025/blob/main/docs/codes/09/code01.ts">こちら<i class="fa-solid fa-person-chalkboard"></i></a>のようにしてください。ただし、これは中級以上の内容になってくるので、無理に利用する必要はありません。</p>
+      </div>
+      <p><strong>httpYac</strong> を使って、<code>/api/posts</code>
+      のレスポンスのボディが、次のような内容になっていること (＝<span
+      class="masked">投稿記事に紐づくカテゴリの「id」と「name」も取得できること</span>)
+      を確認してください。</p>
+      <div class="sourceCode" id="cb9"
+      data-caption="select を指定したときの /api/posts のレスポンス(例)"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb9-1"><a href="#cb9-1"></a><span class="ot">[</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">{</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>    <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;d6993236-ac1c-40cf-a4af-7ff405b7e96f&quot;</span><span class="fu">,</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>    <span class="dt">&quot;title&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿4&quot;</span><span class="fu">,</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>    <span class="dt">&quot;content&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿4の本文。&lt;br/&gt;投稿4の本文。投稿4の本文。&quot;</span><span class="fu">,</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>    <span class="dt">&quot;createdAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-12-05T05:58:44.095Z&quot;</span><span class="fu">,</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>    <span class="dt">&quot;categories&quot;</span><span class="fu">:</span> <span class="ot">[]</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a>  <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a>  <span class="er">//</span> <span class="er">～</span> <span class="er">省略</span> <span class="er">～</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>  <span class="fu">{</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a>    <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;18cd63c0-d364-4c29-9e92-fa68b8d65cfc&quot;</span><span class="fu">,</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a>    <span class="dt">&quot;title&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿1&quot;</span><span class="fu">,</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a>    <span class="dt">&quot;content&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿1の本文。&lt;br/&gt;投稿1の本文。投稿1の本文。&quot;</span><span class="fu">,</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a>    <span class="dt">&quot;createdAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-12-05T05:58:44.073Z&quot;</span><span class="fu">,</span></span>
+<span id="cb9-15"><a href="#cb9-15"></a>    <span class="dt">&quot;categories&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a>      <span class="fu">{</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a>        <span class="dt">&quot;category&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a>          <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;f5ee7b9c-ee8e-466e-aafc-6aa112005d5a&quot;</span><span class="fu">,</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a>          <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;カテゴリ1&quot;</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a>        <span class="fu">}</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a>      <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a>      <span class="fu">{</span></span>
+<span id="cb9-23"><a href="#cb9-23"></a>        <span class="dt">&quot;category&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a>          <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;d3e10601-3cfa-48f3-9ede-886647a1063b&quot;</span><span class="fu">,</span></span>
+<span id="cb9-25"><a href="#cb9-25"></a>          <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;カテゴリ2&quot;</span></span>
+<span id="cb9-26"><a href="#cb9-26"></a>        <span class="fu">}</span></span>
+<span id="cb9-27"><a href="#cb9-27"></a>      <span class="fu">}</span></span>
+<span id="cb9-28"><a href="#cb9-28"></a>    <span class="ot">]</span></span>
+<span id="cb9-29"><a href="#cb9-29"></a>  <span class="fu">}</span></span>
+<span id="cb9-30"><a href="#cb9-30"></a><span class="ot">]</span></span></code></pre></div>
+      <h3 data-number="2.2.1" id="補足-selectプロパティに関する解説-1"><span
+      class="header-section-number">2.2.1</span> 補足: selectプロパティに関する解説 1</h3>
+      <p>PrismaClient の <strong>findManyメソッド</strong> や <strong>findUniqueメソッド</strong>
+      (＝レコード単体の取得に使用) の引数に設定可能な <code>select</code> プロパティは、SQL文の
+      <code>SELECT</code> に相当するもので、戻り値に得たい <span class="masked">カラム (属性)</span>
+      を選択 (指定) するために使用します。</p>
+      <p><code>findMany</code>/<code>findUnique</code> の第1引数として与えるオブジェクトに
+      <code>select</code> プロパティを含めなければ <span
+      class="masked">そのテーブルが持っている全てのカラム (列)</span> が戻り値となります。例えば
+      <code>prisma.post.findMany</code> メソッドにおいて、<code>select</code>
+      を指定しなければ「id」「title」「content」「coverImageURL」「createdAt」「updatedAt」の
+      <strong>6個のプロパティを持ったオブジェクトの配列</strong> が「戻り値」となります。</p>
+      <p>一方で、メソッドの引数に <code>select: { id: true, title: true, content: true }</code>
+      を与えれば、「id」「title」「content」の <strong>3つだけのプロパティを持ったオブジェクト
+      (単体/配列)</strong> が「戻り値」となります。</p>
+      <p>ここで <span class="masked">「そのテーブルが持つすべてのカラム (列)とは何か？」</span>
+      ということについて正しく理解しておく必要があります。<a
+      href="lecture08.html#schema.prisma-の編集">前回講義</a> では <code>prisma/schema.prisma</code>
+      というファイルで、各テーブルのスキーマ (＝構造・型・制約) を次のように定義しました。</p>
+      <div class="sourceCode" id="cb10" data-caption="prisma/schema.prisma (抜粋・再掲)"><pre
+      class="sourceCode numberSource text numberLines"><code class="sourceCode"><span id="cb10-1"><a href="#cb10-1"></a>// 投稿記事テーブル</span>
+<span id="cb10-2"><a href="#cb10-2"></a>model Post {</span>
+<span id="cb10-3"><a href="#cb10-3"></a>  id             String @id @default(uuid())</span>
+<span id="cb10-4"><a href="#cb10-4"></a>  title          String</span>
+<span id="cb10-5"><a href="#cb10-5"></a>  content        String</span>
+<span id="cb10-6"><a href="#cb10-6"></a>  coverImageURL  String</span>
+<span id="cb10-7"><a href="#cb10-7"></a>  createdAt      DateTime @default(now())</span>
+<span id="cb10-8"><a href="#cb10-8"></a>  updatedAt      DateTime @updatedAt</span>
+<span id="cb10-9"><a href="#cb10-9"></a>  categories     PostCategory[]</span>
+<span id="cb10-10"><a href="#cb10-10"></a>}</span>
+<span id="cb10-11"><a href="#cb10-11"></a></span>
+<span id="cb10-12"><a href="#cb10-12"></a>// カテゴリテーブル</span>
+<span id="cb10-13"><a href="#cb10-13"></a>model Category {</span>
+<span id="cb10-14"><a href="#cb10-14"></a>  id         String @id @default(uuid())</span>
+<span id="cb10-15"><a href="#cb10-15"></a>  name       String @unique</span>
+<span id="cb10-16"><a href="#cb10-16"></a>  createdAt  DateTime @default(now())</span>
+<span id="cb10-17"><a href="#cb10-17"></a>  updatedAt  DateTime @updatedAt</span>
+<span id="cb10-18"><a href="#cb10-18"></a>  posts      PostCategory[]</span>
+<span id="cb10-19"><a href="#cb10-19"></a>}</span>
+<span id="cb10-20"><a href="#cb10-20"></a></span>
+<span id="cb10-21"><a href="#cb10-21"></a>// 投稿記事とカテゴリを紐づける中間テーブル</span>
+<span id="cb10-22"><a href="#cb10-22"></a>model PostCategory {</span>
+<span id="cb10-23"><a href="#cb10-23"></a>  id          String @id @default(uuid())</span>
+<span id="cb10-24"><a href="#cb10-24"></a>  postId      String</span>
+<span id="cb10-25"><a href="#cb10-25"></a>  categoryId  String</span>
+<span id="cb10-26"><a href="#cb10-26"></a>  createdAt   DateTime @default(now())</span>
+<span id="cb10-27"><a href="#cb10-27"></a>  updatedAt   DateTime @updatedAt</span>
+<span id="cb10-28"><a href="#cb10-28"></a>  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)</span>
+<span id="cb10-29"><a href="#cb10-29"></a>  post        Post     @relation(fields: [postId], references: [id], onDelete: Cascade)</span>
+<span id="cb10-30"><a href="#cb10-30"></a>}</span></code></pre></div>
+      <p>これらの定義を <strong>ER図 (風)</strong> に表現すると以下のようになります
+      (<strong>ER図</strong>: Entity Relationship Diagram については、来年の<a
+      href="https://takeshiwada1980.github.io/DB-2025/">データベース工学</a>で詳しく学びます。ここでは「RDBの設計図」と考えてください)。上記の
+      <code>schema.prisma</code> の記述と、以下のER図の対応関係が (なんとなく)
+      分かるでしょうか🤔</p>
+      <figure>
+      <img src="figs/09/db_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>ER図のなかで <strong>赤色で prisma と示したカラム</strong>、具体的には、投稿記事テーブルの
+      <code>categories</code> カラム、中間テーブルの <code>category</code> と <code>post</code>
+      カラム、カテゴリテーブルの <code>posts</code> のカラムは <strong>扱いに注意が必要</strong>
+      です。</p>
+      <p>これらのカラムは、<strong>Prisma が O/R Mapper として内部的に使用する参照情報</strong>
+      (＝ユーザにオブジェクト指向的なデータアクセスを提供するための設定情報) であり、<span
+      class="masked">実際の RDB のテーブルには存在しないカラム</span> となっています。</p>
+      <p>実際に SQLite の<a
+      href="https://www.sqlite.org/download.html">コマンドラインツール</a>である
+      <code>sqlite3.exe</code> を使って <code>prisma/dev.db</code>
+      に接続して「投稿記事テーブル」のスキーマを確認すると (<code>.schema Post</code>
+      コマンドを実行すると)、次のような結果になります。</p>
+      <pre><code>sqlite&gt; .schema Post
+CREATE TABLE IF NOT EXISTS &quot;Post&quot; (
+    &quot;id&quot; TEXT NOT NULL PRIMARY KEY,
+    &quot;title&quot; TEXT NOT NULL,
+    &quot;content&quot; TEXT NOT NULL,
+    &quot;coverImageURL&quot; TEXT NOT NULL,
+    &quot;createdAt&quot; DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    &quot;updatedAt&quot; DATETIME NOT NULL
+);</code></pre>
+      <p><code>id</code> や <code>title</code> などのカラムは存在しますが、<code>categories</code>
+      というカラムは <u>存・在・し・な・い・こ・と</u> が確認できます。このように <strong>実際の RDB
+      のテーブルに存在しないカラムの値</strong> は、<code>select</code> オプション (あるいは
+      <code>include</code> オプション) を指定して取得する必要があります。</p>
+      <p>なお、<code>schema.prisma</code> のフィールドのうち、RDB にカラム (列) が作成されないのは
+      <code>categories PostCategory[]</code> や <code>posts PostCategory[]</code>
+      のように「<strong>配列型</strong>」になっているものと、<code>@relation(...)</code>
+      の属性がついたものとなります。つまり、<a
+      href="https://github.com/TakeshiWada1980/Programming3-2025/blob/main/docs/codes/09/schema.prisma">schema.prisma<i class="fa-solid fa-person-chalkboard"></i></a>
+      の <strong>25、34、44、45行目</strong> についてはカラムが作成されません。</p>
+      <h3 data-number="2.2.2" id="補足-selectプロパティに関する解説-2"><span
+      class="header-section-number">2.2.2</span> 補足: selectプロパティに関する解説 2</h3>
+      <p><code>prisma.post.findMany</code> を使って、「Categoryテーブル」のなかの <code>id</code> と
+      <code>name</code> の情報同時に取得するためには、以下の ➊ → ➋ → ➌
+      のように<strong>段階的にアプローチ</strong>する必要があります。</p>
+      <figure>
+      <img src="figs/09/db_02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>この の ➊ → ➋ → ➌ のアプローチが、さきほどの <code>select</code>
+      (<strong>第13行目</strong>から<strong>第22行目</strong>) に対応しています。</p>
+      <div class="sourceCode" id="cb12" data-startFrom="7"
+      data-caption="api/posts/route.ts (findManyの引数を変更) 抜粋"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 6;"><span id="cb12-7"><a href="#cb12-7"></a><span class="kw">const</span> posts <span class="op">=</span> <span class="cf">await</span> prisma<span class="op">.</span><span class="at">post</span><span class="op">.</span><span class="fu">findMany</span>({</span>
+<span id="cb12-8"><a href="#cb12-8"></a>  select<span class="op">:</span> {</span>
+<span id="cb12-9"><a href="#cb12-9"></a>    id<span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a>    title<span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a>    content<span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a>    createdAt<span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb12-13"><a href="#cb12-13"></a>    categories<span class="op">:</span> { <span class="co">// ◀ ➊</span></span>
+<span id="cb12-14"><a href="#cb12-14"></a>      select<span class="op">:</span> {</span>
+<span id="cb12-15"><a href="#cb12-15"></a>        category<span class="op">:</span> { <span class="co">// ◀ ➋</span></span>
+<span id="cb12-16"><a href="#cb12-16"></a>          select<span class="op">:</span> {</span>
+<span id="cb12-17"><a href="#cb12-17"></a>            id<span class="op">:</span> <span class="kw">true</span><span class="op">,</span>    <span class="co">// ◀ ➌</span></span>
+<span id="cb12-18"><a href="#cb12-18"></a>            name<span class="op">:</span> <span class="kw">true</span><span class="op">,</span>  <span class="co">// ◀ ➌</span></span>
+<span id="cb12-19"><a href="#cb12-19"></a>          }<span class="op">,</span></span>
+<span id="cb12-20"><a href="#cb12-20"></a>        }<span class="op">,</span></span>
+<span id="cb12-21"><a href="#cb12-21"></a>      }<span class="op">,</span></span>
+<span id="cb12-22"><a href="#cb12-22"></a>    }<span class="op">,</span></span>
+<span id="cb12-23"><a href="#cb12-23"></a>  }<span class="op">,</span></span>
+<span id="cb12-24"><a href="#cb12-24"></a>  orderBy<span class="op">:</span> {</span>
+<span id="cb12-25"><a href="#cb12-25"></a>    createdAt<span class="op">:</span> <span class="st">&quot;desc&quot;</span><span class="op">,</span></span>
+<span id="cb12-26"><a href="#cb12-26"></a>  }<span class="op">,</span></span>
+<span id="cb12-27"><a href="#cb12-27"></a>})<span class="op">;</span></span></code></pre></div>
+      <p><code>select</code>
+      オプションの指定は理解が難しいと思うので、生成AIなどのサポートを受けてください。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>prisma の <code>findMany</code> の引数に設定可能な
+      <code>select</code>、<code>inclue</code>、<code>_count</code>
+      について丁寧に解説してください。投稿記事とカテゴリが「多対多」の関係になっているブログデータを扱う場合を例に解説してください。</p>
+      </blockquote>
+      <blockquote>
+      <p>上記以外に <code>findMany</code> メソッドでは、どのようなオプションが利用できますか。</p>
+      </blockquote>
+      <h2 data-number="2.3" id="投稿記事を新規作成するウェブapiの実装"><span
+      class="header-section-number">2.3</span> 投稿記事を新規作成するウェブAPIの実装</h2>
+      <p>投稿記事を<strong>新規作成</strong> (POST メソッドで記事を<strong>新規投稿</strong>)
+      するためのウェブAPIを実装していきます。</p>
+      <p>エンドポイントは <code>/api/admin/posts</code>
+      として、以下のようなリクエストボディを受け付ける想定で設計します。投稿記事にカテゴリを1個も設定しないことも許可し、その場合は
+      <code>"categoryIds": []</code> のように <strong>空配列</strong> を与えるものとします。</p>
+      <div class="sourceCode" id="cb13"
+      data-caption="/api/admin/post に対する POST リクエストのボディ例"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">{</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>  <span class="dt">&quot;title&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿X&quot;</span><span class="fu">,</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>  <span class="dt">&quot;content&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿Xの本文。&lt;br/&gt;投稿Xの本文。投稿Xの本文。&quot;</span><span class="fu">,</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>  <span class="dt">&quot;coverImageURL&quot;</span><span class="fu">:</span> <span class="st">&quot;https://....&quot;</span><span class="fu">,</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>  <span class="dt">&quot;categoryIds&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>    <span class="st">&quot;d3e10601-3cfa-48f3-9ede-886647a1063b&quot;</span><span class="ot">,</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>    <span class="st">&quot;5a8d8365-e435-4ed4-a05e-34237c1b2ff0&quot;</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>  <span class="ot">]</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="fu">}</span></span></code></pre></div>
+      <p>投稿記事の追加では、次のような点を考慮する必要があるため、前回講義の<a
+      href="lecture08.html#カテゴリを追加するウェブapiの実装">カテゴリの追加</a>よりも複雑な処理となります。</p>
+      <ol type="1">
+      <li><strong>リクエストボディのバリエーション (データ検証) の処理</strong></li>
+      <li><strong>categoryIdsの要素に一致するIDを持ったカテゴリが存在しない場合の処理</strong></li>
+      <li><strong>中間テーブルにレコードを追加する処理</strong></li>
+      </ol>
+      <p>まず、「<strong>1番目</strong>」の<strong>バリエーション</strong>ですが、これはカテゴリの追加でも<strong>本来は必要だった処理</strong>になります。具体的には、リクエストボディについて「<strong>必要なプロパティを持っているか</strong>」<span
+      class="masked">「プロパティが期待する型であるか」</span>「<strong>文字数制限
+      (例えば2文字以上32文字以内) が守られているか</strong>」<span
+      class="masked">「URLとして適切な形式になっているか」</span>といったチェックをする処理になります。この処理は
+      <strong>紙面の都合で省略</strong>します (余裕がある学生はバリエーションを実装し、問題があれば
+      <code>400 Bad Request</code> をレスポンスするようにしてください)。</p>
+      <p>次に「<strong>2番目</strong>」ですが、これは「<strong>実在するカテゴリだけを投稿記事に紐づける</strong>」または<span
+      class="masked">「実在しないカテゴリがあれば、エラーとしてリクエストを拒否する」</span>
+      という対応が考えられますが、ここではリクエストを拒否する方針で設計します。</p>
+      <p>「<strong>3番目</strong>」は必須の処理となります。</p>
+      <p>以上を踏まえて投稿記事の追加するAPIは、以下のように実装することができます。</p>
+      <div class="sourceCode" id="cb14"
+      data-caption="api/admin/posts/route.ts (投稿記事の追加)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb14-1"><a href="#cb14-1"></a><span class="im">import</span> { prisma } <span class="im">from</span> <span class="st">&quot;@/lib/prisma&quot;</span><span class="op">;</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="im">import</span> { NextResponse<span class="op">,</span> NextRequest } <span class="im">from</span> <span class="st">&quot;next/server&quot;</span><span class="op">;</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="im">import</span> <span class="im">type</span> { Post } <span class="im">from</span> <span class="st">&quot;@/generated/prisma/client&quot;</span><span class="op">;</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="kw">type</span> RequestBody <span class="op">=</span> {</span>
+<span id="cb14-6"><a href="#cb14-6"></a>  title<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a>  content<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a>  coverImageURL<span class="op">:</span> <span class="dt">string</span><span class="op">;</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a>  categoryIds<span class="op">:</span> <span class="dt">string</span>[]<span class="op">;</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a>}<span class="op">;</span></span>
+<span id="cb14-11"><a href="#cb14-11"></a></span>
+<span id="cb14-12"><a href="#cb14-12"></a><span class="im">export</span> <span class="kw">const</span> POST <span class="op">=</span> <span class="kw">async</span> (req<span class="op">:</span> NextRequest) <span class="kw">=&gt;</span> {</span>
+<span id="cb14-13"><a href="#cb14-13"></a>  <span class="cf">try</span> {</span>
+<span id="cb14-14"><a href="#cb14-14"></a>    <span class="kw">const</span> requestBody<span class="op">:</span> RequestBody <span class="op">=</span> <span class="cf">await</span> req<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span></span>
+<span id="cb14-15"><a href="#cb14-15"></a></span>
+<span id="cb14-16"><a href="#cb14-16"></a>    <span class="co">// 分割代入</span></span>
+<span id="cb14-17"><a href="#cb14-17"></a>    <span class="kw">const</span> { title<span class="op">,</span> content<span class="op">,</span> coverImageURL<span class="op">,</span> categoryIds } <span class="op">=</span> requestBody<span class="op">;</span></span>
+<span id="cb14-18"><a href="#cb14-18"></a></span>
+<span id="cb14-19"><a href="#cb14-19"></a>    <span class="co">// categoryIds で指定されるカテゴリがDB上に存在するか確認</span></span>
+<span id="cb14-20"><a href="#cb14-20"></a>    <span class="kw">const</span> categories <span class="op">=</span> <span class="cf">await</span> prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">findMany</span>({</span>
+<span id="cb14-21"><a href="#cb14-21"></a>      where<span class="op">:</span> {</span>
+<span id="cb14-22"><a href="#cb14-22"></a>        id<span class="op">:</span> {</span>
+<span id="cb14-23"><a href="#cb14-23"></a>          <span class="kw">in</span><span class="op">:</span> categoryIds<span class="op">,</span></span>
+<span id="cb14-24"><a href="#cb14-24"></a>        }<span class="op">,</span></span>
+<span id="cb14-25"><a href="#cb14-25"></a>      }<span class="op">,</span></span>
+<span id="cb14-26"><a href="#cb14-26"></a>    })<span class="op">;</span></span>
+<span id="cb14-27"><a href="#cb14-27"></a>    <span class="cf">if</span> (categories<span class="op">.</span><span class="at">length</span> <span class="op">!==</span> categoryIds<span class="op">.</span><span class="at">length</span>) {</span>
+<span id="cb14-28"><a href="#cb14-28"></a>      <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(</span>
+<span id="cb14-29"><a href="#cb14-29"></a>        { error<span class="op">:</span> <span class="st">&quot;指定されたカテゴリのいくつかが存在しません&quot;</span> }<span class="op">,</span></span>
+<span id="cb14-30"><a href="#cb14-30"></a>        { status<span class="op">:</span> <span class="dv">400</span> }<span class="op">,</span> <span class="co">// 400: Bad Request</span></span>
+<span id="cb14-31"><a href="#cb14-31"></a>      )<span class="op">;</span></span>
+<span id="cb14-32"><a href="#cb14-32"></a>    }</span>
+<span id="cb14-33"><a href="#cb14-33"></a></span>
+<span id="cb14-34"><a href="#cb14-34"></a>    <span class="co">// 投稿記事テーブルにレコードを追加</span></span>
+<span id="cb14-35"><a href="#cb14-35"></a>    <span class="kw">const</span> post<span class="op">:</span> Post <span class="op">=</span> <span class="cf">await</span> prisma<span class="op">.</span><span class="at">post</span><span class="op">.</span><span class="fu">create</span>({</span>
+<span id="cb14-36"><a href="#cb14-36"></a>      data<span class="op">:</span> {</span>
+<span id="cb14-37"><a href="#cb14-37"></a>        title<span class="op">,</span> <span class="co">// title: title の省略形であることに注意。以下も同様</span></span>
+<span id="cb14-38"><a href="#cb14-38"></a>        content<span class="op">,</span></span>
+<span id="cb14-39"><a href="#cb14-39"></a>        coverImageURL<span class="op">,</span></span>
+<span id="cb14-40"><a href="#cb14-40"></a>      }<span class="op">,</span></span>
+<span id="cb14-41"><a href="#cb14-41"></a>    })<span class="op">;</span></span>
+<span id="cb14-42"><a href="#cb14-42"></a></span>
+<span id="cb14-43"><a href="#cb14-43"></a>    <span class="co">// 中間テーブルにレコードを追加</span></span>
+<span id="cb14-44"><a href="#cb14-44"></a>    <span class="cf">for</span> (<span class="kw">const</span> categoryId <span class="kw">of</span> categoryIds) {</span>
+<span id="cb14-45"><a href="#cb14-45"></a>      <span class="cf">await</span> prisma<span class="op">.</span><span class="at">postCategory</span><span class="op">.</span><span class="fu">create</span>({</span>
+<span id="cb14-46"><a href="#cb14-46"></a>        data<span class="op">:</span> {</span>
+<span id="cb14-47"><a href="#cb14-47"></a>          postId<span class="op">:</span> post<span class="op">.</span><span class="at">id</span><span class="op">,</span></span>
+<span id="cb14-48"><a href="#cb14-48"></a>          categoryId<span class="op">:</span> categoryId<span class="op">,</span></span>
+<span id="cb14-49"><a href="#cb14-49"></a>        }<span class="op">,</span></span>
+<span id="cb14-50"><a href="#cb14-50"></a>      })<span class="op">;</span></span>
+<span id="cb14-51"><a href="#cb14-51"></a>    }</span>
+<span id="cb14-52"><a href="#cb14-52"></a></span>
+<span id="cb14-53"><a href="#cb14-53"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(post)<span class="op">;</span></span>
+<span id="cb14-54"><a href="#cb14-54"></a>  } <span class="cf">catch</span> (error) {</span>
+<span id="cb14-55"><a href="#cb14-55"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(error)<span class="op">;</span></span>
+<span id="cb14-56"><a href="#cb14-56"></a>    <span class="cf">return</span> NextResponse<span class="op">.</span><span class="fu">json</span>(</span>
+<span id="cb14-57"><a href="#cb14-57"></a>      { error<span class="op">:</span> <span class="st">&quot;投稿記事の作成に失敗しました&quot;</span> }<span class="op">,</span></span>
+<span id="cb14-58"><a href="#cb14-58"></a>      { status<span class="op">:</span> <span class="dv">500</span> }<span class="op">,</span></span>
+<span id="cb14-59"><a href="#cb14-59"></a>    )<span class="op">;</span></span>
+<span id="cb14-60"><a href="#cb14-60"></a>  }</span>
+<span id="cb14-61"><a href="#cb14-61"></a>}<span class="op">;</span></span></code></pre></div>
+      <p><strong>第05行目</strong> から <strong>第10行目</strong>
+      では、POSTリクエストの「ボディ」として想定される <strong>JSONデータ</strong>
+      に適合する「型」を定義しています
+      (他のAPIでも同じ型を使う場合は、別ファイルに型を定義してインポートするほうが望ましいです)。また、<strong>第14行目</strong>
+      では、リクエストのボディ (＝<span class="masked">JSON形式の文字列</span>)
+      を、JavaScriptオブジェクトに変換して <code>requestBody</code> に代入しています。</p>
+      <p><strong>第20行目</strong> から <strong>第32行目</strong> では「リクエストボディの
+      <code>categoryIds</code> に含まれるIDのカテゴリが DB
+      に存在するか」を確認し、存在しないカテゴリがひとつでもあれば、処理を中断してステータスコード「<a
+      href="https://developer.mozilla.org/ja/docs/Web/HTTP/Status/400">400</a>」をレスポンスするようにしています。ここでは
+      <code>prisma.category.findMany</code> の引数を <code>where: {id: {in: categoryIds } }</code>
+      とすることで「<strong>categoryIds
+      配列の各要素に対応するカテゴリIDを一括検索する処理</strong>」を実行しています。これにより、<span
+      class="masked">forループなどの繰り返し処理を使用することなく</span>
+      一度の操作で複数のレコードを効率的に取得することができます。そして、取得したレコード数と
+      <code>categoryIds</code> の要素数を比較し、一致しない場合は <span
+      class="masked">指定されたカテゴリIDの一部がDBに存在しない</span>
+      と判断してステータスコード「400」を返しています。</p>
+      <div class="note type-tips">
+      <p><strong>参考情報</strong></p>
+      <p>次の <strong>PrismaClientの処理</strong> (TypeScriptプログラム) は、</p>
+      <div class="sourceCode" id="cb15"><pre class="sourceCode ts"><code class="sourceCode typescript"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>prisma<span class="op">.</span><span class="at">category</span><span class="op">.</span><span class="fu">findMany</span>( { where<span class="op">:</span> { id<span class="op">:</span> { <span class="kw">in</span><span class="op">:</span> [<span class="st">&quot;c-001&quot;</span><span class="op">,</span><span class="st">&quot;c-002&quot;</span><span class="op">,</span><span class="st">&quot;c-003&quot;</span>] }}} )<span class="op">;</span></span></code></pre></div>
+      <p>次のような <strong>SQL</strong> と同等になります。</p>
+      <div class="sourceCode" id="cb16"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> <span class="kw">category</span> <span class="kw">WHERE</span> <span class="kw">id</span> <span class="kw">IN</span> (<span class="st">&#39;c-001&#39;</span>, <span class="st">&#39;c-002&#39;</span>, <span class="st">&#39;c-003&#39;</span>);</span></code></pre></div>
+      </div>
+      <p><strong>第44行目</strong> から <strong>第51行目</strong> では、中間テーブル
+      (<code>postCategory</code>)
+      に、投稿記事とカテゴリを紐づけるためのレコードを挿入しています。</p>
+      <p>各処理の概要が理解できたら、<strong>httpYac</strong> と <strong>Prisma Studio</strong>
+      を利用してエンドポイント <code>/api/admin/posts</code>
+      の動作確認を行なってください。この際、あえて<strong>不適切なボディ</strong>
+      (例えば、存在しないカテゴリIDを含むデータなど) を与え、そのレスポンスや <span
+      class="masked">VSCodeのターミナルに出力されるエラーメッセージ</span>
+      がどのようになるかを確認してください。</p>
+      <div class="sourceCode" id="cb17"
+      data-caption="devtools/httpyac/LocalApi.http (抜粋・例)"><pre
+      class="sourceCode numberSource text numberLines"><code class="sourceCode"><span id="cb17-1"><a href="#cb17-1"></a>### 記事の投稿</span>
+<span id="cb17-2"><a href="#cb17-2"></a>POST http://localhost:3000/api/admin/posts</span>
+<span id="cb17-3"><a href="#cb17-3"></a>Content-Type: application/json</span>
+<span id="cb17-4"><a href="#cb17-4"></a></span>
+<span id="cb17-5"><a href="#cb17-5"></a>{</span>
+<span id="cb17-6"><a href="#cb17-6"></a>  &quot;title&quot;: &quot;投稿X&quot;,</span>
+<span id="cb17-7"><a href="#cb17-7"></a>  &quot;content&quot;: &quot;投稿Xの本文。&lt;br/&gt;投稿Xの本文。投稿Xの本文。&quot;,</span>
+<span id="cb17-8"><a href="#cb17-8"></a>  &quot;coverImageURL&quot;: &quot;https://....&quot;,</span>
+<span id="cb17-9"><a href="#cb17-9"></a>  &quot;categoryIds&quot;: [</span>
+<span id="cb17-10"><a href="#cb17-10"></a>    &quot;d3e10601-3cfa-48f3-9ede-886647a1063b&quot;,</span>
+<span id="cb17-11"><a href="#cb17-11"></a>    &quot;5a8d8365-e435-4ed4-a05e-34237c1b2ff0&quot;</span>
+<span id="cb17-12"><a href="#cb17-12"></a>  ]</span>
+<span id="cb17-13"><a href="#cb17-13"></a>}</span></code></pre></div>
+      <ul>
+      <li>categoryIds のUUID (<strong>第09行目</strong>と<strong>第10行目</strong>) は、各自の DB
+      にあわせて変更してください。</li>
+      </ul>
+      <h3 data-number="2.3.1" id="演習-10分"><span class="header-section-number">2.3.1</span> 演習
+      (<i class="fa-solid fa-stopwatch"></i>10分)</h3>
+      <p>次のような「<strong>誤った書式のJSON文字列</strong>」をボディに与えてリクエストを送ったとき、VSCodeのターミナルにどのようなエラーメッセージが出力されるか確認してください。</p>
+      <div class="sourceCode" id="cb18"
+      data-caption="書式に誤りのあるJSON: プロパティ名をダブルクォーテーションで囲んでいない"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">{</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>  <span class="er">title</span><span class="fu">:</span> <span class="st">&quot;投稿X&quot;</span><span class="fu">,</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a>  <span class="er">content</span><span class="fu">:</span> <span class="st">&quot;投稿Xの本文。&lt;br/&gt;投稿Xの本文。投稿Xの本文。&quot;</span><span class="fu">,</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a>  <span class="er">coverImageURL</span><span class="fu">:</span> <span class="st">&quot;https://....&quot;</span><span class="fu">,</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a>  <span class="er">categoryIds</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a>    <span class="st">&quot;d3e10601-3cfa-48f3-9ede-886647a1063b&quot;</span><span class="ot">,</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a>    <span class="st">&quot;5a8d8365-e435-4ed4-a05e-34237c1b2ff0&quot;</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a>  <span class="ot">]</span></span>
+<span id="cb18-9"><a href="#cb18-9"></a><span class="fu">}</span></span></code></pre></div>
+      <div class="sourceCode" id="cb19"
+      data-caption="書式に誤りのあるJSON: 配列の末尾にカンマが付いている"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">{</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>  <span class="dt">&quot;title&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿X&quot;</span><span class="fu">,</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a>  <span class="dt">&quot;content&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿Xの本文。&lt;br/&gt;投稿Xの本文。投稿Xの本文。&quot;</span><span class="fu">,</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a>  <span class="dt">&quot;coverImageURL&quot;</span><span class="fu">:</span> <span class="st">&quot;https://....&quot;</span><span class="fu">,</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a>  <span class="dt">&quot;categoryIds&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a>    <span class="st">&quot;d3e10601-3cfa-48f3-9ede-886647a1063b&quot;</span><span class="ot">,</span></span>
+<span id="cb19-7"><a href="#cb19-7"></a>    <span class="st">&quot;5a8d8365-e435-4ed4-a05e-34237c1b2ff0&quot;</span><span class="ot">,</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a>  <span class="ot">]</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a><span class="fu">}</span></span></code></pre></div>
+      <div class="note type-senior">
+      <p><strong>EX: より高度でエレガントな実装✨</strong></p>
+      <p>投稿記事とカテゴリを紐付ける「中間テーブルへのレコードの挿入」については、前回講義の<a
+      href="lecture08.html#dbの初期データの作成">DBの初期データの作成</a>で示した
+      <code>seed.ts</code> の <strong>第21行目</strong> から <strong>第23行目</strong> のように
+      <span class="masked">Prismaのリレーションを使用した一括作成機能</span>
+      を利用することで、実行効率の良い実装ができます。</p>
+      <p>実装例は<a
+      href="https://github.com/TakeshiWada1980/Programming3-2025/blob/main/docs/codes/09/code02.ts">こちら<i class="fa-solid fa-person-chalkboard"></i></a>を参照してください。</p>
+      <p>また、このように実装すると「<strong>カテゴリが存在することを事前確認せずに処理すること</strong>」が可能になります。投稿記事を作成する際に、存在しないカテゴリIDが与えられると、<strong>データベースの外部キー制約</strong>によってエラーが発生し、それを適切にハンドリングすることでステータスコード「400」を返すことができるようになります。</p>
+      </div>
+      <h2 data-number="2.4" id="宿題-投稿記事-単体-を取得するウェブapiの実装"><span
+      class="header-section-number">2.4</span> 宿題⛄: 投稿記事 (単体)
+      を取得するウェブAPIの実装</h2>
+      <p><code>/api/posts/[id]</code> というエンドポイントに、単一の投稿記事を取得するウェブAPI
+      (<strong>GET Method</strong>に対応) を実装してください。</p>
+      <p>URLパスで与える <code>id</code>
+      に一致する投稿記事が存在するときは、ステータスコード「<strong>200 OK</strong>」で以下のような
+      JSON をレスポンスするようにしてください。</p>
+      <div class="sourceCode" id="cb20"
+      data-caption="GET /api/posts/[id] の 200 のレスポンス(例)"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb20-1"><a href="#cb20-1"></a><span class="fu">{</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>  <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;58169a35-8f4c-4f62-b50b-876f254ef3a3&quot;</span><span class="fu">,</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>  <span class="dt">&quot;title&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿1&quot;</span><span class="fu">,</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a>  <span class="dt">&quot;content&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿1の本文。&lt;br/&gt;投稿1の本文。投稿1の本文。&quot;</span><span class="fu">,</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a>  <span class="dt">&quot;coverImageURL&quot;</span><span class="fu">:</span> <span class="st">&quot;https://...&quot;</span><span class="fu">,</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a>  <span class="dt">&quot;createdAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-12-08T12:00:42.720Z&quot;</span><span class="fu">,</span></span>
+<span id="cb20-7"><a href="#cb20-7"></a>  <span class="dt">&quot;updatedAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-12-08T12:00:42.720Z&quot;</span><span class="fu">,</span></span>
+<span id="cb20-8"><a href="#cb20-8"></a>  <span class="dt">&quot;categories&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb20-9"><a href="#cb20-9"></a>    <span class="fu">{</span></span>
+<span id="cb20-10"><a href="#cb20-10"></a>      <span class="dt">&quot;category&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb20-11"><a href="#cb20-11"></a>        <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;ad28ee69-359f-4d66-aaea-1680c97347b8&quot;</span><span class="fu">,</span></span>
+<span id="cb20-12"><a href="#cb20-12"></a>        <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;カテゴリ1&quot;</span></span>
+<span id="cb20-13"><a href="#cb20-13"></a>      <span class="fu">}</span></span>
+<span id="cb20-14"><a href="#cb20-14"></a>    <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb20-15"><a href="#cb20-15"></a>    <span class="fu">{</span></span>
+<span id="cb20-16"><a href="#cb20-16"></a>      <span class="dt">&quot;category&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb20-17"><a href="#cb20-17"></a>        <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;f6a99736-ad29-493b-8323-c3b10c6390c2&quot;</span><span class="fu">,</span></span>
+<span id="cb20-18"><a href="#cb20-18"></a>        <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;カテゴリ2&quot;</span></span>
+<span id="cb20-19"><a href="#cb20-19"></a>      <span class="fu">}</span></span>
+<span id="cb20-20"><a href="#cb20-20"></a>    <span class="fu">}</span></span>
+<span id="cb20-21"><a href="#cb20-21"></a>  <span class="ot">]</span></span>
+<span id="cb20-22"><a href="#cb20-22"></a><span class="fu">}</span></span></code></pre></div>
+      <p>また、<code>id</code>
+      に一致する<strong>投稿記事が存在しなかったとき</strong>は、ステータスコード「<strong>404 Not
+      Found</strong>」で以下のような JSON をレスポンスするようにしてください。</p>
+      <div class="sourceCode" id="cb21"
+      data-caption="GET /api/posts/[id] の 404 のレスポンス(例)"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">{</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>  <span class="dt">&quot;error&quot;</span><span class="fu">:</span> <span class="st">&quot;id=&#39;0120-00-9696&#39;の投稿記事は見つかりませんでした&quot;</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="fu">}</span></span></code></pre></div>
+      <ul>
+      <li>URLパスの<strong>パラメータプレースホルダ</strong> <code>[id]</code>
+      の処理については、前回講義の<a
+      href="lecture08.html#カテゴリを削除するウェブapiの実装">こちら</a>を参考にしてください。</li>
+      <li>単一のレコードの取得には <code>findUnique</code> メソッドを使用してください。
+      <ul>
+      <li>条件に一致するレコードが見つからなかったとき、<code>findUnique</code> の戻り値は
+      <code>null</code> になります (厳密には <code>await</code> した Promise の結果として
+      <code>null</code> が返されます)。</li>
+      </ul></li>
+      </ul>
+      <p>どうしても実装できないときは<a
+      href="https://github.com/TakeshiWada1980/Programming3-2025/blob/main/docs/codes/09/code03.ts">こちら<i class="fa-solid fa-person-chalkboard"></i></a>を参考にしてください。</p>
+      <h2 data-number="2.5" id="宿題-投稿記事を削除するウェブapiの実装"><span
+      class="header-section-number">2.5</span> 宿題⛄: 投稿記事を削除するウェブAPIの実装</h2>
+      <p><code>/api/admin/posts/[id]</code>
+      というエンドポイントに、<strong>「投稿記事」を削除するウェブAPI</strong> (<strong>DELETE
+      Method</strong> に対応) を実装してください。実装にあたっては、前回講義の<a
+      href="lecture08.html#カテゴリを削除するウェブapiの実装">カテゴリ削除のAPI</a>を参考にしてください。</p>
+      <ul>
+      <li>エンドポイントが <code>/api/posts/[id]</code> ではなく <code>/api/admin/posts/[id]</code>
+      であることに注意してください。</li>
+      </ul>
+      <div class="note type-tips">
+      <p><strong>中間テーブルのレコードの削除について</strong></p>
+      <p>前回講義において <strong>中間テーブル</strong> (<code>PostCategory</code>) は<a
+      href="https://github.com/TakeshiWada1980/Programming3-2025/blob/main/docs/codes/09/schema.prisma">schema.prisma
+      <i class="fa-solid fa-person-chalkboard"></i></a> のなかで次のように定義しました。</p>
+      <div class="sourceCode" id="cb22" data-caption="prisma/schema.prisma 抜粋"
+      data-startFrom="37"><pre class="sourceCode numberSource text numberLines"><code class="sourceCode" style="counter-reset: source-line 36;"><span id="cb22-37"><a href="#cb22-37"></a>// 投稿記事とカテゴリを紐づける中間テーブル</span>
+<span id="cb22-38"><a href="#cb22-38"></a>model PostCategory {</span>
+<span id="cb22-39"><a href="#cb22-39"></a>  id          String @id @default(uuid())</span>
+<span id="cb22-40"><a href="#cb22-40"></a>  postId      String</span>
+<span id="cb22-41"><a href="#cb22-41"></a>  categoryId  String</span>
+<span id="cb22-42"><a href="#cb22-42"></a>  createdAt   DateTime @default(now())</span>
+<span id="cb22-43"><a href="#cb22-43"></a>  updatedAt   DateTime @updatedAt</span>
+<span id="cb22-44"><a href="#cb22-44"></a>  category    Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)</span>
+<span id="cb22-45"><a href="#cb22-45"></a>  post        Post     @relation(fields: [postId], references: [id], onDelete: Cascade)</span>
+<span id="cb22-46"><a href="#cb22-46"></a>}</span></code></pre></div>
+      <p>この設定のうち、<strong>投稿記事の削除</strong>に関連して重要になってくるのが
+      <strong>第45行目</strong> の <code>onDelete: Cascade</code>
+      というオプションです。このオプションは <span
+      class="masked">もし参照先の「Postレコード」が削除された場合、それに関連する「PostCategoryレコード」も自動的に削除する</span>
+      というものになります。</p>
+      <p>たとえば、各テーブルに次のようなレコードがあるとき…</p>
+      <p><strong>■ Post テーブル</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>id</th>
+      <th>title</th>
+      <th>content</th>
+      <th>created_at</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td>p-001</td>
+      <td>JavaScriptだと…</td>
+      <td>TypeScriptに移行…</td>
+      <td>2024-03-19</td>
+      </tr>
+      <tr class="even">
+      <td>p-002</td>
+      <td>リストの[-1]って…</td>
+      <td>Pythonのリストで…</td>
+      <td>2024-03-24</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><strong>■ Category テーブル</strong></p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>id</th>
+      <th>name</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td>c-001</td>
+      <td>プログラミング</td>
+      </tr>
+      <tr class="even">
+      <td>c-002</td>
+      <td>TypeScript</td>
+      </tr>
+      <tr class="odd">
+      <td>c-003</td>
+      <td>JavaScript</td>
+      </tr>
+      <tr class="even">
+      <td>c-004</td>
+      <td>Python</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><strong>■ PostCategory テーブル</strong> (中間テーブル)</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>postId</th>
+      <th>categoryId</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td>p-001</td>
+      <td>c-001</td>
+      </tr>
+      <tr class="even">
+      <td>p-001</td>
+      <td>c-002</td>
+      </tr>
+      <tr class="odd">
+      <td>p-001</td>
+      <td>c-003</td>
+      </tr>
+      <tr class="even">
+      <td>p-002</td>
+      <td>c-001</td>
+      </tr>
+      <tr class="odd">
+      <td>p-002</td>
+      <td>c-004</td>
+      </tr>
+      </tbody>
+      </table>
+      <p><code>Post</code> テーブルから id = <code>p-002</code>
+      のレコードを削除すると、<strong>それに連動して</strong> <code>PostCategory</code>
+      テーブルのなかの関連レコードも次のように<strong>自動削除</strong>されるというオプションになります。</p>
+      <p><strong>■ PostCategory テーブル</strong> (Postテーブルから <code>p-002</code>
+      のレコードを削除した後 )</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>postId</th>
+      <th>categoryId</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td>p-001</td>
+      <td>c-001</td>
+      </tr>
+      <tr class="even">
+      <td>p-001</td>
+      <td>c-002</td>
+      </tr>
+      <tr class="odd">
+      <td>p-001</td>
+      <td>c-003</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>中間テーブルのレコードには、以上のような <code>onDelete: Cascade</code>
+      が設定されているため、「投稿記事の削除」に際して <span
+      class="masked">中間テーブルのレコードに対する明示的な削除処理</span> は不要です。</p>
+      <p>なお、この連動削除は「<strong>単方向</strong>」のものなので、<code>PostCategory</code>
+      のレコードを削除しても、<code>Post</code> や <code>Category</code>
+      のレコードが削除されるようなことは<strong>ありません</strong>。</p>
+      </div>
+      <p><code>DELETE /api/admin/posts/[id]</code> で、<code>id</code>
+      に一致する投稿記事が「<strong>削除できたとき</strong>」は、ステータスコード「<strong>200
+      OK</strong>」で以下のような JSON をレスポンスするようにしてください。</p>
+      <div class="sourceCode" id="cb23"
+      data-caption="DELETE /api/admin/posts/[id] の 200 のレスポンス(例)"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb23-1"><a href="#cb23-1"></a><span class="fu">{</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>  <span class="dt">&quot;msg&quot;</span><span class="fu">:</span> <span class="st">&quot;「投稿X」を削除しました。&quot;</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="fu">}</span></span></code></pre></div>
+      <p>また、id
+      に一致する投稿記事が存在しないなどの理由で「<strong>削除できなかったとき</strong>」は、ステータスコード「<strong>500
+      Internal Server Error</strong>」で以下の JSON をレスポンスするようにしてください。</p>
+      <div class="sourceCode" id="cb24"
+      data-caption="DELETE /api/admin/posts/[id] の 500 のレスポンス(例)"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb24-1"><a href="#cb24-1"></a><span class="fu">{</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>  <span class="dt">&quot;error&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿記事の削除に失敗しました&quot;</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="fu">}</span></span></code></pre></div>
+      <p>どうしても実装できないときは<a
+      href="https://github.com/TakeshiWada1980/Programming3-2025/blob/main/docs/codes/09/code04.ts">こちら<i class="fa-solid fa-person-chalkboard"></i></a>を参考にしてください。</p>
+      <h2 data-number="2.6" id="宿題-投稿記事の内容を変更-更新-するウェブapiの実装"><span
+      class="header-section-number">2.6</span> 宿題⛄: 投稿記事の内容を変更 (更新)
+      するウェブAPIの実装</h2>
+      <p><code>/api/admin/posts/[id]</code> というエンドポイントに、<strong>投稿記事を変更 (更新)
+      するウェブAPI</strong> (<strong>PUT Method</strong> に対応)
+      を実装してください。このエンドポイントは <span
+      class="masked">先ほどの「投稿記事の削除」と同じエンドポイント</span>
+      となります。<code>DELETE</code> 関数を記述したファイルのなかに <code>PUT</code>
+      関数を実装してください。</p>
+      <p>PUTリクエストのボディは、POSTメソッドと同じ形式のJSONデータを想定してください。</p>
+      <div class="sourceCode" id="cb25"
+      data-caption="PUT /api/admin/post/[id] へのリクエストのボディ(例)"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">{</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>  <span class="dt">&quot;title&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿Z&quot;</span><span class="fu">,</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a>  <span class="dt">&quot;content&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿Zの本文。&lt;br/&gt;投稿Zの本文。投稿Zの本文。&quot;</span><span class="fu">,</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a>  <span class="dt">&quot;coverImageURL&quot;</span><span class="fu">:</span> <span class="st">&quot;https://....&quot;</span><span class="fu">,</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a>  <span class="dt">&quot;categoryIds&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb25-6"><a href="#cb25-6"></a>    <span class="st">&quot;d3e10601-3cfa-48f3-9ede-886647a1063b&quot;</span><span class="ot">,</span></span>
+<span id="cb25-7"><a href="#cb25-7"></a>    <span class="st">&quot;5a8d8365-e435-4ed4-a05e-34237c1b2ff0&quot;</span></span>
+<span id="cb25-8"><a href="#cb25-8"></a>  <span class="ot">]</span></span>
+<span id="cb25-9"><a href="#cb25-9"></a><span class="fu">}</span></span></code></pre></div>
+      <p>データベースに <code>id</code>
+      に一致する投稿記事が存在し「<strong>内容を変更できたとき</strong>」は、ステータスコード「<strong>200
+      OK</strong>」で以下のようなJSONデータ (更新された内容)
+      をレスポンスするようにしてください。カテゴリの情報は不要です。</p>
+      <div class="sourceCode" id="cb26"
+      data-caption="PUT /api/admin/posts/[id] の 200 のレスポンス(例)"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">{</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a>  <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;0d2f8c7e-08c4-4aa5-8ed7-a46d9a1ef3be&quot;</span><span class="fu">,</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a>  <span class="dt">&quot;title&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿Z&quot;</span><span class="fu">,</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a>  <span class="dt">&quot;content&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿Zの本文。&lt;br/&gt;投稿Zの本文。投稿Zの本文。&quot;</span><span class="fu">,</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a>  <span class="dt">&quot;coverImageURL&quot;</span><span class="fu">:</span> <span class="st">&quot;https://....&quot;</span><span class="fu">,</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a>  <span class="dt">&quot;createdAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-12-10T08:51:42.829Z&quot;</span><span class="fu">,</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a>  <span class="dt">&quot;updatedAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-12-11T05:33:45.884Z&quot;</span></span>
+<span id="cb26-8"><a href="#cb26-8"></a><span class="fu">}</span></span></code></pre></div>
+      <p>「<strong>内容を変更できなかったとき</strong>」は、ステータスコード「<strong>500 Internal
+      Server Error</strong>」で以下のJSONデータをレスポンスするようにしてください。</p>
+      <div class="sourceCode" id="cb27"
+      data-caption="PUT /api/admin/posts/[id] の 500 のレスポンス(例)"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb27-1"><a href="#cb27-1"></a><span class="fu">{</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>  <span class="dt">&quot;error&quot;</span><span class="fu">:</span> <span class="st">&quot;投稿記事の変更に失敗しました&quot;</span></span>
+<span id="cb27-3"><a href="#cb27-3"></a><span class="fu">}</span></span></code></pre></div>
+      <p>実装に際しては次のことに注意してください。</p>
+      <ul>
+      <li>投稿記事とカテゴリを紐付けする情報の更新は、まず <span
+      class="masked">中間テーブルから現在の紐づけ情報を削除</span>
+      してから、中間テーブルに新しい紐付け情報を挿入するという <strong>2段階</strong>
+      で行なってください。</li>
+      <li>リクエストボディの <code>"categoryIds"</code>
+      に不正な値が含まれているときに「<strong>タイトル、本文、カバーイメージURLは更新されたが、カテゴリ設定については失敗した</strong>」といった
+      <strong>中途半端な状態 (データの整合性が保たれない状態) が生じないように実装</strong>
+      してください。<code>prisma.post.update</code> の実行よりも先に <code>"categoryIds"</code>
+      の検証をするようにしてください。
+      <ul>
+      <li>もしくは <strong>トランザクション</strong> を利用して処理してください
+      (トランザクションの利用は必須ではありません)。</li>
+      </ul></li>
+      </ul>
+      <div class="note type-tips">
+      <p><strong>参考</strong></p>
+      <p>httpYac のコード例です。<code>@post_id</code>、<code>categoryIds</code> は、各自の DB
+      にあわせて適切に設定してください。</p>
+      <div class="sourceCode" id="cb28"
+      data-caption="devtools/httpyac/LocalApi.http (抜粋・例)"><pre
+      class="sourceCode numberSource text numberLines"><code class="sourceCode"><span id="cb28-1"><a href="#cb28-1"></a>### 投稿記事の更新</span>
+<span id="cb28-2"><a href="#cb28-2"></a>@post_id = d1e9ff60-2f17-419a-bacd-ee54cd741484</span>
+<span id="cb28-3"><a href="#cb28-3"></a>PUT http://localhost:3000/api/admin/posts/{{post_id}}</span>
+<span id="cb28-4"><a href="#cb28-4"></a>Content-Type: application/json</span>
+<span id="cb28-5"><a href="#cb28-5"></a></span>
+<span id="cb28-6"><a href="#cb28-6"></a>{</span>
+<span id="cb28-7"><a href="#cb28-7"></a>  &quot;title&quot;: &quot;投稿Z&quot;,</span>
+<span id="cb28-8"><a href="#cb28-8"></a>  &quot;content&quot;: &quot;投稿Zの本文。&lt;br/&gt;投稿Zの本文。投稿Zの本文。&quot;,</span>
+<span id="cb28-9"><a href="#cb28-9"></a>  &quot;coverImageURL&quot;: &quot;https://....&quot;,</span>
+<span id="cb28-10"><a href="#cb28-10"></a>  &quot;categoryIds&quot;: [</span>
+<span id="cb28-11"><a href="#cb28-11"></a>    &quot;51f8302e-6296-4f1b-bc1c-c65fedc1850b&quot;,</span>
+<span id="cb28-12"><a href="#cb28-12"></a>    &quot;cc8cd654-7f15-4bea-8ab5-38e94a2ed8ea&quot;</span>
+<span id="cb28-13"><a href="#cb28-13"></a>  ]</span>
+<span id="cb28-14"><a href="#cb28-14"></a>}</span></code></pre></div>
+      </div>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>RDBにおけるトランザクションの概念について教えてください。</p>
+      </blockquote>
+      <blockquote>
+      <p>Prisma
+      でトランザクションを使う方法を解説してください。投稿記事とカテゴリが「多対多」の関係になっているブログデータで更新
+      (UPDATE) を実行するケースを題材に解説してください。</p>
+      </blockquote>
+      <p>どうしても実装できないときは<a
+      href="https://github.com/TakeshiWada1980/Programming3-2025/blob/main/docs/codes/09/code05.ts">こちら<i class="fa-solid fa-person-chalkboard"></i></a>を参考にしてください。</p>
+      <h2 data-number="2.7" id="情報の整理-apiリストとサイトマップ"><span
+      class="header-section-number">2.7</span> 情報の整理: APIリストとサイトマップ</h2>
+      <p>宿題を含めてここまでの実装を終えると、次のような <strong>9件のウェブAPI</strong>
+      が利用可能な状態になっているはずです。</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>エンドポイント</th>
+      <th>HTTP<br>Method</th>
+      <th>処理</th>
+      <th>管理者<br>権限</th>
+      <th>リクエスト<br>ボディ</th>
+      <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td>/api/categories</td>
+      <td>GET</td>
+      <td>カテゴリの一覧を取得する</td>
+      <td></td>
+      <td></td>
+      <td>第08回講義</td>
+      </tr>
+      <tr class="even">
+      <td>/api/admin/categories</td>
+      <td>POST</td>
+      <td>カテゴリを追加する</td>
+      <td>必要</td>
+      <td>必要</td>
+      <td>第08回講義</td>
+      </tr>
+      <tr class="odd">
+      <td>/api/admin/categories/[id]</td>
+      <td>PUT</td>
+      <td>カテゴリの名前を変更する</td>
+      <td>必要</td>
+      <td>必要</td>
+      <td>第08回講義</td>
+      </tr>
+      <tr class="even">
+      <td>/api/admin/categories/[id]</td>
+      <td>DELETE</td>
+      <td>カテゴリを削除する</td>
+      <td>必要</td>
+      <td></td>
+      <td>第08回講義</td>
+      </tr>
+      <tr class="odd">
+      <td>/api/posts</td>
+      <td>GET</td>
+      <td>投稿記事の一覧を取得する</td>
+      <td></td>
+      <td></td>
+      <td>第09回講義</td>
+      </tr>
+      <tr class="even">
+      <td>/api/posts/[id]</td>
+      <td>GET</td>
+      <td>投稿記事 (単体) を取得する</td>
+      <td></td>
+      <td></td>
+      <td><strong>宿題</strong>⛄ (課題2)</td>
+      </tr>
+      <tr class="odd">
+      <td>/api/admin/posts</td>
+      <td>POST</td>
+      <td>投稿記事を追加する</td>
+      <td>必要</td>
+      <td>必要</td>
+      <td>第09回講義</td>
+      </tr>
+      <tr class="even">
+      <td>/api/admin/posts/[id]</td>
+      <td>PUT</td>
+      <td>投稿記事の内容を変更 (編集) する</td>
+      <td>必要</td>
+      <td>必要</td>
+      <td><strong>宿題</strong>⛄ (課題2)</td>
+      </tr>
+      <tr class="odd">
+      <td>/api/admin/posts/[id]</td>
+      <td>DELETE</td>
+      <td>投稿記事を削除する</td>
+      <td>必要</td>
+      <td></td>
+      <td><strong>宿題</strong>⛄ (課題2)</td>
+      </tr>
+      </tbody>
+      </table>
+      <h2 data-number="2.8" id="ふたたびフロンドエンド開発に"><span
+      class="header-section-number">2.8</span> ふたたびフロンドエンド開発に…</h2>
+      <p>ウェブAPIを利用する形で、次のようなフロントエンド開発
+      (<strong>Reactによるウェブ画面の設計・構築</strong>)
+      を進めていきます。なお、<strong>宿題</strong>⛄
+      の部分が<strong>まだ完了していなくても着手することが可能</strong>です。</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>URL</th>
+      <th>処理</th>
+      <th>管理者権限</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td>/</td>
+      <td>投稿記事の一覧表示 <font size="-1">(<strong>実装済み・但し要修正</strong>)</font></td>
+      <td></td>
+      </tr>
+      <tr class="even">
+      <td>/about</td>
+      <td>制作者プロフィール<br>このサイトについて
+      <font size="-1">(<strong>実装済み</strong>)</font></td>
+      <td></td>
+      </tr>
+      <tr class="odd">
+      <td>/posts/[id]</td>
+      <td>投稿記事の詳細表示 <font size="-1">(<strong>実装済み・但し要修正</strong>)</font></td>
+      <td></td>
+      </tr>
+      <tr class="even">
+      <td>/admin/posts</td>
+      <td>投稿記事の一覧表示<br>編集ページへのリンク、削除機能 (オプション)</td>
+      <td>必要</td>
+      </tr>
+      <tr class="odd">
+      <td>/admin/posts/new</td>
+      <td>投稿記事の新規作成</td>
+      <td>必要</td>
+      </tr>
+      <tr class="even">
+      <td>/admin/posts/[id]</td>
+      <td>投稿記事の編集 (削除を含む)</td>
+      <td>必要</td>
+      </tr>
+      <tr class="odd">
+      <td>/admin/categories</td>
+      <td>カテゴリの一覧表示<br>編集ページへのリンク、削除機能 (オプション)</td>
+      <td>必要</td>
+      </tr>
+      <tr class="even">
+      <td>/admin/categories/new</td>
+      <td>カテゴリの新規作成</td>
+      <td>必要</td>
+      </tr>
+      <tr class="odd">
+      <td>/admin/categories/[id]</td>
+      <td>カテゴリの編集 (削除を含む)</td>
+      <td>必要</td>
+      </tr>
+      </tbody>
+      </table>
+      <h1 data-number="3" id="カテゴリの新規作成フォームの実装"><span
+      class="header-section-number">3</span> カテゴリの新規作成フォームの実装</h1>
+      <p>フロントエンド開発に戻ります。<code>/admin/categories/new</code> に
+      <strong>カテゴリを新規作成 (追加) するためのフォーム</strong>
+      を配置したページを実装していきます。</p>
+      <figure>
+      <img src="figs/09/app_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>この画面では、実装済みの API を以下のように利用します。</p>
+      <ol type="1">
+      <li>既存の<strong>カテゴリ (一覧) の取得</strong>に <span class="masked">GET
+      /api/categories</span> を使用</li>
+      <li><strong>カテゴリの新規作成 (追加)</strong> に <span class="masked">POST
+      /api/admin/categories</span> を使用</li>
+      </ol>
+      <h2 data-number="3.1" id="準備-1"><span class="header-section-number">3.1</span> 準備</h2>
+      <p>ここでは、<strong>以下のウェブAPIが実装されていること</strong>を前提とします
+      (いずれのAPIも前回授業のなかで実装済みです)。</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>エンドポイント</th>
+      <th>HTTP Method</th>
+      <th>処理</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td>/api/categories</td>
+      <td>GET</td>
+      <td>カテゴリの一覧を取得する</td>
+      </tr>
+      <tr class="even">
+      <td>/api/admin/categories</td>
+      <td>POST</td>
+      <td>カテゴリを追加する</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>念のために <code>/api/categories</code>
+      のレスポンスが、次のような形式のJSONになっていることを <strong>httpYac</strong>
+      から確認しておいてください。もし、形式が違っていれば、前回の<a
+      href="lecture08.html#カテゴリの一覧を取得するウェブapiの実装">講義資料</a>を参照して修正しておいてください。</p>
+      <div class="sourceCode" id="cb29" data-caption="GET /api/categories のレスポンス (例)"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb29-1"><a href="#cb29-1"></a><span class="ot">[</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a>  <span class="fu">{</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a>    <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;db450dc7-a73b-4311-8b70-3af652efd144&quot;</span><span class="fu">,</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a>    <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;カテゴリ4&quot;</span><span class="fu">,</span></span>
+<span id="cb29-5"><a href="#cb29-5"></a>    <span class="dt">&quot;createdAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-12-08T12:00:42.713Z&quot;</span><span class="fu">,</span></span>
+<span id="cb29-6"><a href="#cb29-6"></a>    <span class="dt">&quot;updatedAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-12-08T12:00:42.713Z&quot;</span></span>
+<span id="cb29-7"><a href="#cb29-7"></a>  <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb29-8"><a href="#cb29-8"></a>  <span class="er">//</span> <span class="er">...略...</span></span>
+<span id="cb29-9"><a href="#cb29-9"></a>  <span class="fu">{</span></span>
+<span id="cb29-10"><a href="#cb29-10"></a>    <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;ad28ee69-359f-4d66-aaea-1680c97347b8&quot;</span><span class="fu">,</span></span>
+<span id="cb29-11"><a href="#cb29-11"></a>    <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;カテゴリ1&quot;</span><span class="fu">,</span></span>
+<span id="cb29-12"><a href="#cb29-12"></a>    <span class="dt">&quot;createdAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-12-08T12:00:42.695Z&quot;</span><span class="fu">,</span></span>
+<span id="cb29-13"><a href="#cb29-13"></a>    <span class="dt">&quot;updatedAt&quot;</span><span class="fu">:</span> <span class="st">&quot;2024-12-08T12:00:42.695Z&quot;</span></span>
+<span id="cb29-14"><a href="#cb29-14"></a>  <span class="fu">}</span></span>
+<span id="cb29-15"><a href="#cb29-15"></a><span class="ot">]</span></span></code></pre></div>
+      <p>また、カテゴリを新規作成 (追加) するための API (<code>/api/admin/categories</code>)
+      は、次のようなリクエストボディを受付けることを確認しておいてください。問題があれば、前回の<a
+      href="lecture08.html#カテゴリを追加するウェブapiの実装-コードの解説">講義資料</a>を参照して修正してください。</p>
+      <div class="sourceCode" id="cb30"
+      data-caption="POST /api/admin/categories のリクエストボディ (例)"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">{</span></span>
+<span id="cb30-2"><a href="#cb30-2"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;カテゴリ5&quot;</span></span>
+<span id="cb30-3"><a href="#cb30-3"></a><span class="fu">}</span></span></code></pre></div>
+      <p><strong>httpTac</strong> を使用したPOSTリクエストの確認方法は次のとおりです
+      (再掲)。なお、<u>既に同じ名前のカテゴリが DB に存在する場合は失敗するので注意</u> してください
+      (失敗するように設計しているので注意してください)。</p>
+      <div class="sourceCode" id="cb31"
+      data-caption="devtools/httpyac/LocalApi.http (抜粋・例)"><pre
+      class="sourceCode numberSource text numberLines"><code class="sourceCode"><span id="cb31-1"><a href="#cb31-1"></a>### カテゴリ一覧の取得</span>
+<span id="cb31-2"><a href="#cb31-2"></a>GET http://localhost:3000/api/categories</span>
+<span id="cb31-3"><a href="#cb31-3"></a></span>
+<span id="cb31-4"><a href="#cb31-4"></a>### カテゴリの作成</span>
+<span id="cb31-5"><a href="#cb31-5"></a>POST http://localhost:3000/api/admin/categories</span>
+<span id="cb31-6"><a href="#cb31-6"></a>Content-Type: application/json</span>
+<span id="cb31-7"><a href="#cb31-7"></a></span>
+<span id="cb31-8"><a href="#cb31-8"></a>{</span>
+<span id="cb31-9"><a href="#cb31-9"></a>  &quot;name&quot;: &quot;カテゴリ5&quot;</span>
+<span id="cb31-10"><a href="#cb31-10"></a>}</span></code></pre></div>
+      <p>以下、ステップバイステップで段階的にカテゴリの追加フォームを実装していきます。</p>
+      <h2 data-number="3.2" id="カテゴリの追加フォームの実装-第1段階"><span
+      class="header-section-number">3.2</span> カテゴリの追加フォームの実装 (第1段階)</h2>
+      <p>プロジェクトフォルダに <code>src/app/admin/categories/new/page.tsx</code> を作成して<a
+      href="https://github.com/TakeshiWada1980/Programming3-2025/blob/main/docs/codes/09/code06.tsx">こちらのコード<i class="fa-solid fa-person-chalkboard"></i></a>を貼付け、開発モードでアプリを起動し、<code>/admin/categories/new</code>
+      にアクセスして動作確認してください。</p>
+      <figure>
+      <img src="figs/09/app_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <ol type="1">
+      <li>ページ (＝Reactコンポーネント) の実装となるので、ファイル名を <code>route.ts</code>
+      ではなく <code>page.tsx</code> とすることに注意してください。</li>
+      <li><code>/admin/categories/new</code> にアクセスすると、内部的に
+      <code>GET /api/admin/categories</code>
+      がコールされ、カテゴリの一覧が画面に表示されることを確認してください。
+      <ul>
+      <li>各カテゴリをクリックすると <code>/admin/categories/[id]</code>
+      に遷移することを確認してください (遷移先のページは未実装なので 404 となります)。</li>
+      </ul></li>
+      <li>テキストボックスに「名前」を入力してボタンを押下すると、開発ツール
+      (<code>F12</code>で起動) のコンソールに <span
+      class="masked"><code>POST /api/admin/categories =&gt; {"name":"カテゴリ5"}</code></span>
+      のようなログが出力されること確認してください。
+      <ul>
+      <li>ただし、現状の実装では <strong>実際の「POST処理」は実行されていないこと</strong>
+      に注意してください。</li>
+      </ul></li>
+      <li>新しいカテゴリの名前についての <strong>バリデーション (値の検証)</strong>
+      が実装されていないことを確認してください。
+      <ul>
+      <li>テキストボックスが空欄でも「カテゴリを作成」のボタンが押下できてしまいます。</li>
+      <li>既存のカテゴリと同じ名前でも「カテゴリを作成」のボタンが押下できてしまいます。</li>
+      </ul></li>
+      </ol>
+      <p>以上のように、<strong>このコードには「POST処理」と「バリデーション処理」が実装されていません</strong>。そのことを踏まえて、まずはじっくりとコードの読解に努めてください。特にしっかりと理解して欲しい部分は以下のようになります。</p>
+      <ul>
+      <li><strong>第28行目</strong>から<strong>第70行目</strong>の「カテゴリ一覧の取得する処理」
+      <ul>
+      <li><a href="lecture07.html#ブログ記事一覧の表示">第07回講義</a>(microCMSからのデータフェッチ)
+      の復習となります。</li>
+      </ul></li>
+      <li><strong>第77行目</strong>から<strong>第89行目</strong>の「ボタンを押下したときの処理」</li>
+      <li><strong>第123行目</strong>から<strong>第154行目</strong>の「<code>&lt;form&gt;</code>要素を使った入力フォームの構成」</li>
+      </ul>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>Next.js (React)
+      を使用してブログアプリ開発をしています。そこで、<code>&lt;input type="text"&gt;</code> や
+      <code>&lt;button&gt;</code>
+      などの要素を使って、記事の投稿フォームを構成しています。これらの要素を
+      <code>&lt;form&gt;</code>
+      の子要素にすることの意味について教えてください。<code>&lt;button&gt;</code> に
+      <code>onClick</code> 属性を設定すれば送信処理を実装できるのに、わざわざ
+      <code>&lt;form&gt;</code> を使うことに理由があるのでしょうか</p>
+      </blockquote>
+      <p>ある程度の理解ができたら、次のセクションに進んでください。</p>
+      <h2 data-number="3.3" id="カテゴリの追加フォームの実装-第2段階"><span
+      class="header-section-number">3.3</span> カテゴリの追加フォームの実装 (第2段階)</h2>
+      <p>バリデーション (値の検証) を実装したコードを<a
+      href="https://github.com/TakeshiWada1980/Programming3-2025/blob/main/docs/codes/09/code07.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>に示します。開発モードで実行して動作を確認してください。<strong>文字数が規定範囲にない場合</strong>、<span
+      class="masked">既存のカテゴリと同じ名前を設定した場合</span>
+      にバリデーションエラーとなります。</p>
+      <figure>
+      <img src="figs/09/app_02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>バリデーションをパスしない状態では <strong>ボタンが押下できないこと</strong>
+      を確認してください
+      (ボタンが薄色表示になり、マウスカーソルをあわせると<i class="fa-solid fa-ban"></i>マークになる)。
+      テキストボックスやボタンのバリデーションについては<a
+      href="lecture05.html#バリデーション">第05回講義</a>(Todoアプリ開発) のほぼ復習となります。</p>
+      <p>ある程度の理解ができたら、次のセクションに進んでください。</p>
+      <h2 data-number="3.4" id="カテゴリの追加フォームの実装-第3段階"><span
+      class="header-section-number">3.4</span> カテゴリの追加フォームの実装 (第3段階)</h2>
+      <p><code>/api/admin/categories</code> に対する <strong>POST処理</strong>
+      を追加実装したコードを<a
+      href="https://github.com/TakeshiWada1980/Programming3-2025/blob/main/docs/codes/09/code08.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>に示します。開発モードで実行して動作を確認してください。</p>
+      <figure>
+      <img src="figs/09/app_03.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>また、Prisma Studio を使って、実際に DB の
+      <strong>カテゴリテーブルにレコードが追加されていること</strong> を確認してください。</p>
+      <figure>
+      <img src="figs/09/app_04.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><strong>第90行目</strong>から<strong>第133行目</strong>が主な追加実装となります。特に次の処理については、じっくりと読み解い理解に努めてください。<code>fetch</code>
+      関数の第2引数が、<code>GET</code> の場合とは、どのように違うかに注意してください。</p>
+      <div class="sourceCode" id="cb32"
+      data-caption="src/app/admin/categories/new/page.tsx (カテゴリの追加・抜粋)"
+      data-startFrom="95"><pre class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 94;"><span id="cb32-95"><a href="#cb32-95"></a><span class="co">// ▼▼ 追加 ウェブAPI (/api/admin/categories) にPOSTリクエストを送信する処理</span></span>
+<span id="cb32-96"><a href="#cb32-96"></a><span class="cf">try</span> {</span>
+<span id="cb32-97"><a href="#cb32-97"></a>  <span class="kw">const</span> requestUrl <span class="op">=</span> <span class="st">&quot;/api/admin/categories&quot;</span><span class="op">;</span></span>
+<span id="cb32-98"><a href="#cb32-98"></a>  <span class="kw">const</span> res <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(requestUrl<span class="op">,</span> {</span>
+<span id="cb32-99"><a href="#cb32-99"></a>    method<span class="op">:</span> <span class="st">&quot;POST&quot;</span><span class="op">,</span></span>
+<span id="cb32-100"><a href="#cb32-100"></a>    cache<span class="op">:</span> <span class="st">&quot;no-store&quot;</span><span class="op">,</span></span>
+<span id="cb32-101"><a href="#cb32-101"></a>    headers<span class="op">:</span> {</span>
+<span id="cb32-102"><a href="#cb32-102"></a>      <span class="st">&quot;Content-Type&quot;</span><span class="op">:</span> <span class="st">&quot;application/json&quot;</span><span class="op">,</span></span>
+<span id="cb32-103"><a href="#cb32-103"></a>    }<span class="op">,</span></span>
+<span id="cb32-104"><a href="#cb32-104"></a>    body<span class="op">:</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>({ name<span class="op">:</span> newCategoryName })<span class="op">,</span></span>
+<span id="cb32-105"><a href="#cb32-105"></a>  })<span class="op">;</span></span>
+<span id="cb32-106"><a href="#cb32-106"></a></span>
+<span id="cb32-107"><a href="#cb32-107"></a>  <span class="cf">if</span> (<span class="op">!</span>res<span class="op">.</span><span class="at">ok</span>) {</span>
+<span id="cb32-108"><a href="#cb32-108"></a>    <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">Error</span>(<span class="vs">`</span><span class="sc">${</span>res<span class="op">.</span><span class="at">status</span><span class="sc">}</span><span class="vs">: </span><span class="sc">${</span>res<span class="op">.</span><span class="at">statusText</span><span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span> <span class="co">// -&gt; catch節に移動</span></span>
+<span id="cb32-109"><a href="#cb32-109"></a>  }</span>
+<span id="cb32-110"><a href="#cb32-110"></a></span>
+<span id="cb32-111"><a href="#cb32-111"></a>  <span class="fu">setNewCategoryName</span>(<span class="st">&quot;&quot;</span>)<span class="op">;</span></span>
+<span id="cb32-112"><a href="#cb32-112"></a>  <span class="cf">await</span> <span class="fu">fetchCategories</span>()<span class="op">;</span> <span class="co">// カテゴリの一覧を再取得</span></span>
+<span id="cb32-113"><a href="#cb32-113"></a>} <span class="cf">catch</span> (error) {</span>
+<span id="cb32-114"><a href="#cb32-114"></a>  <span class="kw">const</span> errorMsg <span class="op">=</span></span>
+<span id="cb32-115"><a href="#cb32-115"></a>    error <span class="kw">instanceof</span> <span class="bu">Error</span></span>
+<span id="cb32-116"><a href="#cb32-116"></a>      <span class="op">?</span> <span class="vs">`カテゴリのPOSTリクエストに失敗しました</span><span class="sc">\n${</span>error<span class="op">.</span><span class="at">message</span><span class="sc">}</span><span class="vs">`</span></span>
+<span id="cb32-117"><a href="#cb32-117"></a>      <span class="op">:</span> <span class="vs">`予期せぬエラーが発生しました</span><span class="sc">\n${</span>error<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
+<span id="cb32-118"><a href="#cb32-118"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(errorMsg)<span class="op">;</span></span>
+<span id="cb32-119"><a href="#cb32-119"></a>  <span class="bu">window</span><span class="op">.</span><span class="fu">alert</span>(errorMsg)<span class="op">;</span></span>
+<span id="cb32-120"><a href="#cb32-120"></a>} <span class="cf">finally</span> {</span>
+<span id="cb32-121"><a href="#cb32-121"></a>  <span class="fu">setIsSubmitting</span>(<span class="kw">false</span>)<span class="op">;</span></span>
+<span id="cb32-122"><a href="#cb32-122"></a>}</span></code></pre></div>
+      <h1 data-number="4" id="カテゴリの変更削除フォームの実装"><span
+      class="header-section-number">4</span> カテゴリの変更・削除フォームの実装</h1>
+      <p><code>/admin/categories/[id]</code> でアクセス可能な
+      <strong>カテゴリの編集・削除フォーム</strong> を
+      <code>src/app/admin/categories/[id]/page.tsx</code>
+      に実装していきます。この画面では、既存のカテゴリの「名前の変更」と「削除」の操作ができるようにフォームを構築していきます。</p>
+      <figure>
+      <img src="figs/09/app_05.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>不正な id が指定されたときの画面の例です。</p>
+      <figure>
+      <img src="figs/09/app_06.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>ここでは、<strong>以下のウェブAPIが実装されていること</strong>を前提とします。</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>エンドポイント</th>
+      <th>HTTP Method</th>
+      <th>処理</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td>/api/categories</td>
+      <td>GET</td>
+      <td>カテゴリの一覧を取得する</td>
+      </tr>
+      <tr class="even">
+      <td>/api/admin/categories/[id]</td>
+      <td>PUT</td>
+      <td>カテゴリの名前を変更する</td>
+      </tr>
+      <tr class="odd">
+      <td>/api/admin/categories/[id]</td>
+      <td>DELETE</td>
+      <td>カテゴリを削除する</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>実装例を<a
+      href="https://github.com/TakeshiWada1980/Programming3-2025/blob/main/docs/codes/09/code09.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>に示します。まずは、コード例を参照せずに<strong>自分で実装にチャレンジ</strong>してみてください。そのプロセスのなかで
+      <span class="masked">「どうやって実装すれば良いのか分からない」</span>
+      ということが明確になるので
+      (頭のなかで整理されるので)、それから実装例を見たほうが圧倒的に知識定着率が高くなります。</p>
+      <h1 data-number="5" id="投稿記事の新規作成フォームの実装"><span
+      class="header-section-number">5</span> 投稿記事の新規作成フォームの実装</h1>
+      <p><code>/admin/posts/new</code> に、次のような <strong>投稿記事の新規作成フォーム</strong>
+      を実装していきます。基本的には、カテゴリの追加フォームの実装の拡張版になります。</p>
+      <figure>
+      <img src="figs/09/app_07.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <ul>
+      <li><strong>画像をアップロードする機能</strong>については、次回以降の講義で解説します。現段階では「画像のURL」を与えるように実装してください。なお、ここで指定したURLの画像を、投稿記事の詳細画面
+      (<code>/posts/[id]</code>) で表示するためには <span
+      class="masked">「next.config.ts」を適切に設定</span> する必要があります。詳しくは<a
+      href="lecture07.html#動作確認と画像取得に関する設定変更">第07回講義</a>の解説を参照してください。</li>
+      </ul>
+      <p>実装例を<a
+      href="https://github.com/TakeshiWada1980/Programming3-2025/blob/main/docs/codes/09/code10.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>に示します。まずは、コード例を参照せずに<strong>自分で実装にチャレンジ</strong>してみてください。</p>
+      <h1 data-number="6" id="冬休みの宿題"><span class="header-section-number">6</span>
+      冬休みの宿題</h1>
+      <div class="note type-caution">
+      <p><strong>これまでと比較して格段に「高難易度の課題」です。その分だけ、実装できたときには大きく成長していることは間違いないので頑張って取り組んでください。</strong></p>
+      </div>
+      <p>まず、次のAPIを全て実装してください。<strong>★</strong>印のAPIは
+      <strong>ここまでの講義で実装済み</strong> です。<u>実質3件が新規実装が必要なAPI</u>
+      になります。なお、レスポンスのボディについては、<a
+      href="lecture08.html#ex演習-宿題-20分">こちら</a>のように<strong>自由に仕様変更しても問題ありません</strong>。ただし
+      <span class="masked">データベースのスキーマ (schema.prisma )</span>
+      については変更しないでください。</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>APIエンドポイント</th>
+      <th>HTTP<br>Method</th>
+      <th>処理</th>
+      <th style="text-align: center;">リクエスト<br>ボディ</th>
+      <th style="text-align: center;"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td>/api/categories</td>
+      <td>GET</td>
+      <td>カテゴリの一覧を取得</td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;"><strong>★</strong></td>
+      </tr>
+      <tr class="even">
+      <td>/api/admin/categories</td>
+      <td>POST</td>
+      <td>カテゴリを追加</td>
+      <td style="text-align: center;">必要</td>
+      <td style="text-align: center;"><strong>★</strong></td>
+      </tr>
+      <tr class="odd">
+      <td>/api/admin/categories/[id]</td>
+      <td>PUT</td>
+      <td>カテゴリの名前を変更</td>
+      <td style="text-align: center;">必要</td>
+      <td style="text-align: center;"><strong>★</strong></td>
+      </tr>
+      <tr class="even">
+      <td>/api/admin/categories/[id]</td>
+      <td>DELETE</td>
+      <td>カテゴリを削除</td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;"><strong>★</strong></td>
+      </tr>
+      <tr class="odd">
+      <td>/api/posts</td>
+      <td>GET</td>
+      <td>投稿記事の一覧を取得</td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;"><strong>★</strong></td>
+      </tr>
+      <tr class="even">
+      <td>/api/posts/[id]</td>
+      <td>GET</td>
+      <td>投稿記事 (単体) を取得</td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;"><font color="deepink" size="-1">未実装</font></td>
+      </tr>
+      <tr class="odd">
+      <td>/api/admin/posts</td>
+      <td>POST</td>
+      <td>投稿記事を追加</td>
+      <td style="text-align: center;">必要</td>
+      <td style="text-align: center;"><strong>★</strong></td>
+      </tr>
+      <tr class="even">
+      <td>/api/admin/posts/[id]</td>
+      <td>PUT</td>
+      <td>投稿記事の内容を更新</td>
+      <td style="text-align: center;">必要</td>
+      <td style="text-align: center;"><font color="deepink" size="-1">未実装</font></td>
+      </tr>
+      <tr class="odd">
+      <td>/api/admin/posts/[id]</td>
+      <td>DELETE</td>
+      <td>投稿記事を削除</td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;"><font color="deepink" size="-1">未実装</font></td>
+      </tr>
+      </tbody>
+      </table>
+      <p>つづいて上記のAPIを利用する形で、次のウェブページ (Reactコンポーネント)
+      を全て実装してください。<strong>ページのデザインやレイアウトに制約・制限はありません</strong>
+      (自由にデザインしてください)。</p>
+      <p><strong>★</strong>印は既に実装済みのページ、<strong>☆</strong>印は <span
+      class="masked">microCMS API からの切り替えが必要のページ</span> になります
+      (<strong>microCMSのAPI</strong> と <strong>Next.jsで自作したAPI</strong>
+      ではレスポンスのボディのJSON形式が少し違っているので注意してください)。</p>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>Page URL</th>
+      <th>処理</th>
+      <th style="text-align: center;">管理者<br>権限</th>
+      <th style="text-align: center;"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td>/</td>
+      <td>投稿記事の一覧表示</td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;"><strong>☆</strong></td>
+      </tr>
+      <tr class="even">
+      <td>/posts/[id]</td>
+      <td>投稿記事の詳細表示</td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;"><strong>☆</strong></td>
+      </tr>
+      <tr class="odd">
+      <td>/about</td>
+      <td>制作者プロフィール<br>このサイトについて</td>
+      <td style="text-align: center;"></td>
+      <td style="text-align: center;"><strong>★</strong></td>
+      </tr>
+      <tr class="even">
+      <td>/admin/posts</td>
+      <td>投稿記事の一覧表示<br>編集ページへのリンク、削除機能 (オプション)</td>
+      <td style="text-align: center;">必要</td>
+      <td style="text-align: center;"></td>
+      </tr>
+      <tr class="odd">
+      <td>/admin/posts/new</td>
+      <td>投稿記事の新規作成</td>
+      <td style="text-align: center;">必要</td>
+      <td style="text-align: center;"><strong>★</strong></td>
+      </tr>
+      <tr class="even">
+      <td>/admin/posts/[id]</td>
+      <td>投稿記事の編集 (削除を含む)</td>
+      <td style="text-align: center;">必要</td>
+      <td style="text-align: center;"></td>
+      </tr>
+      <tr class="odd">
+      <td>/admin/categories</td>
+      <td>カテゴリの一覧表示<br>編集ページへのリンク、削除機能 (オプション)</td>
+      <td style="text-align: center;">必要</td>
+      <td style="text-align: center;"></td>
+      </tr>
+      <tr class="even">
+      <td>/admin/categories/new</td>
+      <td>カテゴリの新規作成</td>
+      <td style="text-align: center;">必要</td>
+      <td style="text-align: center;"><strong>★</strong></td>
+      </tr>
+      <tr class="odd">
+      <td>/admin/categories/[id]</td>
+      <td>カテゴリの編集 (削除を含む)</td>
+      <td style="text-align: center;">必要</td>
+      <td style="text-align: center;"><strong>★</strong></td>
+      </tr>
+      </tbody>
+      </table>
+      <p>以上について、次回授業日 1月8日 (木) を目標に実装にチャレンジしてください
+      (生成AIをフル活用してください)。</p>
+      <p>デザインや機能によっては、<strong>これまでの授業で習っていない (紹介されていない)
+      ライブラリやテクニックが必要になります</strong>。そこは、生成AIのサポートを受けて乗り越えてください。</p>
+      <p>1月14日 (水) を期限に <strong><em>課題2</em></strong>
+      として、上記の各ページの「<strong>スクリーンショット</strong>」と「<strong>各コードへのリンク</strong>」を提出してもらうことを予定しています
+      (冬休みの宿題⛄が完了していれば30分程度で完了する内容です)。</p>
+      <p>課題2の提出方法の詳細は、次回の授業 1月8日 (木) のなかで案内します。</p>
+      <div class="note type-tips">
+      <p><strong>どうしても実装できないときは…</strong></p>
+      <p>以下のデザイン例 (スクリーンショット) を参考にしてください。</p>
+      <!-- こちらの[リポジトリ (feature/sqliteブランチ)](https://github.com/TakeshiWada1980/next-blog-app/tree/feature/sqlite)と、 -->
+      <ul>
+      <li>/admin/categories の<a href="figs/09/blog-app_02.png">デザイン例</a></li>
+      <li>/admin/posts の<a href="figs/09/blog-app_01.png">デザイン例</a></li>
+      <li>/admin/posts/[id] の<a href="figs/09/blog-app_03.png">デザイン例</a></li>
+      </ul>
+      </div>
+      <div class="note type-senior">
+      <p><strong>さらなるスキル向上を目指すなら…</strong></p>
+      <ul>
+      <li>同じ型定義が複数箇所で必要になったときは <code>_types</code>
+      フォルダのなかに型定義専用のファイルを作成し、そこから型をインポートして使うようにしてみましょう。これにより、型の一貫性が保たれ、変更管理も容易になります
+      (つまり「保守性」と「再利用性」が向上します)。</li>
+      <li>複数のページで共通して使用するUIコンポーネント (例えばボタンやカテゴリタグなど) は
+      <code>_components</code>
+      フォルダに切り出して、再利用可能なモジュールとして管理するようにしてみましょう。</li>
+      <li>現在、記事の投稿フォームは <code>onChange</code> と <code>useState</code>
+      で値の管理やバリデーション (文字数のチェックなど)
+      をしています。これは基本形として大事ですが、多く現場では <a
+      href="https://www.google.com/search?q=zod+react+hook+form">react-hook-form と zod</a>
+      というライブラリが使用されています。定番のライブラリとなるので、ぜひ試してみてください。</li>
+      <li><code>fetch</code> 関数によるデータ取得 (HTTP GET) がマスターできたら、次は
+      <code>useSWR</code> という Hook
+      の利用にチャレンジしてみてください。「キャッシュ管理」や「自動再取得」などの便利な機能
+      (UXを向上につながる機能) が揃っており、実務でもよく利用されているライブラリになります。</li>
+      </ul>
+      </div>
+      <div class="note type-senior">
+      <p><strong>生成AIからコードレビューを受けてみましょう</strong></p>
+      <p>生成AIを利用して<a
+      href="https://www.google.com/search?q=エンジニア+コードレビューとは">コードレビュー</a>を受けてみましょう。要求される実行結果が得られるプログラムが書けても「<strong>果たしてベストな書き方になっているのか</strong>」「<strong>実際の現場で通用するレベルのコードになっているのか</strong>」という疑問や不安が残っていると思います。そのような場合、次のようなプロンプトを利用して、コードレビューを受けてみてください。</p>
+      <blockquote>
+      <p>私は就職およびインターンシップの応募に使うポートフォリオとして、Next.js 15
+      で「ブログアプリ」を開発している学生です。以下に示す私のプログラム
+      (＝<strong>XXXXするページ</strong>の実装)
+      について、現場のエンジニアの視点で「コードレビュー」と「評価」をしてください。特に、以下のことを重点的にレビューしてください。<br />
+      1. モダンな Next.js の書き方やベストプラクティスに則しているか<br />
+      2. パフォーマンスや保守性・可読性の観点で改善点はないか<br />
+      3. セキュリティ上の懸念点はないか<br />
+      4. 命名や構造が適切で理解しやすいか</p>
+      </blockquote>
+      </div>
+      <!-- ---------------------------------------- -->
+    </main>
+
+    <footer class="markdown-body">
+      <p><a href="https://takeshiwada1980.github.io/Programming3-2025/">講義資料のIndexに移動</a></p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        // ナビゲーション関連
+        let openBtn = document.getElementsByClassName("openbtn")[0];
+        let navPnl = document.getElementById("g-nav");
+        openBtn.onclick = () => {
+          openBtn.classList.toggle("active");
+          navPnl.classList.toggle("panelactive");
+        };
+
+        let items = navPnl.getElementsByTagName("a");
+        Array.from(items).forEach((item) => {
+          item.onclick = () => {
+            openBtn.classList.toggle("active");
+            navPnl.classList.toggle("panelactive");
+          };
+        });
+
+        // マスク処理
+        let maskedSpans = document.getElementsByClassName("masked");
+        Array.from(maskedSpans).forEach((span) => {
+          span.onclick = () => {
+            span.classList.toggle("open");
+          };
+        });
+
+        // data-startfrom 属性の行番号カウンタのリセット
+        document.querySelectorAll("div.sourceCode").forEach(function (div) {
+          var startFrom = div.getAttribute("data-startfrom");
+          if (startFrom != null) {
+            div.style.counterReset = "pg-line " + (startFrom - 1);
+          }
+        });
+
+        // 画像にリンクを付与
+        // let images = document.querySelectorAll("figure img");
+        // Array.from(images).forEach((img) => {
+        //   img.onclick = () => {
+        //     location.href = img.getAttribute("src");
+        //   };
+        // });
+      };
+    </script>
+  </body>
+</html>
