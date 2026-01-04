@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=yes"
+    />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <meta name="referrer" content="no-referrer" />
+
+    <script>
+      MathJax = {
+        chtml: {
+          displayAlign: "left",
+          displayIndent: "1em",
+        },
+      };
+    </script>
+
+    
+
+    <link rel="icon" href="favicon.ico" sizes="any" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=M+PLUS+Rounded+1c"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>第10回 3I-プログラミング3</title>
+  </head>
+
+  <body>
+    <div class="openbtn"><span></span><span></span><span></span></div>
+    <nav id="g-nav">
+      <div id="g-nav-list">
+        <!-- ---------------------------------------- -->
+         <ul>
+<li><a href="#連絡概要" id="toc-連絡概要"><span class="toc-section-number">1</span> 連絡・概要</a>
+<ul>
+<li><a href="#今後の流れ" id="toc-今後の流れ"><span class="toc-section-number">1.1</span>
+今後の流れ</a></li>
+</ul></li>
+<li><a href="#準備" id="toc-準備"><span class="toc-section-number">2</span> 準備</a></li>
+<li><a href="#プロジェクトのビルド" id="toc-プロジェクトのビルド"><span
+class="toc-section-number">3</span> プロジェクトのビルド</a></li>
+<li><a href="#認証機能-ログイン機能-の実装" id="toc-認証機能-ログイン機能-の実装"><span
+class="toc-section-number">4</span> 認証機能 (ログイン機能) の実装</a>
+<ul>
+<li><a href="#supabase-登録とプロジェクト作成" id="toc-supabase-登録とプロジェクト作成"><span
+class="toc-section-number">4.1</span> Supabase 登録とプロジェクト作成</a></li>
+<li><a href="#prismaのデータベース接続情報の更新" id="toc-prismaのデータベース接続情報の更新"><span
+class="toc-section-number">4.2</span> Prismaのデータベース接続情報の更新</a></li>
+<li><a href="#データベース接続とテーブル作成-初期化"
+id="toc-データベース接続とテーブル作成-初期化"><span class="toc-section-number">4.3</span>
+データベース接続とテーブル作成 (初期化)</a></li>
+<li><a href="#テーブルの削除" id="toc-テーブルの削除"><span class="toc-section-number">4.4</span>
+テーブルの削除</a></li>
+<li><a href="#テーブル作成とrls設定" id="toc-テーブル作成とrls設定"><span
+class="toc-section-number">4.5</span> テーブル作成とRLS設定</a></li>
+<li><a href="#ログイン可能なユーザの追加" id="toc-ログイン可能なユーザの追加"><span
+class="toc-section-number">4.6</span> ログイン可能なユーザの追加</a></li>
+<li><a href="#フロントエンドで使用するapiキーの取得"
+id="toc-フロントエンドで使用するapiキーの取得"><span class="toc-section-number">4.7</span>
+フロントエンドで使用するAPIキーの取得</a></li>
+<li><a href="#supabaseclient-のインストール" id="toc-supabaseclient-のインストール"><span
+class="toc-section-number">4.8</span> SupabaseClient のインストール</a></li>
+<li><a href="#ログインページの実装" id="toc-ログインページの実装"><span
+class="toc-section-number">4.9</span> ログインページの実装</a></li>
+<li><a href="#ログイン処理の解説" id="toc-ログイン処理の解説"><span
+class="toc-section-number">4.10</span> ログイン処理の解説</a></li>
+<li><a href="#演習" id="toc-演習"><span class="toc-section-number">4.11</span> 演習</a></li>
+</ul></li>
+<li><a href="#認証状態の取得確認" id="toc-認証状態の取得確認"><span
+class="toc-section-number">5</span> 認証状態の取得・確認</a>
+<ul>
+<li><a href="#フロントエンドの認可カスタムフックの定義"
+id="toc-フロントエンドの認可カスタムフックの定義"><span class="toc-section-number">5.1</span>
+フロントエンドの認可、カスタムフックの定義</a></li>
+<li><a href="#useauth-を利用したヘッダの表示パターンの切り替え"
+id="toc-useauth-を利用したヘッダの表示パターンの切り替え"><span
+class="toc-section-number">5.2</span> useAuth を利用したヘッダの表示パターンの切り替え</a></li>
+<li><a href="#演習-1" id="toc-演習-1"><span class="toc-section-number">5.3</span> 演習</a></li>
+</ul></li>
+<li><a href="#ルートガードの実装" id="toc-ルートガードの実装"><span
+class="toc-section-number">6</span> ルートガードの実装</a>
+<ul>
+<li><a href="#演習-2" id="toc-演習-2"><span class="toc-section-number">6.1</span> 演習</a></li>
+</ul></li>
+<li><a href="#課題2" id="toc-課題2"><span class="toc-section-number">7</span> 課題2</a>
+<ul>
+<li><a href="#提出ファイル作成に関する注意事項" id="toc-提出ファイル作成に関する注意事項"><span
+class="toc-section-number">7.1</span> 提出ファイル作成に関する注意事項</a></li>
+<li><a href="#スマホ版のスクショの撮影方法" id="toc-スマホ版のスクショの撮影方法"><span
+class="toc-section-number">7.2</span> スマホ版のスクショの撮影方法</a></li>
+</ul></li>
+</ul> 
+        <!-- ---------------------------------------- -->
+      </div>
+    </nav>
+
+    <header class="markdown-body">
+      <p>2025-3I プログラミング3 第10回 講義資料</p>
+      <p>2026年01月08日（木）5・6時限</p>
+    </header>
+
+    <main class="markdown-body">
+      <!-- ---------------------------------------- -->
+      <h1 data-number="1" id="連絡概要"><span class="header-section-number">1</span> 連絡・概要</h1>
+      <ul>
+      <li><a href="lecture10.html#課題2">課題2</a> についての連絡があります。</li>
+      </ul>
+      <h2 data-number="1.1" id="今後の流れ"><span class="header-section-number">1.1</span>
+      今後の流れ</h2>
+      <p>今回の講義の内容は、<a
+      href="lecture09.html#冬休みの宿題">冬休みの宿題</a>が完了していることを前提したものになります。</p>
+      <p>ここまでの開発によって、ローカル環境に構築した「ブログアプリ」について、<strong>「投稿記事」と「カテゴリ」の
+      CRUD操作 (＝Create / Read / Update / Delete)
+      に関して、フロントエンドとバックエンドの両方で概ね実装が完了</strong>したことになります。</p>
+      <p>次のステップとしては <span class="masked">ユーザ認証機能</span>
+      を実装していきます。これにより、<u><strong>管理者だけが (＝ログインした特定ユーザだけが)
+      記事やカテゴリの新規作成・編集・削除を実行</strong></u>
+      できるような仕組みをつくっていきます。</p>
+      <p>また、次回講義では「<strong>画像のアップロード機能</strong>」を実装し、次々回の講義では
+      <span class="masked">Vercel というホスティングサービスに「ブログアプリ」をデプロイ
+      (配置・展開)</span>
+      し、手持ちのスマートフォンなどから「ブログアプリ」にアクセスできるように公開していきます。</p>
+      <p>なお、上記のような「認証機能の実装」や「アプリのデプロイ」については、様々な選択肢がありますが、この授業では<a
+      href="https://supabase.com/">Supabase</a>と<a
+      href="https://vercel.com/">Vercel</a>という2つのウェブサービス (クラウドプラットフォーム)
+      を利用していきます。いずれのサービスも、<strong>学習目的</strong> (≠商用利用)
+      であれば無料利用可能な「枠」が存在し、一定の制限 (例えば、作成可能なプロジェクト数の制限など)
+      の範囲内であれば <span class="masked">クレジットカードの登録も不要</span>
+      で利用できます。感謝。</p>
+      <h1 data-number="2" id="準備"><span class="header-section-number">2</span> 準備</h1>
+      <p>管理者用の各種画面にアクセスするためのポータル画面として、プロジェクトに
+      <code>src/app/admin/page.tsx</code> を作成して、次のコードを貼り付けておいてください。</p>
+      <div class="sourceCode" id="cb1"
+      data-caption="src/app/admin/page.tsx (管理者用機能の一覧ページ)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb1-1"><a href="#cb1-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="im">import</span> Link <span class="im">from</span> <span class="st">&quot;next/link&quot;</span><span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="im">import</span> { FontAwesomeIcon } <span class="im">from</span> <span class="st">&quot;@fortawesome/react-fontawesome&quot;</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="im">import</span> { faArrowRight } <span class="im">from</span> <span class="st">&quot;@fortawesome/free-solid-svg-icons&quot;</span><span class="op">;</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a></span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">const</span> Page<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="cf">return</span> (</span>
+<span id="cb1-8"><a href="#cb1-8"></a>    <span class="op">&lt;</span>main<span class="op">&gt;</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;mb-2 text-2xl font-bold&quot;</span><span class="op">&gt;</span>管理者用機能の一覧<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a>      <span class="op">&lt;</span>ul<span class="op">&gt;</span></span>
+<span id="cb1-11"><a href="#cb1-11"></a>        <span class="op">&lt;</span>li<span class="op">&gt;</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>          <span class="op">&lt;</span>FontAwesomeIcon icon<span class="op">=</span>{faArrowRight} className<span class="op">=</span><span class="st">&quot;mr-2&quot;</span> <span class="op">/&gt;</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>          <span class="op">&lt;</span>Link className<span class="op">=</span><span class="st">&quot;text-blue-500 underline&quot;</span> href<span class="op">=</span><span class="st">&quot;/admin/posts&quot;</span><span class="op">&gt;</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a>            <span class="ss">/admin/posts</span></span>
+<span id="cb1-15"><a href="#cb1-15"></a>          <span class="op">&lt;/</span>Link<span class="op">&gt;</span></span>
+<span id="cb1-16"><a href="#cb1-16"></a>        <span class="op">&lt;/</span>li<span class="op">&gt;</span></span>
+<span id="cb1-17"><a href="#cb1-17"></a>        <span class="op">&lt;</span>li<span class="op">&gt;</span></span>
+<span id="cb1-18"><a href="#cb1-18"></a>          <span class="op">&lt;</span>FontAwesomeIcon icon<span class="op">=</span>{faArrowRight} className<span class="op">=</span><span class="st">&quot;mr-2&quot;</span> <span class="op">/&gt;</span></span>
+<span id="cb1-19"><a href="#cb1-19"></a>          <span class="op">&lt;</span>Link className<span class="op">=</span><span class="st">&quot;text-blue-500 underline&quot;</span> href<span class="op">=</span><span class="st">&quot;/admin/posts/new&quot;</span><span class="op">&gt;</span></span>
+<span id="cb1-20"><a href="#cb1-20"></a>            <span class="ss">/admin/posts/new</span></span>
+<span id="cb1-21"><a href="#cb1-21"></a><span class="ss">          &lt;/Link</span><span class="op">&gt;</span></span>
+<span id="cb1-22"><a href="#cb1-22"></a>        <span class="op">&lt;/</span>li<span class="op">&gt;</span></span>
+<span id="cb1-23"><a href="#cb1-23"></a>        <span class="op">&lt;</span>li<span class="op">&gt;</span></span>
+<span id="cb1-24"><a href="#cb1-24"></a>          <span class="op">&lt;</span>FontAwesomeIcon icon<span class="op">=</span>{faArrowRight} className<span class="op">=</span><span class="st">&quot;mr-2&quot;</span> <span class="op">/&gt;</span></span>
+<span id="cb1-25"><a href="#cb1-25"></a>          <span class="op">&lt;</span>Link className<span class="op">=</span><span class="st">&quot;text-blue-500 underline&quot;</span> href<span class="op">=</span><span class="st">&quot;/admin/categories&quot;</span><span class="op">&gt;</span></span>
+<span id="cb1-26"><a href="#cb1-26"></a>            <span class="ss">/admin/categories</span></span>
+<span id="cb1-27"><a href="#cb1-27"></a>          <span class="op">&lt;/</span>Link<span class="op">&gt;</span></span>
+<span id="cb1-28"><a href="#cb1-28"></a>        <span class="op">&lt;/</span>li<span class="op">&gt;</span></span>
+<span id="cb1-29"><a href="#cb1-29"></a>        <span class="op">&lt;</span>li<span class="op">&gt;</span></span>
+<span id="cb1-30"><a href="#cb1-30"></a>          <span class="op">&lt;</span>FontAwesomeIcon icon<span class="op">=</span>{faArrowRight} className<span class="op">=</span><span class="st">&quot;mr-2&quot;</span> <span class="op">/&gt;</span></span>
+<span id="cb1-31"><a href="#cb1-31"></a>          <span class="op">&lt;</span>Link</span>
+<span id="cb1-32"><a href="#cb1-32"></a>            className<span class="op">=</span><span class="st">&quot;text-blue-500 underline&quot;</span></span>
+<span id="cb1-33"><a href="#cb1-33"></a>            href<span class="op">=</span><span class="st">&quot;/admin/categories/new&quot;</span></span>
+<span id="cb1-34"><a href="#cb1-34"></a>          <span class="op">&gt;</span></span>
+<span id="cb1-35"><a href="#cb1-35"></a>            <span class="ss">/admin/categories/new</span></span>
+<span id="cb1-36"><a href="#cb1-36"></a><span class="ss">          &lt;/Link</span><span class="op">&gt;</span></span>
+<span id="cb1-37"><a href="#cb1-37"></a>        <span class="op">&lt;/</span>li<span class="op">&gt;</span></span>
+<span id="cb1-38"><a href="#cb1-38"></a>      <span class="op">&lt;/</span>ul<span class="op">&gt;</span></span>
+<span id="cb1-39"><a href="#cb1-39"></a>    <span class="op">&lt;/</span>main<span class="op">&gt;</span></span>
+<span id="cb1-40"><a href="#cb1-40"></a>  )<span class="op">;</span></span>
+<span id="cb1-41"><a href="#cb1-41"></a>}<span class="op">;</span></span>
+<span id="cb1-42"><a href="#cb1-42"></a></span>
+<span id="cb1-43"><a href="#cb1-43"></a><span class="im">export</span> <span class="im">default</span> Page<span class="op">;</span></span></code></pre></div>
+      <p>開発者モードでアプリを起動し、<code>/admin</code>
+      にアクセスすると次のような画面が表示されることを確認してください。</p>
+      <figure>
+      <img src="figs/10/app_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h1 data-number="3" id="プロジェクトのビルド"><span class="header-section-number">3</span>
+      プロジェクトのビルド</h1>
+      <p>冬休みの宿題を含めると、これまでに <strong>next-blog-app プロジェクト</strong> に対して
+      <span class="masked">約30～40</span>
+      個のファイルを<strong>作成・追加</strong>してきたことになります。</p>
+      <p>開発中は、主に <code>npm run dev</code>
+      コマンドを使って「<strong>開発モード</strong>」でアプリを起動し、エラーやワーニングが生じていないことを確認していると思います。しかし、ここから先の開発をはじめる前に、<strong>本番用</strong>
+      (<strong>プロダクション用</strong>)
+      に「ビルド」を実行し、<strong>プロジェクトに問題がないことを改めて確認</strong>
+      していきます。</p>
+      <p><a
+      href="lecture06.html#npm-run-build">第06回講義</a>で一度解説したように、以下のコマンドを使って<strong>本番環境用（プロダクション環境用）にアプリをビルド</strong>することができます。</p>
+      <pre><code>npm run build</code></pre>
+      <p>以上のコマンドを実行して、そのログ (コンソール出力) に <span
+      class="masked">エラーやワーニングが報告されないこと</span>
+      を確認してください。もし問題があれば、生成AIなどを利用して解決してください
+      (ワーニングについては、必要に応じて無視も可能です)。</p>
+      <p>なお、ビルド結果は <code>.next</code>
+      フォルダに出力されます。以下のコマンドを使って本番モード (プロダクションモード)
+      でアプリの実行が可能です。</p>
+      <pre><code>npm run start</code></pre>
+      <h1 data-number="4" id="認証機能-ログイン機能-の実装"><span
+      class="header-section-number">4</span> 認証機能 (ログイン機能) の実装</h1>
+      <p><strong>認証機能 (ログイン機能)</strong> を実装していきます。</p>
+      <p>ここでは<a href="https://supabase.com/">Supabase</a>という BaaS (＝<span
+      class="masked">Backend as a Service</span>) を利用して認証機能を実装します。Supabase
+      は、ウェブアプリ／ウェブサービスの開発で一般に必要となる「<strong>リレーショナルデータベース</strong>」「<strong>ファイルストレージ</strong>」「<strong>認証機能</strong>」「<strong>サーバレスファンクション</strong>」などのバックエンド機能を包括的に提供してくれるサービスとなっています。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>supabase
+      とは、どのような機能を提供してくれるサービスですか。できるだけ専門用語をさけて分かりやすく教えてください。</p>
+      </blockquote>
+      <p>このブログアプリ開発では、Supabaseの「<strong>認証機能</strong>」を投稿記事やカテゴリの新規作成・編集・削除の制限に利用する他に、「<strong>リレーショナルデータベース機能</strong>」を
+      <span class="masked">投稿記事やカテゴリの管理</span>
+      に利用、また「<strong>ファイルストレージ機能</strong>」を <span
+      class="masked">記事に添付する画像 (CoverImg) の管理</span> に利用していきます。</p>
+      <div class="note type-tips">
+      <p><strong>データベースシステムの変更 ( SQLite→PostgreSQL) </strong></p>
+      <p>ここまでの開発には、データベースとして「SQLite」を使用してきました。しかし、SQLiteは
+      <strong>ファイルベースのデータベース</strong> であり、本番環境で使用するためには <span
+      class="masked">Node.js から直接読み書き可能な永続的なディスク領域を持ったサーバ環境</span>
+      が必要になります。しかし、そのようなサーバ環境を
+      <strong>無料提供してくれるホスティングサービスは限られているため</strong>、以降は、Supabase
+      の無料枠のなかで利用可能な <strong>PostgreSQL</strong> という RDBMS (Relational DataBase
+      Management System) に移行します。</p>
+      <p>なお、PostgreSQL
+      は、エンタープライズレベルの本番環境で広く採用されている高機能なオープンソースデータベースシステムです。SQLite
+      が<strong>書き込み操作を1つのみに制限する</strong>のに対し、PostgreSQLはトランザクション制御により
+      <span class="masked">複数ユーザーからの同時アクセスを安全に処理すること</span>
+      ができます。</p>
+      </div>
+      <h2 data-number="4.1" id="supabase-登録とプロジェクト作成"><span
+      class="header-section-number">4.1</span> Supabase 登録とプロジェクト作成</h2>
+      <p>Supabase
+      を利用するためには、はじめに「<strong>ユーザ登録</strong>」が必要になります。<strong>Freeプラン</strong>であれば、<span
+      class="masked">クレジットカードの登録不要</span>
+      で利用可能です。以下の手順で「ユーザ登録」と「組織・プロジェクトの作成と設定」を行なってください。</p>
+      <p>Supabase の公式ホームページ (<a href="https://supabase.com/">https://supabase.com/</a>)
+      にアクセスして「<strong>Start your project</strong>」のボタンを押下してください。</p>
+      <figure>
+      <img src="figs/10/supabase_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>Supabaseは <span class="masked">ソーシャルログイン機能 (ソーシャル認証)</span>
+      を提供しており、「<strong>GitHubアカウント</strong>」<strong>を使ったサインイン</strong>が可能になっています。この機能を使ってサインインするために「<strong>Continue
+      with GitHub</strong>」ボタンを押下してください。</p>
+      <figure>
+      <img src="figs/10/supabase_02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>ソーシャルログインにおける <strong>認可スコープ</strong> (＝<span class="masked">Supabase
+      が利用する GitHubアカウントの情報と権限</span>)
+      の確認画面に遷移するので、内容を確認のうえ「<strong>Authorize
+      supbase</strong>」ボタンを押下してください。なお、<strong>複数のGitHubアカウントを持っている場合</strong>は、下記の画面で、どのGitHubアカウントで連携するのかを確認・選択してください。</p>
+      <figure>
+      <img src="figs/10/supabase_03.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>つづいて、以下のような <strong>組織</strong> (Organization)
+      の新規作成を行なう画面「<strong>Create a new organization</strong>」に移動します。</p>
+      <p>Supabase
+      における「組織」とは「<strong>チームメンバーの管理や料金請求の単位</strong>」を指します。無料の「Freeプラン」では、1つの組織を作成して、そこに
+      <span class="masked">最大2つまでのプロジェクト (Project)</span>
+      が作成可能になっています。各プロジェクトでは <span class="masked">1個</span> のデータベース
+      を持つことができます。</p>
+      <p><strong>Plan</strong> の項目が「<strong>Free -
+      $0/month</strong>」になっていることを確認して「<strong>Create
+      organization</strong>」のボタンを押下してください。</p>
+      <figure>
+      <img src="figs/10/supabase_04.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>つづいて、以下のようなプロジェクトの作成画面に移動します。</p>
+      <p><strong>Project Name</strong> として <span class="masked">Next-Blog-App</span>
+      を設定して、<strong>Region</strong> (地域) として<strong>必ず</strong> <span
+      class="masked">Northeast Asia (Tokyo)</span> を選択してください。初期設定 (＝
+      <code>Asia-Pacific</code>) のままにすると <strong>シンガポールのデータセンタ</strong>
+      にリソース (データベースなど)
+      が作成され、利用時の応答時間が非常に長くなるので注意してください。</p>
+      <p>また「<strong>Generate a
+      password</strong>」のリンクを押下して、データベース用のパスワードを自動生成してください。なお、このパスワードは「データベース接続文字列」として、環境変数の設定ファイル
+      <code>.env</code> にも記述するので <span
+      class="masked">普段使いのパスワードを使用すること</span> はお勧めしません。</p>
+      <figure>
+      <img src="figs/10/supabase_05.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>パスワードの生成ができたら、以下のように「<strong>Copy</strong>」のボタンを押下して安全な場所
+      (ローカルのテキストファイルなど)
+      に貼り付けておいてください。<strong>このあとの手順で使用します</strong>。</p>
+      <p>パスワードをメモしたら「<strong>Create new
+      project</strong>」のボタンを押下してください。</p>
+      <figure>
+      <img src="figs/10/supabase_06.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>プロジェクトの「トップページ」に移動します。</p>
+      <p>この際、もし「<strong>Setting up
+      project</strong>」のような表示でているときは、しばらく待機してください。以上の手続きで
+      <strong>Supabase の データベース機能 (PostgreSQL) が実際に利用可能</strong>になりました。</p>
+      <figure>
+      <img src="figs/10/supabase_07.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h2 data-number="4.2" id="prismaのデータベース接続情報の更新"><span
+      class="header-section-number">4.2</span> Prismaのデータベース接続情報の更新</h2>
+      <p>現在、プロジェクトにおいて <a href="lecture08.html#orm">ORM (O/R Mapper)</a> である Prisma
+      は、プロジェクトローカルに配置した <code>prisma/dev.db</code> (SQLiteデータベース)
+      と接続するように設定されています。これを <span class="masked">Supabase
+      (クラウドプラットフォーム) に構築された PostgreSQL</span> に切り替えるように設定 (接続情報)
+      を変更していきます。</p>
+      <h3 data-number="4.2.1" id="postgresql用の-prisma-アダプタのインストール"><span
+      class="header-section-number">4.2.1</span> PostgreSQL用の Prisma アダプタのインストール</h3>
+      <p><a href="lecture08.html#prisma-のインストール">第08回講義</a>では、ORM である Prisma と
+      SQLite3 を接続するアダプタ (橋渡し役) として <code>@prisma/adapter-better-sqlite3</code>
+      というライブラリをインストールしました。ここからは、接続先を supabase (PostgreSQL)
+      に変更するので、それにあわせたアダプタをインストールします。また、Node 側の PostgreSQL
+      ドライバ <code>pg</code> もインストールします。</p>
+      <p>VSCode のコンソールから以下のコマンドを実行してください。</p>
+      <pre><code>npm i @prisma/adapter-pg pg</code></pre>
+      <h3 data-number="4.2.2" id="schema.prisma-の書き換え"><span
+      class="header-section-number">4.2.2</span> schema.prisma の書き換え</h3>
+      <p>つづいて SQLite3 から PostgreSQL への接続切り替えを <code>prisma/schema.prisma</code>
+      に記述しています。次のように provider の項目を <code>"sqlite"</code> から
+      <code>"postgresql"</code> に変更してください。</p>
+      <div class="sourceCode" id="cb5" data-caption="prisma/schema.prisma（抜粋）"
+      data-startFrom="13"><pre class="sourceCode numberSource js numberLines"><code class="sourceCode javascript" style="counter-reset: source-line 12;"><span id="cb5-13"><a href="#cb5-13"></a>datasource db {</span>
+<span id="cb5-14"><a href="#cb5-14"></a>  provider <span class="op">=</span> <span class="st">&quot;postgresql&quot;</span> <span class="co">// 変更</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>}</span></code></pre></div>
+      <p>変更後は、忘れずに保存してください。</p>
+      <h3 data-number="4.2.3" id="srclibprisma.ts-の書き換え"><span
+      class="header-section-number">4.2.3</span> src/lib/prisma.ts の書き換え</h3>
+      <p>つづいて、Next.js のなかで Prisma クライアントの初期化・生成を担当している
+      <code>src/lib/prisma.ts</code> にも、SQLite3 から PostgreSQL
+      への切り替え反映していきます。</p>
+      <p>現在の Prisma クライアントの初期化処理 (シングルトンとして管理) を…</p>
+      <div class="sourceCode" id="cb6" data-caption="変更前: src/lib/prisma.ts"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb6-1"><a href="#cb6-1"></a><span class="im">import</span> { PrismaClient } <span class="im">from</span> <span class="st">&quot;@/generated/prisma/client&quot;</span><span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="im">import</span> { PrismaBetterSqlite3 } <span class="im">from</span> <span class="st">&quot;@prisma/adapter-better-sqlite3&quot;</span><span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">const</span> globalForPrisma <span class="op">=</span> <span class="bu">global</span> <span class="im">as</span> <span class="dt">unknown</span> <span class="im">as</span> {</span>
+<span id="cb6-5"><a href="#cb6-5"></a>  prisma<span class="op">:</span> PrismaClient<span class="op">;</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>}<span class="op">;</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="kw">const</span> adapter <span class="op">=</span> <span class="kw">new</span> <span class="fu">PrismaBetterSqlite3</span>({</span>
+<span id="cb6-9"><a href="#cb6-9"></a>  url<span class="op">:</span> <span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">DATABASE_URL</span> <span class="op">||</span> <span class="st">&quot;file:./dev.db&quot;</span><span class="op">,</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a>})<span class="op">;</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="im">export</span> <span class="kw">const</span> prisma <span class="op">=</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a>  globalForPrisma<span class="op">.</span><span class="at">prisma</span> <span class="op">||</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a>  <span class="kw">new</span> <span class="fu">PrismaClient</span>({</span>
+<span id="cb6-15"><a href="#cb6-15"></a>    adapter<span class="op">,</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a>  })<span class="op">;</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a></span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="cf">if</span> (<span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">NODE_ENV</span> <span class="op">!==</span> <span class="st">&quot;production&quot;</span>) {</span>
+<span id="cb6-19"><a href="#cb6-19"></a>  globalForPrisma<span class="op">.</span><span class="at">prisma</span> <span class="op">=</span> prisma<span class="op">;</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a>}</span></code></pre></div>
+      <p>次のように変更してください。</p>
+      <div class="sourceCode" id="cb7" data-caption="変更後: src/lib/prisma.ts"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb7-1"><a href="#cb7-1"></a><span class="im">import</span> { PrismaClient } <span class="im">from</span> <span class="st">&quot;@/generated/prisma/client&quot;</span><span class="op">;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="im">import</span> { PrismaPg } <span class="im">from</span> <span class="st">&quot;@prisma/adapter-pg&quot;</span><span class="op">;</span> <span class="co">// 更新</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">const</span> globalForPrisma <span class="op">=</span> <span class="bu">global</span> <span class="im">as</span> <span class="dt">unknown</span> <span class="im">as</span> {</span>
+<span id="cb7-5"><a href="#cb7-5"></a>  prisma<span class="op">:</span> PrismaClient<span class="op">;</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>}<span class="op">;</span></span>
+<span id="cb7-7"><a href="#cb7-7"></a></span>
+<span id="cb7-8"><a href="#cb7-8"></a><span class="kw">const</span> adapter <span class="op">=</span> <span class="kw">new</span> <span class="fu">PrismaPg</span>({ connectionString<span class="op">:</span> <span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">DATABASE_URL</span><span class="op">!</span> })<span class="op">;</span> <span class="co">// 変更</span></span>
+<span id="cb7-9"><a href="#cb7-9"></a></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="im">export</span> <span class="kw">const</span> prisma <span class="op">=</span></span>
+<span id="cb7-11"><a href="#cb7-11"></a>  globalForPrisma<span class="op">.</span><span class="at">prisma</span> <span class="op">||</span></span>
+<span id="cb7-12"><a href="#cb7-12"></a>  <span class="kw">new</span> <span class="fu">PrismaClient</span>({</span>
+<span id="cb7-13"><a href="#cb7-13"></a>    adapter<span class="op">,</span></span>
+<span id="cb7-14"><a href="#cb7-14"></a>  })<span class="op">;</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a></span>
+<span id="cb7-16"><a href="#cb7-16"></a><span class="cf">if</span> (<span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">NODE_ENV</span> <span class="op">!==</span> <span class="st">&quot;production&quot;</span>) {</span>
+<span id="cb7-17"><a href="#cb7-17"></a>  globalForPrisma<span class="op">.</span><span class="at">prisma</span> <span class="op">=</span> prisma<span class="op">;</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a>}</span></code></pre></div>
+      <p>変更後、忘れずに保存してください。</p>
+      <p><strong>(プロンプト)</strong></p>
+      <blockquote>
+      <p>シングルトンパターンとは何ですか。Prismaクライアントの初期化は「Next.js では、Prisma
+      クライアントはシングルトンとして管理することが推奨される」と言われたのですが意味不明です。</p>
+      </blockquote>
+      <h3 data-number="4.2.4" id="prisma.config.ts-の書き換え"><span
+      class="header-section-number">4.2.4</span> prisma.config.ts の書き換え</h3>
+      <p>プロジェクトルートの <code>prisma.config.ts</code> にも、同様に SQLite3 から PostgreSQL
+      への切り替えを反映させいきます。このファイルは、Next.js
+      のフレームワークから参照されるものでなく、VSCode のターミナルから
+      <code>npx prisma db push</code> や <code>npx prisma db seed</code>
+      のコマンドを実行したときに参照される設定になります (<code>npx prisma ...</code>
+      の実行時に参照される Prisma CLI 用の設定です)。</p>
+      <p>現在の設定を…</p>
+      <div class="sourceCode" id="cb8" data-caption="変更前: prisma.config.ts（抜粋）"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb8-1"><a href="#cb8-1"></a><span class="im">export</span> <span class="im">default</span> <span class="fu">defineConfig</span>({</span>
+<span id="cb8-2"><a href="#cb8-2"></a>  schema<span class="op">:</span> <span class="st">&quot;prisma/schema.prisma&quot;</span><span class="op">,</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>  migrations<span class="op">:</span> {</span>
+<span id="cb8-4"><a href="#cb8-4"></a>    path<span class="op">:</span> <span class="st">&quot;prisma/migrations&quot;</span><span class="op">,</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>    seed<span class="op">:</span> <span class="st">&quot;tsx prisma/seed.ts&quot;</span><span class="op">,</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>  }<span class="op">,</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>  datasource<span class="op">:</span> {</span>
+<span id="cb8-8"><a href="#cb8-8"></a>    url<span class="op">:</span> <span class="fu">env</span>(<span class="st">&quot;DATABASE_URL&quot;</span>)<span class="op">,</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a>  }<span class="op">,</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a>})<span class="op">;</span></span></code></pre></div>
+      <p>次のように変更してください。</p>
+      <div class="sourceCode" id="cb9" data-caption="変更後: prisma.config.ts（抜粋）"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb9-1"><a href="#cb9-1"></a><span class="im">export</span> <span class="im">default</span> <span class="fu">defineConfig</span>({</span>
+<span id="cb9-2"><a href="#cb9-2"></a>  schema<span class="op">:</span> <span class="st">&quot;prisma/schema.prisma&quot;</span><span class="op">,</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>  migrations<span class="op">:</span> {</span>
+<span id="cb9-4"><a href="#cb9-4"></a>    path<span class="op">:</span> <span class="st">&quot;prisma/migrations&quot;</span><span class="op">,</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>    seed<span class="op">:</span> <span class="st">&quot;tsx prisma/seed.ts&quot;</span><span class="op">,</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>  }<span class="op">,</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a>  datasource<span class="op">:</span> {</span>
+<span id="cb9-8"><a href="#cb9-8"></a>    url<span class="op">:</span> <span class="fu">env</span>(<span class="st">&quot;DIRECT_URL&quot;</span>)<span class="op">,</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a>  }<span class="op">,</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>})<span class="op">;</span></span></code></pre></div>
+      <p>変更後、忘れずに保存してください。</p>
+      <h3 data-number="4.2.5" id="環境変数-.env-の書き換え"><span
+      class="header-section-number">4.2.5</span> 環境変数 .env の書き換え</h3>
+      <p>まずは Supabase のウェブページから、<strong>接続情報</strong> (DB接続文字列)
+      を取得します。次のように画面上部の「<strong><i class="fa-solid fa-plug fa-rotate-90"></i>
+      Connect</strong>」のボタンを押下してください。</p>
+      <figure>
+      <img src="figs/10/supabase_08.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>ダイアログが表示されるので「<strong>ORMs</strong>」を選択肢します。</p>
+      <figure>
+      <img src="figs/10/supabase_09.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>次のように Tool
+      が「<strong>Prisma</strong>」になっていることを確認して、「<strong>.env.local</strong>」タブを選択し、「<strong>Copy</strong>」ボタンを押下して
+      <strong>環境変数の設定</strong> をコピーしてください。</p>
+      <figure>
+      <img src="figs/10/supabase_10.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <div class="note type-caution">
+      <p><strong>注意</strong></p>
+      <p>supabase のサイトでは、DB接続文字列を <code>.env.local</code>
+      に設定するように例示されていますが、現在のプロジェクトでは <code>.env</code>
+      に設定するので注意してください。</p>
+      </div>
+      <p>VSCodeで、プロジェクトルートの環境変数の設定ファイル <code>.env</code>
+      を開いてください。</p>
+      <p>現在、コメント部分を除けば、<code>.env</code>
+      は以下のような内容になっているはずです。今後、microCMS API
+      は使用しないので、それに関連する設定は「削除」または「コメントアウト」しておいてください。</p>
+      <div class="sourceCode" id="cb10" data-caption="変更前: .env"><pre
+      class="sourceCode numberSource sh numberLines"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1"></a><span class="va">NEXT_PUBLIC_MICROCMS_API_KEY</span><span class="op">=</span>xxxxxxxxxxxxxx</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="va">NEXT_PUBLIC_MICROCMS_BASE_EP</span><span class="op">=</span>https://xxxxxxxx.microcms.io/api/v1</span>
+<span id="cb10-3"><a href="#cb10-3"></a><span class="va">DATABASE_URL</span><span class="op">=</span><span class="st">&quot;file:./dev.db&quot;</span></span></code></pre></div>
+      <p>これを以下のように変更してください。先ほど Supabase
+      のサイトで「コピー」したテキストを貼り付け、それを<strong>加筆修正</strong>してください。この設定を間違うと、<strong>DB接続に失敗するので慎重に細心の注意を払って設定</strong>してください。</p>
+      <div class="sourceCode" id="cb11" data-caption="変更後: .env"><pre
+      class="sourceCode numberSource sh numberLines"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Connect to Supabase via connection pooling</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="va">DATABASE_URL</span><span class="op">=</span><span class="st">&quot;postgresql://postgres.XXXX:YYYY@aws-1-ap-northeast-1.pooler.supabase.com:6543/postgres?pgbouncer=true&amp;connection_limit=1&quot;</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co"># Direct connection to the database. Used for migrations</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="va">DIRECT_URL</span><span class="op">=</span><span class="st">&quot;postgresql://postgres.XXXX:YYYY@aws-1-ap-northeast-1.pooler.supabase.com:5432/postgres&quot;</span></span></code></pre></div>
+      <ul>
+      <li><code>XXX</code>
+      の部分は「データベースを指定する文字列」になります。supabaseのサイトでコピーしたものをそのまま使ってください。</li>
+      <li><code>YYY</code> の部分は<a href="figs/10/supabase_06.png">「Create a new
+      project」の画面</a>で生成した <span class="masked">パスワード</span>
+      に置き換えてください。</li>
+      <li><code>DATABASE_URL</code> の末尾に <code>&amp;connection_limit=1</code>
+      を付加してください。</li>
+      </ul>
+      <p><strong>プロンプト例</strong></p>
+      <blockquote>
+      <p>Next.js + Prisma + supabase でウェブアプリを開発しています。また、最終的に Vercel
+      にデプロイする予定です。そのようななかで、DB (supabase) の接続文字列 <code>DATABASE_URL</code>
+      の末尾には <code>connection_limit=1</code>
+      を設定したほうがよい、という情報がありました。この設定の意味について解説してください。</p>
+      </blockquote>
+      <div class="note type-caution">
+      <p><strong>.gitignore の内容を再確認</strong></p>
+      <p>既に<a href="lecture06.html#gitignore">第06回講義</a> において設定しているハズですが、再度
+      <code>.gitignore</code> のなかに <code>.env</code> が含まれていること (<code>.env</code> が
+      GitHub にアップロードされないようになっていること) を再確認してください。</p>
+      </div>
+      <div class="note type-caution">
+      <p><strong>注意</strong></p>
+      <p>Freeプランで作成した Supabase
+      のプロジェクトは、7日間、<strong>非アクティブ状態が継続すると</strong>
+      (＝データベースや認証機能などに対するアクセスがないと)「<strong>paused</strong>」という状態になってしまいます。この状態では、<strong>Supabase
+      の API を叩いても機能しないので注意</strong> してください。</p>
+      <p>プロジェクトが「<strong>paused</strong>」になってしまった場合は、ブラウザから Supabase
+      にアクセスして解除することができます
+      (解除には数分かかることがあります)。アプリ開発中は7日間放置することはないと思いますが、完成後は、この状態になることがあるので十分に注意してください。特に、ポートフォリオとして開発したウェブアプリのURLを提出する際には、注意してください。</p>
+      <p>「<strong>paused</strong>」に切り替わったときは、以下のようなメールが届きます
+      (メールのなかのリンクからアクセスしたページで「アクティブ状態」に戻すことができます)。</p>
+      <blockquote>
+      <p>Hi there,</p>
+      <p>To save on cloud resources we’re currently pausing free-tier projects that are inactive for
+      more than 7 days.</p>
+      <p><strong>Your project XXXXXX has been paused</strong>.</p>
+      <p><strong>You can unpause it from the dashboard within the next 90 days</strong>. Beyond that
+      point, you won’t be able to unpause your project, but you’ll be able to download your data.
+      For more information read the docs.</p>
+      <p>If you want, you can upgrade your organization to Pro to avoid future pausings, and this
+      can be done from the billing settings.</p>
+      </blockquote>
+      <p><strong>▼▼ paused になってしまったプロジェクト</strong></p>
+      <figure>
+      <img src="figs/10/supabase_28.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><strong>▼▼ 解除のための操作</strong></p>
+      <p>paused なプロジェクトを選択すると、以下のダイアログが表示されるので「<strong>Restore
+      project</strong>」を選択します。</p>
+      <figure>
+      <img src="figs/10/supabase_29.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      </div>
+      <h2 data-number="4.3" id="データベース接続とテーブル作成-初期化"><span
+      class="header-section-number">4.3</span> データベース接続とテーブル作成 (初期化)</h2>
+      <p>まずは、更新された設定に基づき、Prisma
+      を改めて初期化します。VSCodeのターミナルから次のコマンドを実行してください。</p>
+      <pre><code>npx prisma generate</code></pre>
+      <p>次のような応答が返ってくれば問題ありません。失敗するときは、ここまでの設定変更を再確認してください
+      (ファイルの <strong>保存忘れ</strong> などに注意してください)。</p>
+      <pre><code>Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from prisma\schema.prisma
+✔ Generated Prisma Client (7.1.0) to .\src\generated\prisma in 69ms</code></pre>
+      <hr />
+      <p>次に、supabase が提供するデータベース (PostgreSQL) を初期化していきます。SQLite
+      の場合と同様に <strong>Primsa 経由でテーブルの作成と初期化</strong>
+      をします。VSCodeのターミナルから次のコマンドを実行してください。</p>
+      <pre><code>npx prisma db push</code></pre>
+      <p>次のような応答 (<code>Your database is now in sync with your Prisma schema</code>)
+      が返ってくれば、Supabaseに構築したDBの初期化処理 (つまり <span
+      class="masked"><code>Post</code>、<code>Category</code>、<code>PostCategory</code>
+      という3つのテーブルの作成</span>)
+      が成功したことになります。失敗するときは、ここまでの設定変更を再確認してください。</p>
+      <pre><code>Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from prisma\schema.prisma
+Datasource &quot;db&quot;: PostgreSQL database &quot;postgres&quot;, schema &quot;public&quot; at &quot;aws-1-ap-northeast-1.pooler.supabase.com:5432&quot;
+
+The database is already in sync with the Prisma schema.</code></pre>
+      <p>各テーブルが作成されたことを Supbase で確認してみます。以下の手順で「Table
+      Editor」にアクセスしてテーブルが作成されていることを確認してください。</p>
+      <figure>
+      <img src="figs/10/supabase_12.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <div class="note type-tips">
+      <p><strong>RLS (Row Level Security) の有効化</strong></p>
+      <p>詳細は後述しますが、現状 (初期状態) では、<strong>RLS</strong>
+      というものが無効化されています。これが無効な場合、データベースが無防備な状態となっています。以下の手順で、各テーブルの
+      RLS を有効化しておいてください。</p>
+      <figure>
+      <img src="figs/10/supabase_12-a.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>supabase が提供するデータベースを利用しているのですが、RLS
+      とはなんですか。RLSが「無効」になっていると、無防備な状態になると聞いたのですが詳しく説明してください。</p>
+      </blockquote>
+      </div>
+      <p>ブログアプリからも、 <strong>Supabase のテーブルにレコードが追加できること</strong>
+      を確認してみます。アプリを開発モードで起動して
+      (<code>npm run dev</code>)、実際に記事を投稿してみてください。</p>
+      <figure>
+      <img src="figs/10/supabase_13.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>Supbase から <code>Post</code>
+      テーブルを確認してください。次のようにレコードが追加されていれば成功🎉です
+      (反映されていないときは画面をリロードしてください)。</p>
+      <figure>
+      <img src="figs/10/supabase_14.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>以上が確認できれば、SQLite から PostgreSQL への切り替えは無事完了したことになります。</p>
+      <div class="note type-tips">
+      <p><strong>Supabaseの「Schema Visualizer」機能について</strong></p>
+      <p>Supabase の「<strong>Schema
+      Visualizer</strong>」という機能を使用して、データベースのスキーマ (＝<span
+      class="masked">構造やテーブル間の関係</span>)
+      を視覚的に確認することができます。実際に確認してみてください
+      (テーブルの位置はマウスドラッグで変えることができます)。ユーザーが作成したテーブルは、すべて
+      <code>public</code> というスキーマ内で管理されます。</p>
+      <figure>
+      <img src="figs/10/supabase_18.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>次に、上記の ❸ のドロップダウンリストを <code>auth</code> に切り替えてみてください。</p>
+      <p>先に説明しているように Supabase
+      は「<strong>ユーザ認証機能</strong>」も提供しますが、その認証に使っているテーブル構造が確認できます。認証機能は複数のテーブルで構成されており、ユーザーの基本情報を管理する
+      <code>users</code> テーブルや、セッション情報を扱う <code>sessions</code>
+      テーブルのほか、多要素認証やパスワードリセットなどの高度なセキュリティ機能をサポートするための補助テーブルが使われています。</p>
+      <figure>
+      <img src="figs/10/supabase_19.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      </div>
+      <h2 data-number="4.4" id="テーブルの削除"><span class="header-section-number">4.4</span>
+      テーブルの削除</h2>
+      <p>テーブルに新しくカラムを追加した場合など、<code>prisma/schema.prisma</code>
+      を変更したときは、再度 <code>npx prisma db push</code> を実行する必要があります。</p>
+      <ul>
+      <li>本番運用の開始後は <code>npx prisma migrate</code>
+      という「既存レコードを残したままスキーマを変更するコマンド」を使用してください。</li>
+      </ul>
+      <p><code>npx prisma db push</code> を再実行する際には、<span
+      class="masked">事前に既存テーブルを削除</span> しておくことが推奨されます。<strong>SQLite
+      を使用していたときは</strong> <code>dev.db</code>
+      <strong>を削除することでテーブルを削除することができました</strong>。一方、Supabase の
+      PostgreSQL では、<strong>次のような SQL文を実行してテーブルを削除する必要</strong>があります
+      (GUIを使ってテーブルを削除することも可能です)。</p>
+      <div class="sourceCode" id="cb16" data-caption="テーブルを削除するためのSQL文"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">DROP</span> <span class="kw">TABLE</span> <span class="cf">IF</span> <span class="kw">EXISTS</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>  <span class="kw">public</span>.<span class="ot">&quot;Post&quot;</span>,</span>
+<span id="cb16-3"><a href="#cb16-3"></a>  <span class="kw">public</span>.<span class="ot">&quot;Category&quot;</span>,</span>
+<span id="cb16-4"><a href="#cb16-4"></a>  <span class="kw">public</span>.<span class="ot">&quot;PostCategory&quot;</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="kw">CASCADE</span>;</span></code></pre></div>
+      <p><strong>大文字を含むテーブル</strong>を指定するときは、<span
+      class="masked">ダブルクォーテーションで囲む必要がある</span>
+      ので注意してください。また、<code>public.</code>
+      というスキーマ指定も必要になります。具体的には、次のような手順で、Supabase の「SQL
+      Editor」から <strong>SQL文</strong> を実行してください (実際に試してみてください)。</p>
+      <figure>
+      <img src="figs/10/supabase_15.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>「<strong>Run</strong>」ボタンを押下すると (<code>Ctrl+Enter</code>
+      を入力すると)、次のような確認ダイアログが表示されます。これは、テーブルの削除などの破壊的な操作を含むSQLを実行するときに表示されるダイアログになります。内容を確認して「<strong>Run
+      this query</strong>」を押下してください。</p>
+      <figure>
+      <img src="figs/10/supabase_16.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>「Table Editor」の画面に移動し、次のように <strong>テーブルが削除できていること</strong>
+      を確認してください。</p>
+      <figure>
+      <img src="figs/10/supabase_17.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h2 data-number="4.5" id="テーブル作成とrls設定"><span
+      class="header-section-number">4.5</span> テーブル作成とRLS設定</h2>
+      <p>削除したテーブルを再作成します (<code>npx prisma generate</code>
+      も忘れずに実行してください)。また、さらに、<a
+      href="lecture08.html#dbの初期データの作成">第08回講義</a>で実行したように<code>prisma/seed.ts</code>
+      を使って <strong>初期データを投入</strong> します。</p>
+      <p>VSCodeに戻って、ターミナルから以下のコマンドを実行してください。</p>
+      <pre><code>npx prisma db push
+npx prisma generate
+npx prisma db seed</code></pre>
+      <p>Supabase の「Table
+      Editor」で、次のように初期データの投入を含めて問題なく実行できていることを確認してください。</p>
+      <figure>
+      <img src="figs/10/supabase_21.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>また、この画面において以下の図のように、テーブル名の右に「<strong>UNRESTRICTED</strong>」が表示され、テーブルのステータスが「<strong>RLS
+      disabled</strong>」になっていることを確認してください。ここで <strong>RLS</strong> とは <span
+      class="masked">Row Level Security</span> の頭文字をとったもので <span
+      class="masked">テーブルの行単位 (レコード単位) での読み書きを制限する仕組み・機能</span>
+      になります。</p>
+      <p>この RLS を無効 (<code>disabled</code>) のまま放置すると、<code>ANON_KEY</code> を設定した
+      <strong>SupabaseClient</strong>
+      (<code>@supabase/supabase-js</code>で導入してフロントエンドで動作するもの) を通じて <span
+      class="masked">テーブルレコードの読み取り、編集、削除などが制限なく可能</span>
+      になってしまうという問題があります。<code>ANON_KEY</code>
+      は、フロントエンドプログラムから読み取り可能であるため、少しの知識があれば、それを読み取って<strong>悪用可能</strong>であり、<strong>非常に大きなセキュリティリスク
+      (脆弱性)</strong> となってしまいます。</p>
+      <figure>
+      <img src="figs/10/supabase_22.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>この問題を解決するために「SQL Editor」から、次のような SQL を実行して
+      <strong>全てのテーブルで RLS を有効化</strong> してください (先に示したように、GUIからも RLS
+      の有効化ができます)。成功すると「Success. No rows returned」のログが出力されます。</p>
+      <div class="sourceCode" id="cb18" data-caption="RLSの有効化"><pre
+      class="sourceCode numberSource sql numberLines"><code class="sourceCode sql"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> <span class="kw">public</span>.<span class="ot">&quot;Post&quot;</span> <span class="kw">ENABLE</span> <span class="kw">ROW</span> <span class="kw">LEVEL</span> SECURITY;</span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> <span class="kw">public</span>.<span class="ot">&quot;Category&quot;</span> <span class="kw">ENABLE</span> <span class="kw">ROW</span> <span class="kw">LEVEL</span> SECURITY;</span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="kw">ALTER</span> <span class="kw">TABLE</span> <span class="kw">public</span>.<span class="ot">&quot;PostCategory&quot;</span> <span class="kw">ENABLE</span> <span class="kw">ROW</span> <span class="kw">LEVEL</span> SECURITY;</span></code></pre></div>
+      <figure>
+      <img src="figs/10/supabase_23.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>再び <strong>Table Editor</strong> に戻って「RLS が有効になっていること」を確認してください
+      (反映されていないときは、ページをリロードしてください)。</p>
+      <figure>
+      <img src="figs/10/supabase_24.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h2 data-number="4.6" id="ログイン可能なユーザの追加"><span
+      class="header-section-number">4.6</span> ログイン可能なユーザの追加</h2>
+      <p>Supabase の認証機能を使って <strong>メールアドレス (ログインID)</strong> と
+      <strong>パスワード</strong>
+      を使って認証可能なユーザを作成していきます。この処理はウェブアプリ上に「<strong>サインアップ
+      (ユーザ登録)</strong>」のページを実装して、そこから行なうこともできます。しかし、このブログアプリでは
+      <span class="masked">管理者1名だけの認証ができれば問題ない</span> ので、Supabase
+      のサイトから手動でユーザを登録していきます。</p>
+      <p>次のように「<strong>Add user</strong>」のボタンを押下し、「<strong>Create new
+      user</strong>」を選択してください。</p>
+      <figure>
+      <img src="figs/10/supabase_25.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>次のようなダイアログが表示されるので、適当なメールアドレスとパスワードを設定して、「<strong>Create
+      user</strong>」のボタンを押下してください。</p>
+      <p>なお「<strong>Auto Confirm
+      User?</strong>」にチェックを入れていると、「認証メールの送信プロセス」が省略されるので、メールアドレスは架空のもの
+      (<code>admin@example.com</code> など) でも問題ありません。</p>
+      <figure>
+      <img src="figs/10/supabase_26.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>次のように、ユーザが追加されたことを確認してください。</p>
+      <figure>
+      <img src="figs/10/supabase_27.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h2 data-number="4.7" id="フロントエンドで使用するapiキーの取得"><span
+      class="header-section-number">4.7</span> フロントエンドで使用するAPIキーの取得</h2>
+      <p>ブログアプリの<strong>フロントエンド</strong>プログラムにおいて、<strong>SupabaseClient</strong>
+      (<code>@supabase/supabase-js</code>) を使って Supabase
+      の「認証機能」や「PostgreSQL」にアクセスするための <strong>APIキー</strong>
+      を取得します。なお、バックエンドプログラムでは <span class="masked">基本的に Prisma
+      経由</span> で PostgreSQL にアクセスします。</p>
+      <p>以下の2つのキーを取得してください。</p>
+      <p><strong>▼ NEXT_PUBLIC_SUPABASE_URL の取得</strong></p>
+      <figure>
+      <img src="figs/10/supabase_20.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><strong>▼ NEXT_PUBLIC_SUPABASE_ANON_KEY の取得</strong></p>
+      <figure>
+      <img src="figs/10/supabase_20-1.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <div class="note type-tips">
+      <p><strong>注意</strong></p>
+      <p>ここで取得する <strong>APIキー</strong> <code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code>
+      は、ウェブブラウザで動作する「フロントエンドプログラム」から参照する値であり、その性質上、<strong>利用者に読み取られる可能性</strong>があります。そのため、以下のような注意が書かれています。</p>
+      <blockquote>
+      <p>This key is safe to use in a browser if you have enabled Row Level Security for your tables
+      and configured policies.</p>
+      </blockquote>
+      <blockquote>
+      <p>(訳) テーブルの Row Level Security (RLS)
+      を有効化し、適切なポリシーを設定している場合、このキーはフロントエンド環境（ウェブブラウザ）でも安全に使用可能です。</p>
+      </blockquote>
+      </div>
+      <p>VSCode に戻って次のように環境変数の設定ファイル <code>.env</code> を編集してください。</p>
+      <div class="sourceCode" id="cb19" data-caption=".env (変更前)"><pre
+      class="sourceCode numberSource sh numberLines"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># Connect to Supabase via connection pooling</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a><span class="va">DATABASE_URL</span><span class="op">=</span><span class="st">&quot;postgresql://postgres.XXXX:YYYY@aws-1-ap-northeast-1.pooler.supabase.com:6543/postgres?pgbouncer=true&amp;connection_limit=1&quot;</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a></span>
+<span id="cb19-4"><a href="#cb19-4"></a><span class="co"># Direct connection to the database. Used for migrations</span></span>
+<span id="cb19-5"><a href="#cb19-5"></a><span class="va">DIRECT_URL</span><span class="op">=</span><span class="st">&quot;postgresql://postgres.XXXX:YYYY@aws-1-ap-northeast-1.pooler.supabase.com:5432/postgres&quot;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb20" data-caption=".env (変更後)"><pre
+      class="sourceCode numberSource sh numberLines"><code class="sourceCode bash"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># Connect to Supabase via connection pooling</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="va">DATABASE_URL</span><span class="op">=</span><span class="st">&quot;postgresql://postgres.XXXX:YYYY@aws-1-ap-northeast-1.pooler.supabase.com:6543/postgres?pgbouncer=true&amp;connection_limit=1&quot;</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="co"># Direct connection to the database. Used for migrations</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="va">DIRECT_URL</span><span class="op">=</span><span class="st">&quot;postgresql://postgres.XXXX:YYYY@aws-1-ap-northeast-1.pooler.supabase.com:5432/postgres&quot;</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a></span>
+<span id="cb20-7"><a href="#cb20-7"></a><span class="va">NEXT_PUBLIC_SUPABASE_URL</span><span class="op">=</span>https://ZZZZ.supabase.co</span>
+<span id="cb20-8"><a href="#cb20-8"></a><span class="va">NEXT_PUBLIC_SUPABASE_ANON_KEY</span><span class="op">=</span>WWWW</span></code></pre></div>
+      <p>なお、環境変数のうち <code>NEXT_PUBLIC_</code> から始まる値は <span
+      class="masked">フロントエンドで参照可能な値</span>
+      になります。利用者に読み取られても問題のない値だけ、<code>NEXT_PUBLIC_</code>
+      を付けるようにしてください。バックエンドでは全ての値を参照可能です。</p>
+      <h2 data-number="4.8" id="supabaseclient-のインストール"><span
+      class="header-section-number">4.8</span> SupabaseClient のインストール</h2>
+      <p>VSCode のターミナルから次のコマンドを実行して、<strong>SupabaseClient</strong>
+      を使用するために必要なライブラリをインストールしてください。</p>
+      <pre><code>npm i @supabase/supabase-js</code></pre>
+      <p>また、プロジェクトに <code>src/utils/supabase.ts</code>
+      を新規作成して、以下の内容を記述してください。これは、環境変数を読み取って
+      <strong>SupabaseClient</strong> (＝<span
+      class="masked">データベース操作用のAPI操作ツール</span>)
+      のインスタンスを生成、初期化するプログラムになります。</p>
+      <div class="sourceCode" id="cb22" data-caption="src/utils/supabase.ts"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb22-1"><a href="#cb22-1"></a><span class="im">import</span> { createClient } <span class="im">from</span> <span class="st">&quot;@supabase/supabase-js&quot;</span><span class="op">;</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a></span>
+<span id="cb22-3"><a href="#cb22-3"></a><span class="im">export</span> <span class="kw">const</span> supabase <span class="op">=</span> <span class="fu">createClient</span>(</span>
+<span id="cb22-4"><a href="#cb22-4"></a>  <span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">NEXT_PUBLIC_SUPABASE_URL</span><span class="op">!,</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a>  <span class="bu">process</span><span class="op">.</span><span class="at">env</span><span class="op">.</span><span class="at">NEXT_PUBLIC_SUPABASE_ANON_KEY</span><span class="op">!</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a>)<span class="op">;</span></span></code></pre></div>
+      <p>以降、<code>import { supabase } from "@/utils/supabase"</code>
+      のようにインポートすれば、SupabaseClient である <code>supabase</code> を通じて <span
+      class="masked">Supabase の各種機能 (認証機能やデータベース) を利用すること</span>
+      ができます。</p>
+      <h2 data-number="4.9" id="ログインページの実装"><span class="header-section-number">4.9</span>
+      ログインページの実装</h2>
+      <p>ブログアプリに、IDとパスワードを使った「<strong>ログインページ</strong>」を実装していきます。</p>
+      <p>プロジェクトに <code>src/app/login/page.tsx</code> を新規作成して<a
+      href="https://github.com/TakeshiWada1980/Programming3-2025/blob/main/docs/codes/10/code01.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a>のプログラムを貼り付けて、保存してください。</p>
+      <p>さらに、<code>src/app/_components/ValidationAlert.tsx</code>
+      を新規作成して、以下のプログラムを貼り付けて、保存してください。これは
+      <code>login/page.tsx</code>
+      から参照しているコンポーネントで、バリデーションエラーを表示するためのものになります。</p>
+      <div class="sourceCode" id="cb23"
+      data-caption="src/app/_components/ValidationAlert.tsx (バリデーションエラーを表示するコンポーネント)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb23-1"><a href="#cb23-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="im">import</span> { FontAwesomeIcon } <span class="im">from</span> <span class="st">&quot;@fortawesome/react-fontawesome&quot;</span><span class="op">;</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="im">import</span> { faCircleExclamation } <span class="im">from</span> <span class="st">&quot;@fortawesome/free-solid-svg-icons&quot;</span><span class="op">;</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a></span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="kw">const</span> ValidationAlert <span class="op">=</span> ({ msg }<span class="op">:</span> { msg<span class="op">:</span> <span class="dt">string</span> }) <span class="kw">=&gt;</span> {</span>
+<span id="cb23-6"><a href="#cb23-6"></a>  <span class="cf">if</span> (msg <span class="op">===</span> <span class="st">&quot;&quot;</span>) {</span>
+<span id="cb23-7"><a href="#cb23-7"></a>    <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb23-8"><a href="#cb23-8"></a>  }</span>
+<span id="cb23-9"><a href="#cb23-9"></a>  <span class="cf">return</span> (</span>
+<span id="cb23-10"><a href="#cb23-10"></a>    <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;flex items-center space-x-1 text-sm font-bold text-rose-400&quot;</span><span class="op">&gt;</span></span>
+<span id="cb23-11"><a href="#cb23-11"></a>      <span class="op">&lt;</span>FontAwesomeIcon icon<span class="op">=</span>{faCircleExclamation} className<span class="op">=</span><span class="st">&quot;mr-0.5&quot;</span> <span class="op">/&gt;</span></span>
+<span id="cb23-12"><a href="#cb23-12"></a>      <span class="op">&lt;</span>div<span class="op">&gt;</span>{msg}<span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb23-13"><a href="#cb23-13"></a>    <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb23-14"><a href="#cb23-14"></a>  )<span class="op">;</span></span>
+<span id="cb23-15"><a href="#cb23-15"></a>}<span class="op">;</span></span>
+<span id="cb23-16"><a href="#cb23-16"></a></span>
+<span id="cb23-17"><a href="#cb23-17"></a><span class="im">export</span> <span class="im">default</span> ValidationAlert<span class="op">;</span></span></code></pre></div>
+      <p>開発モードでアプリを起動して <code>/login</code>
+      にアクセスすると、次のような画面が表示されることを確認してください。</p>
+      <figure>
+      <img src="figs/10/app_02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>この画面で、誤ったメールアドレスとパスワードを入力して「<strong>ログイン</strong>」を押下すると、次のようになることを確認してください。また、その際、<strong>ブラウザのデベロッパーツール
+      (F12で起動) のコンソールタブの出力も確認</strong> してください。SupabaseClient が
+      (バックグラウンドで) SupabaseAPI にリクエストを送って <span class="masked">400 Bad
+      Request</span> がレスポンスされていることが確認できます。また、認証に失敗時には SupabaseClient
+      から返されるエラーオブジェクトの内容を確認することができます。</p>
+      <figure>
+      <img src="figs/10/app_03.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><strong>▼ ブラウザのデベロッパーツールのコンソール出力</strong></p>
+      <figure>
+      <img src="figs/10/supabase_30.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>次に Supabase の<a
+      href="lecture10.html#ログイン可能なユーザの追加">ユーザ管理画面</a>で設定したメールアドレスとパスワードを入力して「ログイン」のボタンを押下すると
+      <span class="masked">/admin に「リダイレクト (＝ページ移動)」</span>
+      することを確認してください。</p>
+      <h2 data-number="4.10" id="ログイン処理の解説"><span class="header-section-number">4.10</span>
+      ログイン処理の解説</h2>
+      <p><code>src/app/login/page.tsx</code>
+      の内容について解説していきます。やや長めのプログラムですが、ログイン処理に関する本質的な部分は、次の箇所になります。</p>
+      <p>まず、<strong>第07行目</strong>で <code>src/app/utils/supabase.ts</code> から
+      SupabaseClient をインポートしています。</p>
+      <div class="sourceCode" id="cb24"
+      data-caption="src/app/login/page.tsx (SupabaseClient のインポート)" data-startFrom="7"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 6;"><span id="cb24-7"><a href="#cb24-7"></a><span class="im">import</span> { supabase } <span class="im">from</span> <span class="st">&quot;@/utils/supabase&quot;</span><span class="op">;</span></span></code></pre></div>
+      <p>「ログイン」のボタンが押下されると、<strong>第29行目</strong> の <code>handleSubmit</code>
+      関数がコールされ、UI/UX関連の処理後に、次のコードが実行されます。</p>
+      <div class="sourceCode" id="cb25"
+      data-caption="src/app/login/page.tsx (ログインボタンの押下処理)" data-startFrom="34"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 33;"><span id="cb25-34"><a href="#cb25-34"></a><span class="cf">try</span> {</span>
+<span id="cb25-35"><a href="#cb25-35"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;ログイン処理を実行します。&quot;</span>)<span class="op">;</span></span>
+<span id="cb25-36"><a href="#cb25-36"></a>  <span class="kw">const</span> { error } <span class="op">=</span> <span class="cf">await</span> supabase<span class="op">.</span><span class="at">auth</span><span class="op">.</span><span class="fu">signInWithPassword</span>({</span>
+<span id="cb25-37"><a href="#cb25-37"></a>    email<span class="op">,</span></span>
+<span id="cb25-38"><a href="#cb25-38"></a>    password<span class="op">,</span></span>
+<span id="cb25-39"><a href="#cb25-39"></a>  })<span class="op">;</span></span>
+<span id="cb25-40"><a href="#cb25-40"></a>  <span class="cf">if</span> (error) {</span>
+<span id="cb25-41"><a href="#cb25-41"></a>    <span class="fu">setLoginError</span>(</span>
+<span id="cb25-42"><a href="#cb25-42"></a>      <span class="vs">`ログインIDまたはパスワードが違います（</span><span class="sc">${</span>error<span class="op">.</span><span class="at">code</span><span class="sc">}</span><span class="vs">）。`</span></span>
+<span id="cb25-43"><a href="#cb25-43"></a>    )<span class="op">;</span></span>
+<span id="cb25-44"><a href="#cb25-44"></a>    <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(error<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">2</span>))<span class="op">;</span></span>
+<span id="cb25-45"><a href="#cb25-45"></a>    <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb25-46"><a href="#cb25-46"></a>  }</span>
+<span id="cb25-47"><a href="#cb25-47"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">log</span>(<span class="st">&quot;ログイン処理に成功しました。&quot;</span>)<span class="op">;</span></span>
+<span id="cb25-48"><a href="#cb25-48"></a>  router<span class="op">.</span><span class="fu">replace</span>(<span class="st">&quot;/admin&quot;</span>)<span class="op">;</span></span>
+<span id="cb25-49"><a href="#cb25-49"></a>} <span class="cf">catch</span> (error) {</span>
+<span id="cb25-50"><a href="#cb25-50"></a>  <span class="fu">setLoginError</span>(<span class="st">&quot;ログイン処理中に予期せぬエラーが発生しました。&quot;</span>)<span class="op">;</span></span>
+<span id="cb25-51"><a href="#cb25-51"></a>  <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(<span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(error<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">2</span>))<span class="op">;</span></span>
+<span id="cb25-52"><a href="#cb25-52"></a>} <span class="cf">finally</span> {</span>
+<span id="cb25-53"><a href="#cb25-53"></a>  <span class="fu">setIsSubmitting</span>(<span class="kw">false</span>)<span class="op">;</span></span>
+<span id="cb25-54"><a href="#cb25-54"></a>}</span></code></pre></div>
+      <p>メールアドレスとパスワードを使ったログイン (サインイン) を試みているのが
+      <strong>第36行目</strong> の <code>supabase.auth.signInWithPassword</code>
+      メソッドになります。ログインに成功すると <code>error</code> には <code>null</code>
+      が格納され、失敗すると以下のような <span class="masked">エラーオブジェクト</span>
+      が格納されます (以下には <code>error</code>
+      オブジェクトをJSONに変換したものを掲載しています)。</p>
+      <div class="sourceCode" id="cb26"
+      data-caption="SupabaseClient の auth.signInWithPassword メソッドの戻り値 (例)"><pre
+      class="sourceCode numberSource json numberLines"><code class="sourceCode json"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">{</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a>  <span class="dt">&quot;__isAuthError&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;AuthApiError&quot;</span><span class="fu">,</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a>  <span class="dt">&quot;status&quot;</span><span class="fu">:</span> <span class="dv">400</span><span class="fu">,</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a>  <span class="dt">&quot;code&quot;</span><span class="fu">:</span> <span class="st">&quot;invalid_credentials&quot;</span></span>
+<span id="cb26-6"><a href="#cb26-6"></a><span class="fu">}</span></span></code></pre></div>
+      <p>error が <code>null</code> ではないとき (＝つまり<strong>認証に失敗</strong>したとき) は
+      <strong>第40行目</strong> の if 文が実行され、<strong>第45行目</strong> の <code>return</code>
+      により <code>handleSubmit</code>
+      関数を抜けています。一方で、<strong>認証に成功</strong>したときは、<strong>第48行目</strong>
+      の処理によって <code>/admin</code> のページに <span class="masked">リダイレクト
+      (＝ページ移動)</span> するようになっています。</p>
+      <p>この <code>router.replace(...)</code> は、以下のように <strong>第08行目</strong>
+      でインポートして、<strong>第17行目</strong> で取得している <strong>useRouterフック</strong>
+      のメソッドになります。useRouter は <span
+      class="masked">ページ遷移を操作するための機能セット</span> を提供するものになります。</p>
+      <div class="sourceCode" id="cb27"
+      data-caption="src/app/login/page.tsx (SupabaseClient のインポート)" data-startFrom="8"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 7;"><span id="cb27-8"><a href="#cb27-8"></a><span class="im">import</span> { useRouter } <span class="im">from</span> <span class="st">&quot;next/navigation&quot;</span><span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb28"
+      data-caption="src/app/login/page.tsx (リダイレクトに使用する useRouter フック)"
+      data-startFrom="17"><pre class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript" style="counter-reset: source-line 16;"><span id="cb28-17"><a href="#cb28-17"></a><span class="kw">const</span> router <span class="op">=</span> <span class="fu">useRouter</span>()<span class="op">;</span></span></code></pre></div>
+      <hr />
+      <p><code>supabase.auth.signInWithPassword()</code> によるログインに成功すると、Supabaseからは
+      <span class="masked">アクセストークン (Access Token)</span> と呼ばれる <strong>JWT
+      (JsonWebToken) 形式の文字列</strong> が発行され、その他の情報と共に、
+      <strong>ウェブブラウザのローカルストレージ</strong> に <code>sb-XXXX-auth-token</code>
+      というキーで <span class="masked">認証情報</span> が保存されます (<code>XXXX</code> の部分には
+      Supabase の ProjectID が入ります)。このアクセストークン (以下、トークン)
+      とは、認証の結果、つまり、<span class="masked">認証済みであることの証明書</span>
+      としての役割を持ちます。次回講義では「バックエンドにおけるユーザ認証の手順」を解説しますが、そこでトークンを利用することになります。</p>
+      <p>ローカルストレージに保存された情報 (トークンを含む) は、<strong>デベロッパーツール</strong>
+      (<code>F12</code>で起動) を使って、以下のように確認できます。<code>access_token</code> が
+      <strong>トークン (JWT)</strong>
+      になります。なお、後述の「ログアウト処理」を実行すると、この認証情報はローカルストレージから削除されます。</p>
+      <figure>
+      <img src="figs/10/app_04.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>一見すると、トークン (JWT) はランダムな文字列のように見えますが、実体としては <span
+      class="masked">JSON を BASE64URLエンコードした文字列</span> と、その文字列に対して秘密鍵（JWT
+      Secret）を用いて生成された <strong>署名 (ハッシュ)</strong>
+      を結合した文字列として構成されています。</p>
+      <ul>
+      <li>署名 (ハッシュ) については、情報2 の <strong>第09回講義の講義資料</strong>
+      を参照してください。</li>
+      </ul>
+      <div class="note type-senior">
+      <p><strong>JWT</strong> (JSON Web Token) については、来年度の「知能情報実験実習2」の<a
+      href="https://takeshiwada1980.github.io/Eii2-2025/">前期のテーマ</a>
+      のなかで詳しく学びます。</p>
+      </div>
+      <h2 data-number="4.11" id="演習"><span class="header-section-number">4.11</span> 演習</h2>
+      <p>トークン (JWT)
+      は、JSON文字列をBASE64URLエンコードしてつくられているので、デコードすれば元のJSON
+      が復元可能です。<a
+      href="https://jwt.io/">JWTの公式ページ</a>では、そのデコード処理がブラウザ上で実行できるので、以下の手順で試してください。</p>
+      <ol type="1">
+      <li>デベロッパーツールから <code>access_token</code> を取得して
+      (項目を選んで右クリックから「値をコピー」して)、その内容を以下のサイトに貼り付けてください。ログインしていない状態では
+      <code>access_token</code> が存在しないので注意してください。</li>
+      <li>JWTの公式ページ (<a href="https://jwt.io/">https://jwt.io/</a>) にアクセスして、Encoded
+      に値を貼り付けてください。</li>
+      <li>Decoded の PAYLOAD から、復元された JSON の内容を確認してください。</li>
+      </ol>
+      <figure>
+      <img src="figs/10/jwt_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>JWTの「構成」や「署名の検証方法」などの仕組み
+      (なぜ、これで安全な認証ができるのか、改竄が不可能なのか)
+      について興味がある学生は、以下のウェブ記事や、生成AIなどを利用して学んでください。</p>
+      <ul>
+      <li><a href="https://qiita.com/asagohan2301/items/cef8bcb969fef9064a5c">初学者向け:
+      JWT認証の流れを理解する</a>@ Qiita</li>
+      <li><a href="https://qiita.com/knaot0/items/8427918564400968bd2b">【JWT】入門</a>@ Qiita</li>
+      </ul>
+      <h1 data-number="5" id="認証状態の取得確認"><span class="header-section-number">5</span>
+      認証状態の取得・確認</h1>
+      <p>前のセクションでは、SupabaseClient の <code>auth.ignInWithPassword()</code> メソッドに ID
+      と パスワード を与え、ユーザの<strong>認証</strong> (<strong>Authentication</strong>)
+      ができることを確認しました。また、このメソッドは、認証に成功するとブラウザのローカルストレージに認証情報を格納し、失敗するとエラー情報を格納したオブジェクトを戻り値として返すことを確認しました。</p>
+      <p>しかし、現状では、ブラウザのアドレスバーに <code>/admin</code> を打ち込めば <strong>認証
+      (Authentication)
+      の有無に関わらず「管理者用ページ」が表示できてしまいます</strong>。ここでは、認証されたユーザだけが「管理者用ページ」を表示できるようにするための
+      <span class="masked">認可 (Authorization)</span> という処理について学んでいきます。</p>
+      <div class="note type-tips">
+      <p><strong>認証 (Authentication) と認可 (Authorization)</strong></p>
+      <p>言葉として非常に似ていますが、ウェブアプリ開発の文脈では、次のように区別されるので注意してください。</p>
+      <ul>
+      <li><strong>認証</strong> (Authentication):
+      ユーザが「誰か」また「本人であるか」を確認する仕組みや処理のこと。
+      <ul>
+      <li>例えば <span
+      class="masked"><code>auth.signInWithPassword("admin@example.com","****")</code></span>
+      は、パスワードという「ユーザ本人しか知り得ない情報」を使って、ユーザが
+      <code>admin@example.com</code>
+      であることを確認する「<strong>認証</strong>」の仕組みといえます。</li>
+      </ul></li>
+      <li><strong>認可</strong> (Authorization): 認証されたユーザ (あるいは認証されていないユーザ)
+      について、特定のリソースやアクションにアクセスする権限を有するかを確認する仕組みや処理のこと。
+      <ul>
+      <li>例えば、<code>admin@example.com</code> として認証されたユーザが <span
+      class="masked"><code>/admin</code> や <code>/admin/posts/new</code>
+      にアクセスすることが許可されているか</span>
+      を確認して、それに応じた処理をするのが「<strong>認可</strong>」になります。</li>
+      </ul></li>
+      </ul>
+      </div>
+      <p>ここでは、認証済みユーザだけに <code>/admin</code> 配下のURLパス (<code>/admin/*</code>)
+      の表示と、それに関連するウェブAPI (<code>/api/admin/*</code>)
+      の利用を許可するようなシンプルな<strong>認可処理</strong>を実装していきます。</p>
+      <h2 data-number="5.1" id="フロントエンドの認可カスタムフックの定義"><span
+      class="header-section-number">5.1</span> フロントエンドの認可、カスタムフックの定義</h2>
+      <p><strong>フロントエンド</strong>では、SupabaseClient の <code>auth.getSession()</code>
+      メソッドで「<strong>現在のユーザーの認証状態</strong>」が確認できます。認証済みの場合は
+      <strong>セッションオブジェクト</strong> が、未認証の場合は <code>null</code>
+      が返されます。なお、セッションオブジェクトからは <code>session.user.email</code>
+      でユーザのメールアドレス (ログインID) が取得可能となっています。</p>
+      <p>しかし、<code>src/app/admin/</code> 配下にある全ての <code>page.tsx</code> に
+      <code>auth.getSession()</code> 関連のロジックを個別に実装することは <span
+      class="masked">コードの重複を招き、保守性を著しく低下</span>
+      させることになります。そのため、ここでは <code>useAuth</code>
+      という「<strong>カスタムフック</strong>」の作成と、<code>layout.tsx</code>
+      を用いた「<strong>ルートガード</strong>
+      (詳細は後述)」の実装により、認可処理を一元管理するようにしていきます。</p>
+      <p>まずは、認可関連の処理を「カスタムフック」と呼ばれる形式で実装します。認可処理を適切に行なうには
+      <code>useState</code> や <code>useEffect</code> などの ReactHooks
+      が必要になるのですが、これらは <span class="masked">通常の関数 (普通に定義した関数)
+      の内部では利用できない</span> という制約があります。ReactHooks
+      を使用するときは「カスタムフック」という形式で、<strong>一定の規則・制約に従って処理を記述すること</strong>
+      が求められます (例えば「ファイル名」と「関数名」を <code>useXXX.ts</code>
+      の形式で設定するなどの規則に従う必要があります) 。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>Next.js + TypeScript
+      でウェブアプリを開発しています。「カスタムフック」と「普通の関数」の違いについて教えてください。保守性と再利用性を考えて処理を分離したいと考えているのですが、どちらで実装するべきですか。</p>
+      </blockquote>
+      <p>認可処理に使用する <code>useAuth</code>
+      というカスタムフックを作成します。<code>src/app/_hooks/useAuth.ts</code>
+      というファイルを作成して、以下のプログラムを貼り付けてください。</p>
+      <div class="sourceCode" id="cb29"
+      data-caption="src/app/_hooks/useAuth.ts (カスタムフックの定義)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb29-1"><a href="#cb29-1"></a><span class="im">import</span> { useState<span class="op">,</span> useEffect } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a><span class="im">import</span> { Session } <span class="im">from</span> <span class="st">&quot;@supabase/supabase-js&quot;</span><span class="op">;</span></span>
+<span id="cb29-3"><a href="#cb29-3"></a><span class="im">import</span> { supabase } <span class="im">from</span> <span class="st">&quot;@/utils/supabase&quot;</span><span class="op">;</span></span>
+<span id="cb29-4"><a href="#cb29-4"></a></span>
+<span id="cb29-5"><a href="#cb29-5"></a><span class="im">export</span> <span class="kw">const</span> useAuth <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb29-6"><a href="#cb29-6"></a>  <span class="kw">const</span> [isLoading<span class="op">,</span> setIsLoading] <span class="op">=</span> <span class="fu">useState</span>(<span class="kw">true</span>)<span class="op">;</span></span>
+<span id="cb29-7"><a href="#cb29-7"></a>  <span class="kw">const</span> [session<span class="op">,</span> setSession] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span>Session <span class="op">|</span> <span class="dt">null</span><span class="op">&gt;</span>(<span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb29-8"><a href="#cb29-8"></a>  <span class="kw">const</span> [token<span class="op">,</span> setToken] <span class="op">=</span> <span class="fu">useState</span><span class="op">&lt;</span><span class="dt">string</span> <span class="op">|</span> <span class="dt">null</span><span class="op">&gt;</span>(<span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb29-9"><a href="#cb29-9"></a></span>
+<span id="cb29-10"><a href="#cb29-10"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb29-11"><a href="#cb29-11"></a>    <span class="co">// 初期セッションの取得</span></span>
+<span id="cb29-12"><a href="#cb29-12"></a>    <span class="kw">const</span> initAuth <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb29-13"><a href="#cb29-13"></a>      <span class="cf">try</span> {</span>
+<span id="cb29-14"><a href="#cb29-14"></a>        <span class="kw">const</span> {</span>
+<span id="cb29-15"><a href="#cb29-15"></a>          data<span class="op">:</span> { session }<span class="op">,</span></span>
+<span id="cb29-16"><a href="#cb29-16"></a>        } <span class="op">=</span> <span class="cf">await</span> supabase<span class="op">.</span><span class="at">auth</span><span class="op">.</span><span class="fu">getSession</span>()<span class="op">;</span></span>
+<span id="cb29-17"><a href="#cb29-17"></a>        <span class="fu">setSession</span>(session)<span class="op">;</span></span>
+<span id="cb29-18"><a href="#cb29-18"></a>        <span class="fu">setToken</span>(session<span class="op">?.</span><span class="at">access_token</span> <span class="op">||</span> <span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb29-19"><a href="#cb29-19"></a>        <span class="fu">setIsLoading</span>(<span class="kw">false</span>)<span class="op">;</span></span>
+<span id="cb29-20"><a href="#cb29-20"></a>      } <span class="cf">catch</span> (error) {</span>
+<span id="cb29-21"><a href="#cb29-21"></a>        <span class="bu">console</span><span class="op">.</span><span class="fu">error</span>(</span>
+<span id="cb29-22"><a href="#cb29-22"></a>          <span class="vs">`セッションの取得に失敗しました。</span><span class="sc">\n${</span><span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>(error<span class="op">,</span> <span class="kw">null</span><span class="op">,</span> <span class="dv">2</span>)<span class="sc">}</span><span class="vs">`</span></span>
+<span id="cb29-23"><a href="#cb29-23"></a>        )<span class="op">;</span></span>
+<span id="cb29-24"><a href="#cb29-24"></a>        <span class="fu">setIsLoading</span>(<span class="kw">false</span>)<span class="op">;</span></span>
+<span id="cb29-25"><a href="#cb29-25"></a>      }</span>
+<span id="cb29-26"><a href="#cb29-26"></a>    }<span class="op">;</span></span>
+<span id="cb29-27"><a href="#cb29-27"></a>    <span class="fu">initAuth</span>()<span class="op">;</span></span>
+<span id="cb29-28"><a href="#cb29-28"></a></span>
+<span id="cb29-29"><a href="#cb29-29"></a>    <span class="co">// 認証状態の変更を監視</span></span>
+<span id="cb29-30"><a href="#cb29-30"></a>    <span class="kw">const</span> { data<span class="op">:</span> authListener } <span class="op">=</span> supabase<span class="op">.</span><span class="at">auth</span><span class="op">.</span><span class="fu">onAuthStateChange</span>(</span>
+<span id="cb29-31"><a href="#cb29-31"></a>      <span class="kw">async</span> (<span class="bu">event</span><span class="op">,</span> session) <span class="kw">=&gt;</span> {</span>
+<span id="cb29-32"><a href="#cb29-32"></a>        <span class="fu">setSession</span>(session)<span class="op">;</span></span>
+<span id="cb29-33"><a href="#cb29-33"></a>        <span class="fu">setToken</span>(session<span class="op">?.</span><span class="at">access_token</span> <span class="op">||</span> <span class="kw">null</span>)<span class="op">;</span></span>
+<span id="cb29-34"><a href="#cb29-34"></a>      }</span>
+<span id="cb29-35"><a href="#cb29-35"></a>    )<span class="op">;</span></span>
+<span id="cb29-36"><a href="#cb29-36"></a></span>
+<span id="cb29-37"><a href="#cb29-37"></a>    <span class="co">// アンマウント時に監視を解除（クリーンアップ）</span></span>
+<span id="cb29-38"><a href="#cb29-38"></a>    <span class="cf">return</span> () <span class="kw">=&gt;</span> authListener<span class="op">?.</span><span class="at">subscription</span><span class="op">?.</span><span class="fu">unsubscribe</span>()<span class="op">;</span></span>
+<span id="cb29-39"><a href="#cb29-39"></a>  }<span class="op">,</span> [])<span class="op">;</span></span>
+<span id="cb29-40"><a href="#cb29-40"></a></span>
+<span id="cb29-41"><a href="#cb29-41"></a>  <span class="cf">return</span> { isLoading<span class="op">,</span> session<span class="op">,</span> token }<span class="op">;</span></span>
+<span id="cb29-42"><a href="#cb29-42"></a>}<span class="op">;</span></span></code></pre></div>
+      <p>このカスタムフックは <code>page.tsx</code> や
+      <code>layout.tsx</code>、その他のカスタムフックのなかで、次のように使用します。</p>
+      <div class="sourceCode" id="cb30" data-caption="useAuthのインポート"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb30-1"><a href="#cb30-1"></a><span class="im">import</span> { useAuth } <span class="im">from</span> <span class="st">&quot;@/app/_hooks/useAuth&quot;</span><span class="op">;</span></span></code></pre></div>
+      <div class="sourceCode" id="cb31" data-caption="useAuthの使用例"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb31-1"><a href="#cb31-1"></a><span class="kw">const</span> { isLoading<span class="op">,</span> session<span class="op">,</span> token } <span class="op">=</span> <span class="fu">useAuth</span>()<span class="op">;</span></span></code></pre></div>
+      <p>まずは、useAuth
+      の「使用方法」から先に確認していきます。このフックは、次の3つの値を返します。</p>
+      <ul>
+      <li><code>isLoading</code>
+      は、認証状態の確認中は「true」となり、確認完了すると「false」になります。</li>
+      <li><code>session</code> には、認証済みユーザと確認されたときに
+      <strong>セッション情報</strong> (Sessionオブジェクト) が格納されます。そうでないときは
+      <code>null</code> となります (初期状態、つまり <code>isLoading</code> が「ture」のときも
+      <code>null</code> となることに注意してください)。</li>
+      <li><code>token</code>
+      には、認証済みユーザと確認されたとき、<strong>バックエンドの認可処理に使うためのアクセストークン</strong>
+      (JWT (JsonWebToken) 形式の文字列) が格納されます。未認証または初期状態では <code>null</code>
+      となります。この <code>token</code> は<a
+      href="lecture07.html#apiの利用テスト">第07回講義</a>で学んだ microCMS の API
+      と同様の方法で利用します。</li>
+      </ul>
+      <p>想定する使い方としては、<strong>認可が必要なページ</strong>において、<code>isLoading</code>
+      が <code>true</code> のときは「Loading…」を表示し、これが <code>false</code> に切り替わったら
+      <code>session</code> を確認して、もし <code>null</code> なら <span
+      class="masked">トップページにリダイレクト</span>し、そうでなければ <span
+      class="masked">コンテンツを出力</span>
+      します。また、認可が必要なウェブAPIにリクエストする際、HTTP Header に <code>token</code>
+      を追加します。</p>
+      <hr />
+      <p>次に useAuth の内部処理 <code>src/app/_hooks/useAuth.ts</code> を解説します。</p>
+      <p>まず、<strong>第06行目</strong> から <strong>第08行目</strong>
+      にかけて、<code>useState</code> を利用して 3つの状態
+      (<code>isLoading</code>、<code>session</code>、<code>token</code>) を定義します。初期状態では
+      <code>isLoading</code> は <code>true</code>、他は <code>null</code> になります。</p>
+      <div class="note type-tips">
+      <p>これら3つの値を <code>useState</code>
+      を使って「<strong>状態</strong>」として管理することで、これらの値が更新されたときに、それを参照している「Reactコンポーネント」に
+      <span class="masked">再レンダリングがかかる</span>
+      というメリットがあります。通常の変数として定義すると、この便利な「<strong>更新検知の仕組み</strong>」が機能しないことに注意してください。</p>
+      </div>
+      <p>つづいて、<strong>第10行目</strong> からの <code>useEffect</code>
+      は、大きく2つ役割を持ちます。まず、第1の役割として <span class="masked">認証状態の取得</span>
+      を担います。<code>useAuth()</code> がコールされたタイミングで <code>auth.getSession()</code>
+      を実行し、その結果に応じて、3つの状態
+      (<code>isLoading</code>、<code>session</code>、<code>token</code>) を更新します。</p>
+      <p>第2の役割として、<span class="masked">認証状態の変更監視</span>
+      を設定しています。これにより、ログアウトなどによって認証状態が変化した場合、<code>onAuthStateChange</code>
+      イベントが発生して <code>session</code> と <code>token</code>
+      の状態が更新される仕組みをつくっています。また、コンポーネントのアンマウントされるときには、監視を解除して、メモリリークを防止しています。</p>
+      <p><strong>(プロンプト例)</strong></p>
+      <blockquote>
+      <p>Next.js
+      でウェブアプリを開発しています。コンポーネントの「マウント」と「アンマウント」とは何ですか。useEffect
+      との関係を含めて解説してください。</p>
+      </blockquote>
+      <p><strong>第41行目</strong>では、3つの状態を単一のオブジェクトとして返却し、この useAuth()
+      を使用するコンポーネントから参照できるようにしています。</p>
+      <h2 data-number="5.2" id="useauth-を利用したヘッダの表示パターンの切り替え"><span
+      class="header-section-number">5.2</span> useAuth を利用したヘッダの表示パターンの切り替え</h2>
+      <p>認証状態に応じて、次のようにヘッダの表示パターンの切り替え処理
+      (未認証のときは「<strong>Login</strong>」、認証済みのときは「<strong>Logout</strong>」と表示する処理)
+      を実装してきます。</p>
+      <figure>
+      <img src="figs/10/app_05.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <figure>
+      <img src="figs/10/app_06.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>このような処理を <span class="masked">出し分け</span>
+      や「条件分岐表示」「動的切り替え」のように表現します。</p>
+      <p>実装例を以下に示します。Headerコンポーネントは
+      <strong>既に各自でカスタマイズしているので思うので</strong>、必要な部分だけを書き換えるようにしてください。</p>
+      <div class="sourceCode" id="cb32" data-caption="src/app/_components/Header.tsx"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb32-1"><a href="#cb32-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="im">import</span> Link <span class="im">from</span> <span class="st">&quot;next/link&quot;</span><span class="op">;</span></span>
+<span id="cb32-3"><a href="#cb32-3"></a><span class="im">import</span> { twMerge } <span class="im">from</span> <span class="st">&quot;tailwind-merge&quot;</span><span class="op">;</span></span>
+<span id="cb32-4"><a href="#cb32-4"></a><span class="im">import</span> { FontAwesomeIcon } <span class="im">from</span> <span class="st">&quot;@fortawesome/react-fontawesome&quot;</span><span class="op">;</span></span>
+<span id="cb32-5"><a href="#cb32-5"></a><span class="im">import</span> { faFish } <span class="im">from</span> <span class="st">&quot;@fortawesome/free-solid-svg-icons&quot;</span><span class="op">;</span></span>
+<span id="cb32-6"><a href="#cb32-6"></a><span class="im">import</span> { supabase } <span class="im">from</span> <span class="st">&quot;@/utils/supabase&quot;</span><span class="op">;</span> <span class="co">// ◀ 追加</span></span>
+<span id="cb32-7"><a href="#cb32-7"></a><span class="im">import</span> { useAuth } <span class="im">from</span> <span class="st">&quot;@/app/_hooks/useAuth&quot;</span><span class="op">;</span> <span class="co">// ◀ 追加</span></span>
+<span id="cb32-8"><a href="#cb32-8"></a><span class="im">import</span> { useRouter } <span class="im">from</span> <span class="st">&quot;next/navigation&quot;</span><span class="op">;</span> <span class="co">// ◀ 追加</span></span>
+<span id="cb32-9"><a href="#cb32-9"></a></span>
+<span id="cb32-10"><a href="#cb32-10"></a><span class="kw">const</span> Header<span class="op">:</span> React<span class="op">.</span><span class="at">FC</span> <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb32-11"><a href="#cb32-11"></a>  <span class="co">// ▼ 追加</span></span>
+<span id="cb32-12"><a href="#cb32-12"></a>  <span class="kw">const</span> router <span class="op">=</span> <span class="fu">useRouter</span>()<span class="op">;</span></span>
+<span id="cb32-13"><a href="#cb32-13"></a>  <span class="kw">const</span> { isLoading<span class="op">,</span> session } <span class="op">=</span> <span class="fu">useAuth</span>()<span class="op">;</span></span>
+<span id="cb32-14"><a href="#cb32-14"></a>  <span class="kw">const</span> logout <span class="op">=</span> <span class="kw">async</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb32-15"><a href="#cb32-15"></a>    <span class="cf">await</span> supabase<span class="op">.</span><span class="at">auth</span><span class="op">.</span><span class="fu">signOut</span>()<span class="op">;</span></span>
+<span id="cb32-16"><a href="#cb32-16"></a>    router<span class="op">.</span><span class="fu">replace</span>(<span class="st">&quot;/&quot;</span>)<span class="op">;</span></span>
+<span id="cb32-17"><a href="#cb32-17"></a>  }<span class="op">;</span></span>
+<span id="cb32-18"><a href="#cb32-18"></a>  <span class="co">// ▲ 追加</span></span>
+<span id="cb32-19"><a href="#cb32-19"></a></span>
+<span id="cb32-20"><a href="#cb32-20"></a>  <span class="cf">return</span> (</span>
+<span id="cb32-21"><a href="#cb32-21"></a>    <span class="op">&lt;</span>header<span class="op">&gt;</span></span>
+<span id="cb32-22"><a href="#cb32-22"></a>      <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;bg-slate-800 py-2&quot;</span><span class="op">&gt;</span></span>
+<span id="cb32-23"><a href="#cb32-23"></a>        <span class="op">&lt;</span>div</span>
+<span id="cb32-24"><a href="#cb32-24"></a>          className<span class="op">=</span>{<span class="fu">twMerge</span>(</span>
+<span id="cb32-25"><a href="#cb32-25"></a>            <span class="st">&quot;mx-4 max-w-2xl md:mx-auto&quot;</span><span class="op">,</span></span>
+<span id="cb32-26"><a href="#cb32-26"></a>            <span class="st">&quot;flex items-center justify-between&quot;</span><span class="op">,</span></span>
+<span id="cb32-27"><a href="#cb32-27"></a>            <span class="st">&quot;text-lg font-bold text-white&quot;</span></span>
+<span id="cb32-28"><a href="#cb32-28"></a>          )}</span>
+<span id="cb32-29"><a href="#cb32-29"></a>        <span class="op">&gt;</span></span>
+<span id="cb32-30"><a href="#cb32-30"></a>          <span class="op">&lt;</span>div<span class="op">&gt;</span></span>
+<span id="cb32-31"><a href="#cb32-31"></a>            <span class="op">&lt;</span>Link href<span class="op">=</span><span class="st">&quot;/&quot;</span><span class="op">&gt;</span></span>
+<span id="cb32-32"><a href="#cb32-32"></a>              <span class="op">&lt;</span>FontAwesomeIcon icon<span class="op">=</span>{faFish} className<span class="op">=</span><span class="st">&quot;mr-1&quot;</span> <span class="op">/&gt;</span></span>
+<span id="cb32-33"><a href="#cb32-33"></a>              MyBlogApp</span>
+<span id="cb32-34"><a href="#cb32-34"></a>            <span class="op">&lt;/</span>Link<span class="op">&gt;</span></span>
+<span id="cb32-35"><a href="#cb32-35"></a>          <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb32-36"><a href="#cb32-36"></a>          <span class="op">&lt;</span>div className<span class="op">=</span><span class="st">&quot;flex gap-x-6&quot;</span><span class="op">&gt;</span></span>
+<span id="cb32-37"><a href="#cb32-37"></a>            {<span class="co">/* ▼ 追加 */</span>}</span>
+<span id="cb32-38"><a href="#cb32-38"></a>            {<span class="op">!</span>isLoading <span class="op">&amp;&amp;</span></span>
+<span id="cb32-39"><a href="#cb32-39"></a>              (session <span class="op">?</span> (</span>
+<span id="cb32-40"><a href="#cb32-40"></a>                <span class="op">&lt;</span>button onClick<span class="op">=</span>{logout}<span class="op">&gt;</span>Logout<span class="op">&lt;/</span>button<span class="op">&gt;</span></span>
+<span id="cb32-41"><a href="#cb32-41"></a>              ) <span class="op">:</span> (</span>
+<span id="cb32-42"><a href="#cb32-42"></a>                <span class="op">&lt;</span>Link href<span class="op">=</span><span class="st">&quot;/login&quot;</span><span class="op">&gt;</span>Login<span class="op">&lt;/</span>Link<span class="op">&gt;</span></span>
+<span id="cb32-43"><a href="#cb32-43"></a>              ))}</span>
+<span id="cb32-44"><a href="#cb32-44"></a>            {<span class="co">/* ▲ 追加 */</span>}</span>
+<span id="cb32-45"><a href="#cb32-45"></a>            <span class="op">&lt;</span>Link href<span class="op">=</span><span class="st">&quot;/about&quot;</span><span class="op">&gt;</span>About<span class="op">&lt;/</span>Link<span class="op">&gt;</span></span>
+<span id="cb32-46"><a href="#cb32-46"></a>          <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb32-47"><a href="#cb32-47"></a>        <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb32-48"><a href="#cb32-48"></a>      <span class="op">&lt;/</span>div<span class="op">&gt;</span></span>
+<span id="cb32-49"><a href="#cb32-49"></a>    <span class="op">&lt;/</span>header<span class="op">&gt;</span></span>
+<span id="cb32-50"><a href="#cb32-50"></a>  )<span class="op">;</span></span>
+<span id="cb32-51"><a href="#cb32-51"></a>}<span class="op">;</span></span>
+<span id="cb32-52"><a href="#cb32-52"></a></span>
+<span id="cb32-53"><a href="#cb32-53"></a><span class="im">export</span> <span class="im">default</span> Header<span class="op">;</span></span></code></pre></div>
+      <p><strong>第07行目</strong> で <code>useAuth</code>
+      をインポートして、<strong>第13行目</strong> で <code>useAuth()</code> を実行し、その戻り値を<a
+      href="lecture02.html#分割代入">分割代入</a>しています (このコンポーネントでは
+      <code>token</code> を使用しないので、<code>isLoading</code> と <code>session</code>
+      だけを得ています)。</p>
+      <p><strong>第38行目</strong> から <strong>第41行目</strong> で、出し分け (条件分岐表示)
+      をしています。未認証のときは <code>/login</code>
+      ページにリンクする「Login」を表示し、認証済みの場合は <strong>第14行目</strong>
+      で定義している「<strong>ログアウト処理</strong>」をコールする「Logout」を表示するようにしています。また、認証状態の確認中は、いずれも表示しない用にしています。</p>
+      <p><strong>第14行目</strong>
+      では、ログアウト処理を定義しています。また、ログアウト後はトップページにリダイレクトするようにしています。</p>
+      <h2 data-number="5.3" id="演習-1"><span class="header-section-number">5.3</span> 演習</h2>
+      <p>開発者モードでアプリを起動し、ヘッダ部が期待するような動作をすることを確認してください。</p>
+      <ul>
+      <li>ログインしていない状態では、ヘッダ部に「Login」が表示され、クリックすると
+      <code>/login</code> に移動する。</li>
+      <li>ログイン済みの状態では、ヘッダ部に「Logout」が表示され、クリックすると「ログアウト処理」と「トップページへの移動処理」が実行される。</li>
+      </ul>
+      <h1 data-number="6" id="ルートガードの実装"><span class="header-section-number">6</span>
+      ルートガードの実装</h1>
+      <p>ルートガード (Route Guard) とは <strong>認証状態に基づいて特定のルート (URLパス)
+      に対するアクセスを制御し、権限を持たないユーザを適切なページへリダイレクトする機能</strong>
+      を指します。</p>
+      <p>このブログアプリでは、<code>/admin/*</code>
+      へのアクセスがあったとき、ユーザ認証済みであればコンテンツを表示し、そうでなければ
+      <strong>ログインページにリダイレクト</strong> するようなルートガードを構築します。</p>
+      <p>ルートガードは、保守性を考慮して個々の <code>page.tsx</code> ではなく
+      <code>src/app/admin/layout.tsx</code> に設置します。<a
+      href="lecture06.html#next.js-のルーティング">第06回講義</a>で解説したように
+      <code>layout.tsx</code>
+      は、<strong>それが配置される階層以下の全てのページに適用されるので</strong>
+      <code>src/app/admin</code> に配置すれば、<code>/admin</code> や <code>/admin/posts/new</code>
+      など <code>/admin</code>
+      以下の全てのアクセスにルートガードを適用することができるようになります。</p>
+      <pre><code>📂 src/app/
+├─ 📄 page.tsx
+├─ 📄 layout.tsx
+└─ 📂 admin/
+    ├─ 📄 page.tsx
+    ├─ 📄 layout.tsx  # ここにルートガードを設置
+    ├─ 📂 categories/
+    └─ 📂 posts/
+        ├─ 📄 page.tsx
+        ├─ 📂 [id]/
+        └─ 📂 new/
+            └─ 📄 page.tsx</code></pre>
+      <figure>
+      <img src="figs/10/fig_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p><code>src/app/admin/layout.tsx</code>
+      を作成して、以下のプログラムを貼り付けてください。</p>
+      <div class="sourceCode" id="cb34" data-caption="src/app/admin/layout.tsx (ルートガード)"><pre
+      class="sourceCode numberSource ts numberLines"><code class="sourceCode typescript"><span id="cb34-1"><a href="#cb34-1"></a><span class="st">&quot;use client&quot;</span><span class="op">;</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a></span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="im">import</span> React <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
+<span id="cb34-4"><a href="#cb34-4"></a><span class="im">import</span> { useAuth } <span class="im">from</span> <span class="st">&quot;@/app/_hooks/useAuth&quot;</span><span class="op">;</span></span>
+<span id="cb34-5"><a href="#cb34-5"></a><span class="im">import</span> { useRouter } <span class="im">from</span> <span class="st">&quot;next/navigation&quot;</span><span class="op">;</span></span>
+<span id="cb34-6"><a href="#cb34-6"></a><span class="im">import</span> { useEffect } <span class="im">from</span> <span class="st">&quot;react&quot;</span><span class="op">;</span></span>
+<span id="cb34-7"><a href="#cb34-7"></a></span>
+<span id="cb34-8"><a href="#cb34-8"></a><span class="kw">interface</span> Props {</span>
+<span id="cb34-9"><a href="#cb34-9"></a>  children<span class="op">:</span> React<span class="op">.</span><span class="at">ReactNode</span><span class="op">;</span></span>
+<span id="cb34-10"><a href="#cb34-10"></a>}</span>
+<span id="cb34-11"><a href="#cb34-11"></a><span class="kw">const</span> AdminLayout <span class="op">=</span> ({ children }<span class="op">:</span> Props) <span class="kw">=&gt;</span> {</span>
+<span id="cb34-12"><a href="#cb34-12"></a>  <span class="kw">const</span> router <span class="op">=</span> <span class="fu">useRouter</span>()<span class="op">;</span></span>
+<span id="cb34-13"><a href="#cb34-13"></a>  <span class="kw">const</span> { isLoading<span class="op">,</span> session } <span class="op">=</span> <span class="fu">useAuth</span>()<span class="op">;</span></span>
+<span id="cb34-14"><a href="#cb34-14"></a></span>
+<span id="cb34-15"><a href="#cb34-15"></a>  <span class="fu">useEffect</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb34-16"><a href="#cb34-16"></a>    <span class="co">// 認証状況の確認中は何もせずに戻る</span></span>
+<span id="cb34-17"><a href="#cb34-17"></a>    <span class="cf">if</span> (isLoading) {</span>
+<span id="cb34-18"><a href="#cb34-18"></a>      <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb34-19"><a href="#cb34-19"></a>    }</span>
+<span id="cb34-20"><a href="#cb34-20"></a>    <span class="co">// 認証確認後、未認証であればログインページにリダイレクト</span></span>
+<span id="cb34-21"><a href="#cb34-21"></a>    <span class="cf">if</span> (session <span class="op">===</span> <span class="kw">null</span>) {</span>
+<span id="cb34-22"><a href="#cb34-22"></a>      router<span class="op">.</span><span class="fu">replace</span>(<span class="st">&quot;/login&quot;</span>)<span class="op">;</span></span>
+<span id="cb34-23"><a href="#cb34-23"></a>    }</span>
+<span id="cb34-24"><a href="#cb34-24"></a>  }<span class="op">,</span> [isLoading<span class="op">,</span> router<span class="op">,</span> session])<span class="op">;</span></span>
+<span id="cb34-25"><a href="#cb34-25"></a></span>
+<span id="cb34-26"><a href="#cb34-26"></a>  <span class="co">// 認証済みが確認できるまでは何も表示しない</span></span>
+<span id="cb34-27"><a href="#cb34-27"></a>  <span class="cf">if</span> (<span class="op">!</span>session) {</span>
+<span id="cb34-28"><a href="#cb34-28"></a>    <span class="cf">return</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb34-29"><a href="#cb34-29"></a>  }</span>
+<span id="cb34-30"><a href="#cb34-30"></a>  <span class="cf">return</span> <span class="op">&lt;&gt;</span>{children}<span class="op">&lt;/&gt;;</span></span>
+<span id="cb34-31"><a href="#cb34-31"></a>}<span class="op">;</span></span>
+<span id="cb34-32"><a href="#cb34-32"></a></span>
+<span id="cb34-33"><a href="#cb34-33"></a><span class="im">export</span> <span class="im">default</span> AdminLayout<span class="op">;</span></span></code></pre></div>
+      <p>開発者モードで起動して、未ログイン状態で <code>/admin</code> や
+      <code>/admin/posts</code>、<code>/admin/posts/new</code> にアクセスすると
+      (ウェブブラウザのアドレバーにパスを入力すると)、ログインページ (<code>/login</code>)
+      に移動すること、つまり、ルートガードが機能することを確認してください。</p>
+      <h2 data-number="6.1" id="演習-2"><span class="header-section-number">6.1</span> 演習</h2>
+      <p>再利用性と保守性を高めるために、ルートガードの処理を
+      <code>src/app/_hooks/useRouteGuard.ts</code> という<strong>カスタムフック</strong>
+      として分離し、それを <code>src/app/admin/layout.tsx</code>
+      から呼び出すようにしてください。</p>
+      <ul>
+      <li><code>useRouteGuard.ts</code> の実装例は<a
+      href="https://github.com/TakeshiWada1980/Programming3-2025/blob/main/docs/codes/10/code02.ts">こちら<i class="fa-solid fa-person-chalkboard"></i></a></li>
+      <li><code>layout.tsx</code> の実装例は<a
+      href="https://github.com/TakeshiWada1980/Programming3-2025/blob/main/docs/codes/10/code03.tsx">こちら<i class="fa-solid fa-person-chalkboard"></i></a></li>
+      </ul>
+      <h1 data-number="7" id="課題2"><span class="header-section-number">7</span> 課題2</h1>
+      <p>次の <code>NN-課題2-氏名.docx</code>
+      を雛形に、「リポジトリのURL」の他、以下の各ページの「<strong>スクリーンショット</strong>」と「<strong>画面や機能の解説・アピールポイント</strong>」を記載して提出してください。</p>
+      <ul>
+      <li><p><a
+      href="https://omunet-my.sharepoint.com/:f:/g/personal/z21707r_omu_ac_jp/IgDPSmE87xW2RZq6NvLDq31ZAf54csKHJW4jRY00BcVDfFc?e=LxDg8o">雛形ファイル</a></p></li>
+      <li><p>注意: ワードファイルの編集には、ウェブ版の Office (Microsoft 365 for the web)
+      ではなく、ローカルアプリ版の Office
+      を使用してください。<strong>ウェブ版を使用すると体裁が大きく崩れます</strong>。また、提出後、Teams
+      のプレビュー画面 (提出物の確認画面)
+      では体裁が乱れることがありますが、ダウンロードして開いたときに体裁が乱れてなければ問題ありません。課題を評価する際は、ファイルをダウンロードしてローカルアプリ版で開いて閲覧します。</p></li>
+      <li><p>注意: スクリーンショットは、<strong>PC版</strong> と <strong>スマートフォン版</strong>
+      (<a href="lecture10.html#スマホ版のスクショの撮影方法">次のセクション</a>で指定する方法で撮影)
+      の「両方」をつけてください。</p></li>
+      </ul>
+      <table>
+      <thead>
+      <tr class="header">
+      <th>URL</th>
+      <th>処理</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="odd">
+      <td>/admin/categories</td>
+      <td>カテゴリの一覧表示、編集ページへのリンク、削除機能 (オプション)</td>
+      </tr>
+      <tr class="even">
+      <td>/admin/posts</td>
+      <td>投稿記事の一覧表示、編集ページへのリンク、削除機能 (オプション)</td>
+      </tr>
+      <tr class="odd">
+      <td>/admin/posts/[id]</td>
+      <td>投稿記事の編集 (削除を含む)</td>
+      </tr>
+      </tbody>
+      </table>
+      <ul>
+      <li><strong><em>提出期限</em></strong> : <strong>01月14日 (水) 23時</strong>
+      <ul>
+      <li>課題の採点後は、<strong>修正版の再提出や追提出があっても原則として再評価はしません</strong>。</li>
+      <li>担当教員に事前相談することなく、提出期限から168時間（＝1週間・7日間）を超過して提出されたもの（再提出を含む）は、未提出と同じ0点評価とします。</li>
+      </ul></li>
+      <li><strong><em>提出先</em></strong> : Teams</li>
+      <li><strong><em>ファイル形式</em></strong> :
+      <ul>
+      <li>PDF変換せずに<strong>ワードファイルのまま提出</strong>してください
+      (<code>.docx</code>形式)。不備は一律で「3点減😭」とします。</li>
+      <li>ファイル名は <code>NN-課題2-氏名.docx</code> としてください。<code>NN</code> は
+      <strong>ゼロ埋め2桁の出席番号
+      (本年度のもの)</strong>、氏名はフルネームとして、ハイフンや数字は全て半角文字としてください。姓と名の間には
+      <u>スペースを入れない</u> でください。不備は一律で「2点減😭」とします。
+      <ul>
+      <li>例: <code>03-課題2-高専太郎.docx</code></li>
+      <li>例: <code>16-課題2-寝屋川次郎.docx</code><br />
+      </li>
+      </ul></li>
+      </ul></li>
+      <li><strong><em>採点</em></strong> :
+      「7点」を標準として「10点満点」で評価します。学年末の成績評価の際には「重み」が付けられます。
+      <ul>
+      <li>Wordファイル上の体裁の乱れに注意してください。</li>
+      <li>画面表示やバリデーションなどの UI/UX の工夫、機能の追加、<a
+      href="https://www.google.com/search?q=zod+react+hook+form">react-hook-form &amp; zod</a>
+      を利用などがあれば、アピールポイントとして、ワードファイル内に記載してください。</li>
+      </ul></li>
+      <li>提出された課題 (ワードファイル) はクラスの学生に共有します。</li>
+      </ul>
+      <h2 data-number="7.1" id="提出ファイル作成に関する注意事項"><span
+      class="header-section-number">7.1</span> 提出ファイル作成に関する注意事項</h2>
+      <p><a
+      href="https://omunet-my.sharepoint.com/:w:/g/personal/z21707r_omu_ac_jp/EcO1xgMYToZOtNHc1haCBGsBkm8IzaMzCv_QO_bBS029Sg?e=8VoKaO">雛形のWordファイル</a>は、ダウンロードして、必ず
+      <strong>デスクトップアプリ版の Word を使って編集</strong> してください。</p>
+      <figure>
+      <img src="figs/10/kadai-01-3.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>ブラウザ版 (Word for the Web) や Teams版
+      で閲覧・編集すると、体裁や設定が崩れることがあります（減点対象）。ブラウザで開いてしまった場合は、次の手順でデスクトップアプリで開き直してください。</p>
+      <figure>
+      <img src="figs/10/kadai-01-1.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>Word
+      のオプションから「<strong>画像が自動圧縮されない設定になっていること</strong>」を確認してください。</p>
+      <figure>
+      <img src="figs/10/kadai-01-2.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <h2 data-number="7.2" id="スマホ版のスクショの撮影方法"><span
+      class="header-section-number">7.2</span> スマホ版のスクショの撮影方法</h2>
+      <p>課題に添付するスマートフォン表示のスクリーンショット (iPhone 16 Plus を想定)
+      は、必ず以下の手順で取得してください。</p>
+      <figure>
+      <img src="figs/10/chrome_01.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <figure>
+      <img src="figs/10/chrome_02.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>名前を「<strong>iPhone 16
+      Plus</strong>」、画面サイズを「<strong>430x932</strong>」に設定したエミュレートデバイスを追加してください。</p>
+      <figure>
+      <img src="figs/10/chrome_03.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <p>デバイスから「<strong>iPhone 16 Plus</strong>」を選択して、「<strong>Capture full size
+      screenshot</strong>
+      (<strong>フルサイズのスクリーンショットをキャプチャ</strong>)」を使って画面全体のスクリーンショットを取得してください。</p>
+      <ul>
+      <li>Zoom (ズーム) の値 (以下では<code>125%</code> になっている部分)
+      は、スクショサイズには影響しません。</li>
+      <li>必要に応じて <strong>下部の余白はトリミング</strong> してください。</li>
+      </ul>
+      <figure>
+      <img src="figs/10/chrome_04.png" alt="img" />
+      <figcaption aria-hidden="true">img</figcaption>
+      </figure>
+      <!-- ---------------------------------------- -->
+    </main>
+
+    <footer class="markdown-body">
+      <p><a href="https://takeshiwada1980.github.io/Programming3-2025/">講義資料のIndexに移動</a></p>
+    </footer>
+
+    <script>
+      window.onload = function () {
+        // ナビゲーション関連
+        let openBtn = document.getElementsByClassName("openbtn")[0];
+        let navPnl = document.getElementById("g-nav");
+        openBtn.onclick = () => {
+          openBtn.classList.toggle("active");
+          navPnl.classList.toggle("panelactive");
+        };
+
+        let items = navPnl.getElementsByTagName("a");
+        Array.from(items).forEach((item) => {
+          item.onclick = () => {
+            openBtn.classList.toggle("active");
+            navPnl.classList.toggle("panelactive");
+          };
+        });
+
+        // マスク処理
+        let maskedSpans = document.getElementsByClassName("masked");
+        Array.from(maskedSpans).forEach((span) => {
+          span.onclick = () => {
+            span.classList.toggle("open");
+          };
+        });
+
+        // data-startfrom 属性の行番号カウンタのリセット
+        document.querySelectorAll("div.sourceCode").forEach(function (div) {
+          var startFrom = div.getAttribute("data-startfrom");
+          if (startFrom != null) {
+            div.style.counterReset = "pg-line " + (startFrom - 1);
+          }
+        });
+
+        // 画像にリンクを付与
+        // let images = document.querySelectorAll("figure img");
+        // Array.from(images).forEach((img) => {
+        //   img.onclick = () => {
+        //     location.href = img.getAttribute("src");
+        //   };
+        // });
+      };
+    </script>
+  </body>
+</html>
